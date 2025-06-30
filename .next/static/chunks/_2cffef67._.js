@@ -27,22 +27,24 @@ const CardSearch = ()=>{
             setResults([]);
             setShowSuggestions(false);
             return;
+        } else {
+            setLoading(true);
+            const response = await fetch(`https://api.scryfall.com/cards/autocomplete?q=${encodeURIComponent(value)}`);
+            const data = await response.json();
+            setResults(data.data || []);
+            setLoading(false);
+            setShowSuggestions(true);
         }
-        setLoading(true);
-        const response = await fetch(`https://api.scryfall.com/cards/autocomplete?q=${encodeURIComponent(value)}`);
-        const data = await response.json();
-        setResults(data.data || []);
-        setLoading(false);
-        setShowSuggestions(true);
     };
     const handleSuggestionClick = (suggestion)=>{
         setQuery(suggestion);
         setShowSuggestions(false);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "bg-amber-700 w-3xs h-10 z-50",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                className: "border rounded px-2 py-1 flex-grow",
+                className: "border rounded px-2 py-1 w-full h-full",
                 type: "text",
                 name: "card-search",
                 placeholder: "Search for a card...",
@@ -57,6 +59,7 @@ const CardSearch = ()=>{
                 columnNumber: 13
             }, this),
             loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "bg-gray-800 text-white px-4 py-2",
                 children: "Loading..."
             }, void 0, false, {
                 fileName: "[project]/components/cardsearch.tsx",
@@ -64,7 +67,7 @@ const CardSearch = ()=>{
                 columnNumber: 25
             }, this),
             showSuggestions && results.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "bg-gray-800 text-white",
+                className: "border rounded bg-gray-800 text-white h-64 overflow-y-auto z-50",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                     children: results.map((suggestion)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                             className: "px-4 py-2 hover:bg-gray-200 cursor-pointer",
