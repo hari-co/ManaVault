@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from 'react';
-import {SignedIn, SignedOut, UserButton} from '@clerk/nextjs';
 
 const NavBar: React.FC = () => {
     return (
@@ -8,14 +7,9 @@ const NavBar: React.FC = () => {
             <div className='bg-blue-400 container mx-auto flex items-center justify-between px-10'>
                 <Link href="/" className='hover:text-purple-400'>ManaVault</Link>
                 <div className='hidden md:flex space-x-6'>
-                    <SignedIn>
-                        <Link href="/library" className='hover:text-purple-400'>Library</Link>
-                        <UserButton/>
-                    </SignedIn>
-                    <SignedOut>
-                        <Link href="/account/login" className='hover:text-purple-400'>Login</Link>
-                        <Link href="/account/register" className='hover:text-purple-400'>Register</Link>
-                    </SignedOut>
+                    <Link href="/library" className='hover:text-purple-400'>Library</Link>
+                    <Link href="/account/login" className='hover:text-purple-400'>Login</Link>
+                    <Link href="/account/register" className='hover:text-purple-400'>Register</Link>
                 </div>
             </div>
         </nav>
