@@ -1,17 +1,32 @@
-"use client";
+"use client"
 import React, { useState } from "react";
+import { auth } from "@/config/firebase-config";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 export default function login() {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [error, setError] = React.useState('');
+  const router = useRouter();
 
   const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    try {
+      await signInWithEmailAndPassword(auth, username, password);
+      setUsername('');
+      setPassword('');
+      router.push('/library')
+    } catch (error: any) {
+      setError(error.message);
+    }
   }
 
     return (
       <div className="bg-blue-200 flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-screen">
-        <form className="bg-white flex flex-col p-8 rounded shadow-md w-96">
+        <form className="bg-white flex flex-col p-8 rounded shadow-md w-96"
+              onSubmit={signIn}>
           <div className="flex justify-center">
             <h2>ManaVault Login</h2>
           </div>
@@ -35,10 +50,14 @@ export default function login() {
                 required
               />
           </div>
+          {error && (
+            <p className="text-red-500">
+              {error}
+            </p>
+          )}
           <button
           className="border rounded mt-8 p-2 hover:bg-gray-300"
             type="submit"
-            onClick={signIn}
             >
               Login
             </button>

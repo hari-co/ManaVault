@@ -1,25 +1,43 @@
-"use client";
+"use client"
 import React, { useState } from "react";
+import { auth } from "@/config/firebase-config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
-export default function login() {
+export default function register() {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
   const [passwordDifferent, setPasswordDifferent] = React.useState(false);
+  const [error, setError] = React.useState('');
+  const router = useRouter();
 
   const register = async (e: React.FormEvent) => {
     e.preventDefault();
+    setPasswordDifferent(false);
+
     if (password !== confirmPassword) {
       setPasswordDifferent(true);
-    } else {
       return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+      setUsername('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      router.push('/library');
+    } catch (error: any) {
+      setError(error.message);
     }
   }
 
     return (
       <div className="bg-blue-200 flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-screen">
-        <form className="bg-white flex flex-col p-8 rounded shadow-md w-96">
+        <form className="bg-white flex flex-col p-8 rounded shadow-md w-96"
+              onSubmit={register}>
           <div className="flex justify-center">
             <h2>Register for ManaVault</h2>
           </div>
@@ -66,10 +84,11 @@ export default function login() {
               Passwords do not match. Please try again.
             </p>
             )}
+            {error && !passwordDifferent && (
+            <p className="text-red-500">{error}</p>)}
           <button
           className="border rounded mt-8 p-2 hover:bg-gray-300"
             type="submit"
-            onClick={register}
             >
               Register
             </button>

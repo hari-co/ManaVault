@@ -402,4 +402,3 @@ FodyWeavers.xsd
 
 tailwind.config.js
 .env
-/src/config/firebase-config.ts

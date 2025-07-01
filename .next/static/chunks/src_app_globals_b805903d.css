@@ -281,18 +281,6 @@
     margin: calc(var(--spacing) * 0);
   }
 
-  .m-5 {
-    margin: calc(var(--spacing) * 5);
-  }
-
-  .m-8 {
-    margin: calc(var(--spacing) * 8);
-  }
-
-  .m-10 {
-    margin: calc(var(--spacing) * 10);
-  }
-
   .mx-auto {
     margin-inline: auto;
   }
@@ -482,6 +470,10 @@
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
+  }
+
+  .text-purple-400 {
+    color: var(--color-purple-400);
   }
 
   .text-red-500 {
