@@ -1,14 +1,25 @@
 "use client"
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/config/firebase-config";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 export default function login() {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [error, setError] = React.useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [user, setUser] = useState<User | null | undefined>(undefined);
   const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+        setUser(user);
+        if (user) {
+          router.push('/library');
+        }
+    })
+    return () => unsubscribe();
+  });
 
   const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +34,11 @@ export default function login() {
     }
   }
 
-    return (
+    if (user === undefined) {
+      return (<div></div>)
+    }
+    
+    return (!user &&
       <div className="bg-blue-200 flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-screen">
         <form className="bg-white flex flex-col p-8 rounded shadow-md w-96"
               onSubmit={signIn}>

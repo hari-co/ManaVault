@@ -1,17 +1,28 @@
 "use client"
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/config/firebase-config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,  onAuthStateChanged, User} from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 export default function register() {
-  const [username, setUsername] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
-  const [passwordDifferent, setPasswordDifferent] = React.useState(false);
-  const [error, setError] = React.useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordDifferent, setPasswordDifferent] = useState(false);
+  const [error, setError] = useState('');
+  const [user, setUser] = useState<User | null | undefined>(undefined);
   const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+      setUser(user);
+      if (user) {
+        router.push('/library');
+      }
+    })
+    return () => unsubscribe();
+  });
 
   const register = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,8 +44,12 @@ export default function register() {
       setError(error.message);
     }
   }
+  
+  if (user === undefined) {
+    return (<div></div>)
+  }
 
-    return (
+    return (!user &&
       <div className="bg-blue-200 flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-screen">
         <form className="bg-white flex flex-col p-8 rounded shadow-md w-96"
               onSubmit={register}>
