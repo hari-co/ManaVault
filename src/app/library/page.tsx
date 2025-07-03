@@ -20,14 +20,23 @@ export default function Library() {
     })
 
     return (
-        user && (<>
-            <div className='bg-green-600 flex flex-col'>
+        user && (
+        <div className='flex flex-col h-[calc(100vh-3.5rem)] w-full'>
+            <div className='bg-green-600 flex flex-col p-3 h-32'>
                 <h1 className="font-bold text-5xl py-6">Library</h1>
+            </div>
+            <div className='flex bg-fuchsia-400'>
+                Toolbar
                 <CardSearch />
             </div>
-            <div className='flex flex-col bg-amber-500'>
-                <p>hello</p>
+            <div className='flex bg-amber-500'>
+                <div className='flex bg-gray-600 h-screen w-64'>
+                    Binders
+                </div>
+                <div className='flex bg-blue-600 w-full'>
+                    Cards
+                </div>
             </div>
-        </>)
+        </div>)
     );
 }

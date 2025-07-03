@@ -1,15 +1,17 @@
 "use client"
 import { useState, useEffect } from "react";
-import { auth } from "@/config/firebase-config";
+import { auth, db } from "@/config/firebase-config";
 import { createUserWithEmailAndPassword,  onAuthStateChanged, User} from "firebase/auth";
+import { addDoc, setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import { validateRegistration } from "@/registration-validation";
+import { create } from "domain";
 
 export default function register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordDifferent, setPasswordDifferent] = useState(false);
   const [error, setError] = useState('');
   const [user, setUser] = useState<User | null | undefined>(undefined);
   const router = useRouter();
@@ -26,15 +28,26 @@ export default function register() {
 
   const register = async (e: React.FormEvent) => {
     e.preventDefault();
-    setPasswordDifferent(false);
 
-    if (password !== confirmPassword) {
-      setPasswordDifferent(true);
+    const validationError = await validateRegistration(username, password, confirmPassword);
+
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
+      const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = userCredentials.user.uid;
+      try {
+        await setDoc(doc(db, "users", uid), { username, email, createdAt: new Date() });
+        await setDoc(doc(db, "users", uid, "profile", "description"), {})
+        await setDoc(doc(db, "users", uid, "binders", "all"), {})
+      } catch (error: any) {
+        setError("Error creating user data. Please try again.");
+        await userCredentials.user.delete();
+        return;
+      }
       setUsername('');
       setEmail('');
       setPassword('');
@@ -94,12 +107,7 @@ export default function register() {
                 required
                 />
           </div>
-          {passwordDifferent && (
-            <p className="text-red-500">
-              Passwords do not match. Please try again.
-            </p>
-            )}
-            {error && !passwordDifferent && (
+            {error && (
             <p className="text-red-500">{error}</p>)}
           <button
           className="border rounded mt-8 p-2 hover:bg-gray-300"

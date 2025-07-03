@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { db } from "@/config/firebase-config";
+import { collection, setDoc, getDoc } from "firebase/firestore";
 
 const CardSearch: React.FC = () => {
     const [query, setQuery] = useState("");
@@ -25,9 +27,17 @@ const CardSearch: React.FC = () => {
         }
     };
 
-    const handleSuggestionClick = (suggestion: string) => {
-        setQuery(suggestion);
+    const handleSuggestionClick = async (suggestion: string) => {
+        setQuery('');
         setShowSuggestions(false);
+
+        try {
+            const docRef = await addDoc(collection(db, "cards"), {
+                name: suggestion,
+            })
+        } catch (error) {
+
+        }
     };
 
     return (
@@ -43,7 +53,7 @@ const CardSearch: React.FC = () => {
                 onFocus={() => setShowSuggestions(results.length > 0)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
             />
-            {loading && <div className="bg-gray-800 text-white px-4 py-2">Loading...</div>}
+            {!showSuggestions && loading && <div className="bg-gray-800 text-white px-4 py-2">Loading...</div>}
             {showSuggestions && results.length > 0 && (
                 <div className="border rounded bg-gray-800 text-white h-64 overflow-y-auto z-50">
                     <ul>
