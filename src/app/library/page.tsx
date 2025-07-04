@@ -1,5 +1,6 @@
 "use client"
 import CardSearch from '../../../components/cardsearch';
+import Binders from '../../../components/binders';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '@/config/firebase-config';
@@ -30,9 +31,7 @@ export default function Library() {
                 <CardSearch />
             </div>
             <div className='flex bg-amber-500'>
-                <div className='flex bg-gray-600 h-screen w-64'>
-                    Binders
-                </div>
+                <Binders />
                 <div className='flex bg-blue-600 w-full'>
                     Cards
                 </div>

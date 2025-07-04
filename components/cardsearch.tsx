@@ -1,13 +1,16 @@
 "use client";
-import React, { useState } from "react";
-import { db } from "@/config/firebase-config";
-import { collection, setDoc, getDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { auth, db } from "@/config/firebase-config";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { doc, collection, addDoc, setDoc, getDoc } from "firebase/firestore";
+import { useFirebaseUser } from "@/hooks/useFirebaseUser";
 
 const CardSearch: React.FC = () => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const user = useFirebaseUser();
 
     const handleChange = async (e:React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
@@ -27,16 +30,86 @@ const CardSearch: React.FC = () => {
         }
     };
 
+    const fetchCard = async (cardName: string) => {
+        try {
+            const res = await fetch (`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(cardName)}`);
+            if (!res.ok) throw new Error("Card not found");
+            const data = await res.json();
+            const fields = {
+                card_name: data.name,
+                scryfallId: data.id,
+                tcgplayerId: data.tcgplayer_id,
+                tcgplayerEtchedId: data.tcgplayer_etched_id,
+                cardMarketId: data.card_market_id,
+                lang: data.lang,
+                layout: data.layout,
+                uri: data.uri,
+                scryfallUri: data.scryfall_uri,
+                prints_search_uri: data.prints_search_uri,
+                all_parts: data.all_parts ? data.all_parts.map((part: any) => ({
+                    name: part.name,
+                })) : [],
+                card_faces: data.card_faces ? data.card_faces.map((face: any) => ({
+                    name: face.name,
+                })) : [],
+                cmc: data.cmc,
+                color_identity: data.color_identity,
+                color_indicator: data.color_indicator,
+                colors: data.colors,
+                defense: data.defense,
+                edhrank: data.edhrec_rank,
+                game_changer: data.game_changer,
+                keywords: data.keywords,
+                legality: data.legalities,
+                loyalty: data.loyalty,
+                mana_cost: data.mana_cost,
+                oracle_text: data.oracle_text,
+                power: data.power,
+                produced_mana: data.produced_mana,
+                reserved: data.reserved,
+                toughness: data.toughness,
+                type_line: data.type_line,
+                artist: data.artist,
+                frame: data.frame,
+                frame_effects: data.frame_effects,
+                full_art: data.full_art,
+                oversized: data.oversized,
+                prices: data.prices,
+                promo: data.promo,
+                rarity: data.rarity,
+                reprint: data.reprint,
+                scryfall_set: data.set,
+                set_name: data.set_name,
+                set: data.set,
+                variation: data.variation,
+                variation_of: data.variation_of,
+            }
+            for (const key in fields) {
+                if ((fields as any)[key] === undefined) {
+                    (fields as any)[key] = null;
+                }
+            }
+            return fields;
+        } catch (error) {
+            console.error("Error fetching card:", error);
+            return null;
+        }
+    };
+
     const handleSuggestionClick = async (suggestion: string) => {
         setQuery('');
         setShowSuggestions(false);
 
         try {
-            const docRef = await addDoc(collection(db, "cards"), {
-                name: suggestion,
-            })
+            if (!user || !user.uid) {
+                console.log("No user logged in");
+                return;
+            }
+            const saveData = await fetchCard(suggestion);
+            await addDoc(collection(db, "users", user.uid, "binders", "all", "cards"), saveData);
+            setResults([]);
         } catch (error) {
-
+            console.error("Error adding card to binder:", error);
         }
     };
 
