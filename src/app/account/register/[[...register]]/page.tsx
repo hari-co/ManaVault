@@ -4,7 +4,7 @@ import { auth, db } from "@/config/firebase-config";
 import { createUserWithEmailAndPassword,  onAuthStateChanged, User} from "firebase/auth";
 import { addDoc, setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { validateRegistration } from "@/registration-validation";
+import { validateRegistration } from "@/utils/registration-validation";
 import { create } from "domain";
 
 export default function register() {

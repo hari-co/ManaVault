@@ -1,18 +1,21 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { auth, db } from "@/config/firebase-config";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { doc, collection, addDoc, setDoc, getDocs, query, where } from "firebase/firestore";
 import { useFirebaseUser } from "@/hooks/useFirebaseUser";
-import { get } from "http";
+import { BinderContext } from "@/context/BinderContext";
 
 const Binders: React.FC = () => {
     const [binders, setBinders] = useState<{ name: string; index: number; color: string }[]>([]);
     const [addingBinder, setAddingBinder] = useState(false);
     const [binderName, setBinderName] = useState("");
-    const [currentBinder, setCurrentBinder] = useState<string | null>(null);
+    const binderContext = useContext(BinderContext);
     const inputRef = useRef<HTMLInputElement>(null);
     const user = useFirebaseUser();
+
+    if (!binderContext) throw new Error("BinderContext not found.");
+    const { currentBinder, setCurrentBinder } = binderContext;
 
     useEffect(() => {
         if (!user) return;
@@ -79,6 +82,7 @@ const Binders: React.FC = () => {
 
     const selectBinder = async (binderName: string) => {
         setCurrentBinder(binderName);
+        console.log("Selected binder:", binderName);
         getBinders();
     }
 
