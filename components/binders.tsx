@@ -7,7 +7,7 @@ import { useFirebaseUser } from "@/hooks/useFirebaseUser";
 import { BinderContext } from "@/context/BinderContext";
 
 const Binders: React.FC = () => {
-    const [binders, setBinders] = useState<{ name: string; index: number; color: string }[]>([]);
+    const [binders, setBinders] = useState<{ id: string, name: string; index: number; color: string }[]>([]);
     const [addingBinder, setAddingBinder] = useState(false);
     const [binderName, setBinderName] = useState("");
     const binderContext = useContext(BinderContext);
@@ -19,8 +19,7 @@ const Binders: React.FC = () => {
 
     useEffect(() => {
         if (!user) return;
-        setCurrentBinder("All Cards");
-        getBinders();
+        selectBinder("all")
     }, [user]);
 
     useEffect(() => {
@@ -36,6 +35,7 @@ const Binders: React.FC = () => {
         try {
             const binderSnapshot = await getDocs(collection(db, "users", user.uid, "binders"));
             const binderList = binderSnapshot.docs.map(doc => ({
+                id: doc.id,
                 name: doc.data().name,
                 index: doc.data().index,
                 color: doc.data().color,
@@ -87,7 +87,7 @@ const Binders: React.FC = () => {
     }
 
     return (
-        <div className='flex flex-col bg-gray-600 h-screen w-64'>
+        <div className='flex flex-col bg-gray-600 h-full w-64'>
             Binders
             <ul>
                 {binders
@@ -97,8 +97,8 @@ const Binders: React.FC = () => {
                         return (<li
                         key= {binder.name}
                         className={"flex border h-10 w-full hover:bg-purple-600 items-center " 
-                            + (binder.name === currentBinder ? "bg-purple-600" : "bg-purple-800")}
-                        onClick={() => selectBinder(binder.name)}>
+                            + (binder.id === currentBinder ? "bg-purple-600" : "bg-purple-800")}
+                        onClick={() => selectBinder(binder.id)}>
                         <span
                             className="w-3 h-3 rounded-full border"
                             style={{ backgroundColor: binder.color }}>

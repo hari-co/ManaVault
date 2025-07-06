@@ -1,9 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { auth, db } from "@/config/firebase-config";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { doc, collection, addDoc, setDoc, getDoc } from "firebase/firestore";
+import { doc, collection, addDoc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { useFirebaseUser } from "@/hooks/useFirebaseUser";
+import { BinderContext } from "@/context/BinderContext";
+import { CardType } from "@/types/CardType";
 
 const CardSearch: React.FC = () => {
     const [query, setQuery] = useState("");
@@ -11,6 +13,10 @@ const CardSearch: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const user = useFirebaseUser();
+    const binderContext = useContext(BinderContext);
+
+    if (!binderContext) throw new Error("BinderContext not found.");
+    const { currentBinder, setCurrentBinder } = binderContext;
 
     const handleChange = async (e:React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
@@ -30,13 +36,16 @@ const CardSearch: React.FC = () => {
         }
     };
 
-    const fetchCard = async (cardName: string) => {
+    const fetchCard = async (cardName: string): Promise<CardType | null> => {
         try {
             const res = await fetch (`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(cardName)}`);
             if (!res.ok) throw new Error("Card not found");
             const data = await res.json();
-            const fields = {
+            const card: CardType = {
+                id: 'N/A',
                 card_name: data.name,
+                image_uris: data.image_uris,
+                add_date: new Date,
                 scryfallId: data.id,
                 tcgplayerId: data.tcgplayer_id,
                 tcgplayerEtchedId: data.tcgplayer_etched_id,
@@ -84,12 +93,12 @@ const CardSearch: React.FC = () => {
                 variation: data.variation,
                 variation_of: data.variation_of,
             }
-            for (const key in fields) {
-                if ((fields as any)[key] === undefined) {
-                    (fields as any)[key] = null;
+            for (const key in card) {
+                if ((card as any)[key] === undefined) {
+                    (card as any)[key] = null;
                 }
             }
-            return fields;
+            return card;
         } catch (error) {
             console.error("Error fetching card:", error);
             return null;
@@ -106,7 +115,12 @@ const CardSearch: React.FC = () => {
                 return;
             }
             const saveData = await fetchCard(suggestion);
-            await addDoc(collection(db, "users", user.uid, "binders", "all", "cards"), saveData);
+            const docRefAll = await addDoc(collection(db, "users", user.uid, "binders", "all", "cards"), saveData);
+            await updateDoc(docRefAll, { id: docRefAll.id })
+            if (currentBinder && currentBinder != "all") {
+                const docRefBinder = await addDoc(collection(db, "users", user.uid, "binders", currentBinder, "cards"), saveData);
+                await updateDoc(docRefBinder, { id: docRefBinder.id })
+            }
             setResults([]);
         } catch (error) {
             console.error("Error adding card to binder:", error);
