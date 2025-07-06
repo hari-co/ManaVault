@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export type CardType = {
     id: string;
     card_name: string;
@@ -9,8 +11,9 @@ export type CardType = {
         png: string,
         small: string
     };
-    add_date: Date;
-    last_price_update: Date;
+    add_date: Timestamp | Date;
+    last_price_update: Timestamp | Date;
+    binder: string | null;
     scryfallId: string;
     tcgplayerId: string | null;
     tcgplayerEtchedId: string | null;

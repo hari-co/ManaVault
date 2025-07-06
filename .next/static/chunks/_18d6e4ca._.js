@@ -136,6 +136,7 @@ const CardSearch = ()=>{
                 image_uris: data.image_uris,
                 add_date: new Date,
                 last_price_update: new Date,
+                binder: currentBinder,
                 scryfallId: data.id,
                 tcgplayerId: data.tcgplayer_id,
                 tcgplayerEtchedId: data.tcgplayer_etched_id,
@@ -208,9 +209,9 @@ const CardSearch = ()=>{
                 id: docRefAll.id
             });
             if (currentBinder && currentBinder != "all") {
-                const docRefBinder = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", currentBinder, "cards"), saveData);
-                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])(docRefBinder, {
-                    id: docRefBinder.id
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", currentBinder, "cards", docRefAll.id), {
+                    ...saveData,
+                    id: docRefAll.id
                 });
             }
             setResults([]);
@@ -483,6 +484,125 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
 }
 }}),
+"[project]/components/cardMenu.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/hooks/useFirebaseUser.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$firebase$2f$firestore$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/node_modules/firebase/firestore/dist/esm/index.esm.js [app-client] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@firebase/firestore/dist/index.esm2017.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/firebase-config.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$BinderContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/context/BinderContext.tsx [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
+;
+;
+;
+;
+;
+const CardMenu = ({ card })=>{
+    _s();
+    const [menuOpen, setMenuOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const menuRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const user = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useFirebaseUser"])();
+    const binderContext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$BinderContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BinderContext"]);
+    if (!binderContext) throw new Error("BinderContext not found.");
+    const { currentBinder, setCurrentBinder } = binderContext;
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "CardMenu.useEffect": ()=>{
+            if (!menuOpen) return;
+            function handleClickOutside(event) {
+                if (menuRef.current && !menuRef.current.contains(event.target)) {
+                    setMenuOpen(false);
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+            return ({
+                "CardMenu.useEffect": ()=>document.removeEventListener("mousedown", handleClickOutside)
+            })["CardMenu.useEffect"];
+        }
+    }["CardMenu.useEffect"], [
+        menuOpen
+    ]);
+    const deleteCard = async (card, currentBinder)=>{
+        if (!user || !currentBinder) return;
+        if (currentBinder != "all") {
+            console.log("deleted from all");
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", "all", "cards", card.id));
+        } else {
+            if (!card.binder) return;
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", card.binder, "cards", card.id));
+        }
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", currentBinder, "cards", card.id));
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        ref: menuRef,
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: `absolute top-5 right-4 z-10 transition duration-500 ${menuOpen ? `opacity-100` : `opacity-0 group-hover:opacity-100`}`,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    className: "flex items-center justify-center p-1 w-10 h-8 rounded-xl bg-gray-200 hover:bg-gray-400",
+                    onClick: ()=>setMenuOpen(true),
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "text-3xl",
+                        children: "⋯"
+                    }, void 0, false, {
+                        fileName: "[project]/components/cardMenu.tsx",
+                        lineNumber: 45,
+                        columnNumber: 21
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/components/cardMenu.tsx",
+                    lineNumber: 43,
+                    columnNumber: 17
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/cardMenu.tsx",
+                lineNumber: 42,
+                columnNumber: 13
+            }, this),
+            menuOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "w-40 h-30 bg-gray-200 absolute z-15 top-13 right-4 rounded-md pt-2 pb-2",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    className: "bg-gray-200 hover:bg-gray-300 w-full h-10",
+                    onClick: ()=>deleteCard(card, currentBinder),
+                    children: "Delete"
+                }, void 0, false, {
+                    fileName: "[project]/components/cardMenu.tsx",
+                    lineNumber: 50,
+                    columnNumber: 21
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/cardMenu.tsx",
+                lineNumber: 49,
+                columnNumber: 17
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/cardMenu.tsx",
+        lineNumber: 41,
+        columnNumber: 9
+    }, this);
+};
+_s(CardMenu, "JXnHJ7y783uKXUUw6tD/rLT++oc=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useFirebaseUser"]
+    ];
+});
+_c = CardMenu;
+const __TURBOPACK__default__export__ = CardMenu;
+var _c;
+__turbopack_context__.k.register(_c, "CardMenu");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
 "[project]/components/card.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -492,18 +612,27 @@ __turbopack_context__.s({
     "default": (()=>__TURBOPACK__default__export__)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$cardMenu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/cardMenu.tsx [app-client] (ecmascript)");
+;
 ;
 const Card = ({ card })=>{
     return card.image_uris && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex-1 min-w-55 max-w-65",
+        className: "flex-1 min-w-55 max-w-65 relative group",
         children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$cardMenu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                card: card
+            }, void 0, false, {
+                fileName: "[project]/components/card.tsx",
+                lineNumber: 7,
+                columnNumber: 13
+            }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                 src: card.image_uris.large,
                 alt: card.card_name,
                 className: "rounded-xl w-full"
             }, void 0, false, {
                 fileName: "[project]/components/card.tsx",
-                lineNumber: 7,
+                lineNumber: 8,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -514,7 +643,7 @@ const Card = ({ card })=>{
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/card.tsx",
-                lineNumber: 8,
+                lineNumber: 9,
                 columnNumber: 13
             }, this)
         ]
@@ -565,8 +694,13 @@ const CardDisplay = ()=>{
     const { currentBinder, setCurrentBinder } = binderContext;
     const updatePrice = async (card, user, currentBinder)=>{
         const now = Date.now();
-        const lastUpdate = card.last_price_update.getTime();
+        let lastUpdate;
         const updatePeriod = 24 * 60 * 60 * 1000;
+        if (typeof card.last_price_update.toDate() === "function") {
+            lastUpdate = card.last_price_update.toDate().getTime();
+        } else if (card.last_price_update instanceof Date) {
+            lastUpdate = card.last_price_update.getTime();
+        }
         if (now - lastUpdate > updatePeriod) {
             const res = await fetch(`https://api.scryfall.com/cards/${card.scryfallId}`);
             if (!res.ok) return;
@@ -604,22 +738,36 @@ const CardDisplay = ()=>{
         currentBinder,
         user
     ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "CardDisplay.useEffect": ()=>{
+            if (!user || !currentBinder) return;
+            cardList.forEach({
+                "CardDisplay.useEffect": (card)=>{
+                    updatePrice(card, user, currentBinder);
+                }
+            }["CardDisplay.useEffect"]);
+        }
+    }["CardDisplay.useEffect"], [
+        cardList,
+        user,
+        currentBinder
+    ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-wrap gap-4 w-full bg-blue-300 p-5 items-start",
         children: cardList.map((card)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                 card: card
             }, card.id, false, {
                 fileName: "[project]/components/cardDisplay.tsx",
-                lineNumber: 64,
+                lineNumber: 77,
                 columnNumber: 21
             }, this))
     }, void 0, false, {
         fileName: "[project]/components/cardDisplay.tsx",
-        lineNumber: 62,
+        lineNumber: 75,
         columnNumber: 9
     }, this);
 };
-_s(CardDisplay, "eO0TcMLEhsi9SsaS85YP7CqJUKs=", false, function() {
+_s(CardDisplay, "fUdQxL49XDkoHTNIaAqeaDKvjRo=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useFirebaseUser"]
     ];
@@ -759,4 +907,4 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 }}),
 }]);
 
-//# sourceMappingURL=_67bdac35._.js.map
+//# sourceMappingURL=_18d6e4ca._.js.map

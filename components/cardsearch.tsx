@@ -47,6 +47,7 @@ const CardSearch: React.FC = () => {
                 image_uris: data.image_uris,
                 add_date: new Date,
                 last_price_update: new Date,
+                binder: currentBinder,
                 scryfallId: data.id,
                 tcgplayerId: data.tcgplayer_id,
                 tcgplayerEtchedId: data.tcgplayer_etched_id,
@@ -119,8 +120,7 @@ const CardSearch: React.FC = () => {
             const docRefAll = await addDoc(collection(db, "users", user.uid, "binders", "all", "cards"), saveData);
             await updateDoc(docRefAll, { id: docRefAll.id })
             if (currentBinder && currentBinder != "all") {
-                const docRefBinder = await addDoc(collection(db, "users", user.uid, "binders", currentBinder, "cards"), saveData);
-                await updateDoc(docRefBinder, { id: docRefBinder.id })
+                await setDoc(doc(db, "users", user.uid, "binders", currentBinder, "cards", docRefAll.id), {...saveData, id: docRefAll.id});
             }
             setResults([]);
         } catch (error) {
