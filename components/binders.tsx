@@ -96,7 +96,7 @@ const Binders: React.FC = () => {
                     .map(binder => {
                         return (<li
                         key= {binder.name}
-                        className={"flex border h-10 w-full hover:bg-purple-600 items-center " 
+                        className={"cursor-pointer flex border h-10 w-full hover:bg-purple-600 items-center " 
                             + (binder.id === currentBinder ? "bg-purple-600" : "bg-purple-800")}
                         onClick={() => selectBinder(binder.id)}>
                         <span

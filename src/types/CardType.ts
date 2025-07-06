@@ -10,6 +10,7 @@ export type CardType = {
         small: string
     };
     add_date: Date;
+    last_price_update: Date;
     scryfallId: string;
     tcgplayerId: string | null;
     tcgplayerEtchedId: string | null;

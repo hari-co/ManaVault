@@ -112,6 +112,7 @@ const CardSearch = ()=>{
                 card_name: data.name,
                 image_uris: data.image_uris,
                 add_date: new Date,
+                last_price_update: new Date,
                 scryfallId: data.id,
                 tcgplayerId: data.tcgplayer_id,
                 tcgplayerEtchedId: data.tcgplayer_etched_id,
@@ -209,7 +210,7 @@ const CardSearch = ()=>{
                 onBlur: ()=>setTimeout(()=>setShowSuggestions(false), 100)
             }, void 0, false, {
                 fileName: "[project]/components/cardsearch.tsx",
-                lineNumber: 132,
+                lineNumber: 133,
                 columnNumber: 13
             }, this),
             !showSuggestions && loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -217,7 +218,7 @@ const CardSearch = ()=>{
                 children: "Loading..."
             }, void 0, false, {
                 fileName: "[project]/components/cardsearch.tsx",
-                lineNumber: 143,
+                lineNumber: 144,
                 columnNumber: 45
             }, this),
             showSuggestions && results.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -229,23 +230,23 @@ const CardSearch = ()=>{
                             children: suggestion
                         }, suggestion, false, {
                             fileName: "[project]/components/cardsearch.tsx",
-                            lineNumber: 148,
+                            lineNumber: 149,
                             columnNumber: 29
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/components/cardsearch.tsx",
-                    lineNumber: 146,
+                    lineNumber: 147,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/cardsearch.tsx",
-                lineNumber: 145,
+                lineNumber: 146,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/cardsearch.tsx",
-        lineNumber: 131,
+        lineNumber: 132,
         columnNumber: 9
     }, this);
 };
@@ -360,7 +361,7 @@ const Binders = ()=>{
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                 children: binders.slice().sort((a, b)=>a.index - b.index).map((binder)=>{
                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                        className: "flex border h-10 w-full hover:bg-purple-600 items-center " + (binder.id === currentBinder ? "bg-purple-600" : "bg-purple-800"),
+                        className: "cursor-pointer flex border h-10 w-full hover:bg-purple-600 items-center " + (binder.id === currentBinder ? "bg-purple-600" : "bg-purple-800"),
                         onClick: ()=>selectBinder(binder.id),
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -443,7 +444,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 const Card = ({ card })=>{
     return card.image_uris && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex-1 min-w-55 max-w-65 bg-amber-50",
+        className: "flex-1 min-w-55 max-w-65",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                 src: card.image_uris.large,
@@ -454,7 +455,20 @@ const Card = ({ card })=>{
                 lineNumber: 6,
                 columnNumber: 13
             }, this),
-            card.card_name
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "bg-orange-500 w-full h-full flex justify-center",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                    children: "h"
+                }, void 0, false, {
+                    fileName: "[project]/components/card.tsx",
+                    lineNumber: 8,
+                    columnNumber: 17
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/card.tsx",
+                lineNumber: 7,
+                columnNumber: 13
+            }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/card.tsx",

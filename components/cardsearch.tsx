@@ -46,6 +46,7 @@ const CardSearch: React.FC = () => {
                 card_name: data.name,
                 image_uris: data.image_uris,
                 add_date: new Date,
+                last_price_update: new Date,
                 scryfallId: data.id,
                 tcgplayerId: data.tcgplayer_id,
                 tcgplayerEtchedId: data.tcgplayer_etched_id,
