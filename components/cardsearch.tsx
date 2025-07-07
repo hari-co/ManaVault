@@ -57,6 +57,7 @@ const CardSearch: React.FC = () => {
                 uri: data.uri,
                 scryfallUri: data.scryfall_uri,
                 prints_search_uri: data.prints_search_uri,
+                collector_number: data.collector_number,
                 all_parts: data.all_parts ? data.all_parts.map((part: any) => ({
                     name: part.name,
                 })) : [],

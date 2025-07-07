@@ -56,4 +56,5 @@ export type CardType = {
     set: string;
     variation: boolean;
     variation_of: string | null;
+    collector_number?: string;
 }
