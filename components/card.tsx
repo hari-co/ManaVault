@@ -20,7 +20,7 @@ const Card: React.FC<{ card: CardType }> = ({ card }) => {
     return (card.image_uris &&
         <div className="flex-1 min-w-55 max-w-65 relative group">
             <QuickMenu card={card}/>
-            <img src={card.image_uris.large} alt={card.card_name} className="rounded-xl w-full" onClick={() => fadeIn()}/>
+            <img src={card.image_uris.large} alt={card.card_name} className="rounded-xl w-full cursor-pointer" onClick={() => fadeIn()}/>
             <div className="bg-orange-500 w-full h-full flex justify-center cursor-default">
                 {card.prices.usd && "$" + card.prices.usd}
                 {!card.prices.usd && "N/A"}
@@ -28,7 +28,7 @@ const Card: React.FC<{ card: CardType }> = ({ card }) => {
             {propsOpen && (
                 <div className="fixed inset-0 z-50 flex items-start justify-center pt-50">
                     <div className={`fixed inset-0 bg-black z-40 transition-opacity duration-500 ${fade ? ' opacity-50' : ' opacity-0'}`} onClick={() => fadeOut()}/>
-                    <div className={`relative z-50 transition-opacity duration-500 ${fade ? ' opacity-100' : ' opacity-0'}`} onClick={(e) => e.stopPropagation()}>
+                    <div className={`relative z-50 backdrop-blur-md transition-opacity duration-500 ${fade ? ' opacity-100' : ' opacity-0'}`} onClick={(e) => e.stopPropagation()}>
                         <CardProperties card={card}/>
                     </div>
                 </div>
