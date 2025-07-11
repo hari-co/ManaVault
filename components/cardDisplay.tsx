@@ -4,7 +4,7 @@ import { BinderContext } from "@/context/BinderContext";
 import { CardType } from "@/types/CardType";
 import { collection, getDocs, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/config/firebase-config";
-import Card from "./card";
+import Card from "./Card";
 import { User } from "firebase/auth";
 
 const CardDisplay: React.FC = () => {

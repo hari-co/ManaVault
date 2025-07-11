@@ -3,6 +3,7 @@ import { Timestamp } from "firebase/firestore";
 export type CardType = {
     id: string;
     card_name: string;
+    flavor_name: string | null;
     image_uris?: {
         art_crop: string,
         border_crop: string,
@@ -14,6 +15,7 @@ export type CardType = {
     add_date: Timestamp | Date;
     last_price_update: Timestamp | Date;
     binder: string | null;
+    condition: string;
     scryfallId: string;
     tcgplayerId: string | null;
     tcgplayerEtchedId: string | null;
@@ -57,4 +59,7 @@ export type CardType = {
     variation: boolean;
     variation_of: string | null;
     collector_number?: string;
+    finishes: string[];
+    quantity: number;
+    set_uri: string;
 }

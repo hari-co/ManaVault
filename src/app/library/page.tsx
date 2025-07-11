@@ -1,7 +1,7 @@
 "use client"
-import CardSearch from '../../../components/cardsearch';
-import Binders from '../../../components/binders';
-import CardDisplay from '../../../components/cardDisplay';
+import CardSearch from '../../../components/CardSearch';
+import Binders from '../../../components/Binders';
+import CardDisplay from '../../../components/CardDisplay';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '@/config/firebase-config';

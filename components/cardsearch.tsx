@@ -6,6 +6,7 @@ import { doc, collection, addDoc, setDoc, getDoc, updateDoc } from "firebase/fir
 import { useFirebaseUser } from "@/hooks/useFirebaseUser";
 import { BinderContext } from "@/context/BinderContext";
 import { CardType } from "@/types/CardType";
+import { createCard } from "@/utils/create-card";
 
 const CardSearch: React.FC = () => {
     const [query, setQuery] = useState("");
@@ -41,61 +42,7 @@ const CardSearch: React.FC = () => {
             const res = await fetch (`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(cardName)}`);
             if (!res.ok) throw new Error("Card not found");
             const data = await res.json();
-            const card: CardType = {
-                id: 'N/A',
-                card_name: data.name,
-                image_uris: data.image_uris,
-                add_date: new Date,
-                last_price_update: new Date,
-                binder: currentBinder,
-                scryfallId: data.id,
-                tcgplayerId: data.tcgplayer_id,
-                tcgplayerEtchedId: data.tcgplayer_etched_id,
-                cardMarketId: data.card_market_id,
-                lang: data.lang,
-                layout: data.layout,
-                uri: data.uri,
-                scryfallUri: data.scryfall_uri,
-                prints_search_uri: data.prints_search_uri,
-                collector_number: data.collector_number,
-                all_parts: data.all_parts ? data.all_parts.map((part: any) => ({
-                    name: part.name,
-                })) : [],
-                card_faces: data.card_faces ? data.card_faces.map((face: any) => ({
-                    name: face.name,
-                })) : [],
-                cmc: data.cmc,
-                color_identity: data.color_identity,
-                color_indicator: data.color_indicator,
-                colors: data.colors,
-                defense: data.defense,
-                edhrank: data.edhrec_rank,
-                game_changer: data.game_changer,
-                keywords: data.keywords,
-                legality: data.legalities,
-                loyalty: data.loyalty,
-                mana_cost: data.mana_cost,
-                oracle_text: data.oracle_text,
-                power: data.power,
-                produced_mana: data.produced_mana,
-                reserved: data.reserved,
-                toughness: data.toughness,
-                type_line: data.type_line,
-                artist: data.artist,
-                frame: data.frame,
-                frame_effects: data.frame_effects,
-                full_art: data.full_art,
-                oversized: data.oversized,
-                prices: data.prices,
-                promo: data.promo,
-                rarity: data.rarity,
-                reprint: data.reprint,
-                scryfall_set: data.set,
-                set_name: data.set_name,
-                set: data.set,
-                variation: data.variation,
-                variation_of: data.variation_of,
-            }
+            const card = createCard(data, currentBinder)
             for (const key in card) {
                 if ((card as any)[key] === undefined) {
                     (card as any)[key] = null;

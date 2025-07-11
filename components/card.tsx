@@ -1,7 +1,7 @@
 import { CardType } from "@/types/CardType";
-import QuickMenu from "./quickMenu";
+import QuickMenu from "./QuickMenu";
 import { useState } from "react";
-import CardProperties from "./cardProperties";
+import CardProperties from "./CardProperties";
 
 const Card: React.FC<{ card: CardType }> = ({ card }) => {
     const [propsOpen, setPropsOpen] = useState(false);
@@ -18,7 +18,7 @@ const Card: React.FC<{ card: CardType }> = ({ card }) => {
     }
 
     return (card.image_uris &&
-        <div className="flex-1 min-w-55 max-w-65 relative group">
+        <div className="flex-1 min-w-55 max-w-60 relative group">
             <QuickMenu card={card}/>
             <img src={card.image_uris.large} alt={card.card_name} className="rounded-xl w-full cursor-pointer" onClick={() => fadeIn()}/>
             <div className="bg-orange-500 w-full h-full flex justify-center cursor-default">
