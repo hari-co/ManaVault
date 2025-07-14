@@ -5,7 +5,7 @@ export function createCard(data: any, currentBinder: any) {
                     id: 'N/A',
                     card_name: data.name,
                     flavor_name: data.flavor_name,
-                    image_uris: data.image_uris,
+                    image_uris: data.image_uris || data.card_faces[0].image_uris,
                     add_date: new Date,
                     last_price_update: new Date,
                     binder: currentBinder,
@@ -25,6 +25,7 @@ export function createCard(data: any, currentBinder: any) {
                     })) : [],
                     card_faces: data.card_faces ? data.card_faces.map((face: any) => ({
                         name: face.name,
+                        image_uris: face.image_uris
                     })) : [],
                     cmc: data.cmc,
                     color_identity: data.color_identity,
@@ -58,8 +59,12 @@ export function createCard(data: any, currentBinder: any) {
                     variation: data.variation,
                     variation_of: data.variation_of,
                     finishes: data.finishes,
+                    foil: false,
                     quantity: 1,
                     set_uri: data.set_uri,
+                    buy_price: "0.00",
+                    notes: "",
+                    favourite: false,
                 }
     return card;
 }

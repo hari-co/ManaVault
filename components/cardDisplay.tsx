@@ -16,17 +16,29 @@ const CardDisplay: React.FC = () => {
     const { currentBinder, setCurrentBinder } = binderContext;
 
     const updatePrice = async (card: CardType, user: User, currentBinder: string) => {
-        const now = Date.now()
-        let lastUpdate;
+        const now = Date.now();
+        let lastUpdate: number | undefined;
         const updatePeriod = 24 * 60 * 60 * 1000;
 
-         if (typeof(card.last_price_update as any).toDate() === "function") {
-            lastUpdate = (card.last_price_update as any).toDate().getTime();
-        } else if (card.last_price_update instanceof Date) {
-            lastUpdate = card.last_price_update.getTime();
+        if (card.last_price_update) {
+            if (
+                typeof card.last_price_update === "object" &&
+                card.last_price_update !== null &&
+                "toDate" in card.last_price_update &&
+                typeof (card.last_price_update as any).toDate === "function"
+            ) {
+                lastUpdate = (card.last_price_update as any).toDate().getTime();
+            } else if (card.last_price_update instanceof Date) {
+                lastUpdate = card.last_price_update.getTime();
+            } else if (
+                typeof card.last_price_update === "string" ||
+                typeof card.last_price_update === "number"
+            ) {
+                lastUpdate = new Date(card.last_price_update).getTime();
+            }
         }
 
-        if (now - lastUpdate > updatePeriod) {
+        if (lastUpdate === undefined || now - lastUpdate > updatePeriod) {
             const res = await fetch(`https://api.scryfall.com/cards/${card.scryfallId}`);
             if (!res.ok) return;
             const data = await res.json();
@@ -37,14 +49,14 @@ const CardDisplay: React.FC = () => {
                     last_price_update: new Date()
                 }
             );
-            setCardList(prev => 
+            setCardList(prev =>
                 prev.map(c =>
                     c.id === card.id
                         ? { ...c, prices: data.prices, last_price_update: new Date() }
                         : c
                 )
             );
-        };
+        }
     }
 
 

@@ -26,7 +26,7 @@ export type CardType = {
     scryfallUri: string;
     prints_search_uri: string;
     all_parts: { name: string }[];
-    card_faces: { name: string }[];
+    card_faces: CardType[];
     cmc: number;
     color_identity: string[];
     color_indicator: string[] | null;
@@ -60,6 +60,10 @@ export type CardType = {
     variation_of: string | null;
     collector_number?: string;
     finishes: string[];
+    foil: boolean;
     quantity: number;
     set_uri: string;
+    buy_price: string;
+    notes: string;
+    favourite: boolean;
 }

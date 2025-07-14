@@ -89,7 +89,7 @@ function createCard(data, currentBinder) {
         id: 'N/A',
         card_name: data.name,
         flavor_name: data.flavor_name,
-        image_uris: data.image_uris,
+        image_uris: data.image_uris || data.card_faces[0].image_uris,
         add_date: new Date,
         last_price_update: new Date,
         binder: currentBinder,
@@ -108,7 +108,8 @@ function createCard(data, currentBinder) {
                 name: part.name
             })) : [],
         card_faces: data.card_faces ? data.card_faces.map((face)=>({
-                name: face.name
+                name: face.name,
+                image_uris: face.image_uris
             })) : [],
         cmc: data.cmc,
         color_identity: data.color_identity,
@@ -142,8 +143,12 @@ function createCard(data, currentBinder) {
         variation: data.variation,
         variation_of: data.variation_of,
         finishes: data.finishes,
+        foil: false,
         quantity: 1,
-        set_uri: data.set_uri
+        set_uri: data.set_uri,
+        buy_price: "0.00",
+        notes: "",
+        favourite: false
     };
     return card;
 }
@@ -625,8 +630,15 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$create$2d$card$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/create-card.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$BinderContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/context/BinderContext.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$firebase$2f$firestore$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/node_modules/firebase/firestore/dist/esm/index.esm.js [app-client] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@firebase/firestore/dist/index.esm2017.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/hooks/useFirebaseUser.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/firebase-config.ts [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
+;
+;
+;
 ;
 ;
 ;
@@ -636,8 +648,34 @@ const CardProperties = ({ card })=>{
     const [prints, setPrints] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([
         card
     ]);
+    const [showPreview, setShowPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [cardQuantity, setCardQuantity] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(String(card.quantity));
+    const [buyPrice, setBuyPrice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(card.buy_price ? String(Number(card.buy_price).toFixed(2)) : "0.00");
+    const [binderName, setBinderName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [showBinders, setShowBinders] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [binderList, setBinderList] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([
+        "All Cards"
+    ]);
+    const [showConditions, setShowConditions] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [notes, setNotes] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(card.notes || "");
+    const [foil, setFoil] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(card.foil);
+    const [favourite, setFavourite] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(card.favourite || false);
+    const conditions = [
+        "NM",
+        "LP",
+        "MP",
+        "HP",
+        "DMG"
+    ];
+    const rarityFilter = {
+        common: "black",
+        uncommon: "radial-gradient(circle at 50% 75%, #ececec 0%, #737373 60%, #666666 100%)",
+        rare: "radial-gradient(circle at 50% 75%, #fbeca8 0%, #967c03 60%, #c6a405 100%)",
+        mythic: "radial-gradient(circle at 50% 75%, #fac438 0%, #d96421 60%, #c35008 100%)"
+    };
+    const binderMap = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(new Map());
     const binderContext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$BinderContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BinderContext"]);
+    const user = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useFirebaseUser"])();
     if (!binderContext) throw new Error("BinderContext not found.");
     const { currentBinder, setCurrentBinder } = binderContext;
     const viewPrints = async (card)=>{
@@ -650,6 +688,309 @@ const CardProperties = ({ card })=>{
         });
         setPrints(cardProcessList);
     };
+    const changePrint = async (card, print)=>{
+        if (!user || !user.uid || !currentBinder) {
+            console.log("Error");
+            return;
+        }
+        if (currentBinder != "all") {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                collector_number: print.collector_number,
+                image_uris: print.image_uris,
+                prices: print.prices,
+                rarity: print.rarity,
+                scryfallId: print.scryfallId,
+                scryfallUri: print.scryfallUri,
+                set: print.set,
+                set_name: print.set_name,
+                set_uri: print.set_uri,
+                uri: print.uri
+            });
+            if (print.flavor_name) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", currentBinder, "cards", card.id), {
+                    flavor_name: print.flavor_name
+                });
+            }
+        } else {
+            const binderId = card.binder;
+            if (binderId != "all" && binderId) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", binderId, "cards", card.id), {
+                    collector_number: print.collector_number,
+                    image_uris: print.image_uris,
+                    prices: print.prices,
+                    rarity: print.rarity,
+                    scryfallId: print.scryfallId,
+                    scryfallUri: print.scryfallUri,
+                    set: print.set,
+                    set_name: print.set_name,
+                    set_uri: print.set_uri,
+                    uri: print.uri
+                });
+                if (print.flavor_name) {
+                    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", binderId, "cards", card.id), {
+                        flavor_name: print.flavor_name
+                    });
+                }
+            }
+        }
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", "all", "cards", card.id), {
+            collector_number: print.collector_number,
+            image_uris: print.image_uris,
+            prices: print.prices,
+            rarity: print.rarity,
+            scryfallId: print.scryfallId,
+            scryfallUri: print.scryfallUri,
+            set: print.set,
+            set_name: print.set_name,
+            set_uri: print.set_uri,
+            uri: print.uri
+        });
+        if (print.flavor_name) {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", "all", "cards", card.id), {
+                flavor_name: print.flavor_name
+            });
+        }
+        setShowPreview(null);
+    };
+    const changeQuantity = async (card, cardQuantity, e)=>{
+        e.preventDefault();
+        if (!user || !user.uid || !currentBinder) {
+            console.log("Error");
+            return;
+        }
+        if (currentBinder != "all") {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                quantity: cardQuantity
+            });
+        } else {
+            const binderId = card.binder;
+            if (binderId != "all" && binderId) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", binderId, "cards", card.id), {
+                    quantity: cardQuantity
+                });
+            }
+        }
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", "all", "cards", card.id), {
+            quantity: cardQuantity
+        });
+    };
+    const changeBuyPrice = async (card, buyPrice, e)=>{
+        e.preventDefault();
+        if (!user || !user.uid || !currentBinder) {
+            console.log("Error");
+            return;
+        }
+        if (currentBinder != "all") {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                buy_price: buyPrice
+            });
+        } else {
+            const binderId = card.binder;
+            if (binderId != "all" && binderId) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", binderId, "cards", card.id), {
+                    buy_price: buyPrice
+                });
+            }
+        }
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", "all", "cards", card.id), {
+            buy_price: buyPrice
+        });
+    };
+    const changeNotes = async (card, notes, e)=>{
+        if (e) e.preventDefault?.();
+        if (!user || !user.uid || !currentBinder) {
+            console.log("Error");
+            return;
+        }
+        if (currentBinder != "all") {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                notes: notes
+            });
+        } else {
+            const binderId = card.binder;
+            if (binderId != "all" && binderId) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", binderId, "cards", card.id), {
+                    notes: notes
+                });
+            }
+        }
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", "all", "cards", card.id), {
+            notes: notes
+        });
+    };
+    const changeCondition = async (card, key)=>{
+        if (!user || !user.uid || !currentBinder) {
+            console.log("Error");
+            return;
+        }
+        if (currentBinder != "all") {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                condition: key
+            });
+        } else {
+            const binderId = card.binder;
+            if (binderId != "all" && binderId) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", binderId, "cards", card.id), {
+                    condition: key
+                });
+            }
+        }
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", "all", "cards", card.id), {
+            condition: key
+        });
+        setShowConditions(false);
+    };
+    const changeBinder = async (card, binder)=>{
+        if (!user || !user.uid || !currentBinder) {
+            console.log("Error");
+            return;
+        }
+        const binderNameToId = binderMap.current.get(binder);
+        if (!binderNameToId) {
+            console.error("Invalid binder selected:", binder);
+            return;
+        }
+        const sourceAllRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", currentBinder, "cards", card.id);
+        const targetAllRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", binderNameToId, "cards", card.id);
+        if (currentBinder != "all") {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                binder: binderNameToId
+            });
+            const dataAll = (await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])(sourceAllRef)).data();
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDoc"])(targetAllRef, dataAll, {
+                merge: true
+            });
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteDoc"])(sourceAllRef);
+        } else {
+            const binderId = card.binder;
+            if (binderId != "all" && binderId) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", binderId, "cards", card.id), {
+                    binder: binderNameToId
+                });
+                const sourceRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", binderId, "cards", card.id);
+                const data = (await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])(sourceRef)).data();
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDoc"])(targetAllRef, data, {
+                    merge: true
+                });
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["deleteDoc"])(sourceRef);
+            } else {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", "all", "cards", card.id), {
+                    binder: binderNameToId
+                });
+                const sourceRefNew = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", "all", "cards", card.id);
+                const dataNew = (await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])(sourceRefNew)).data();
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDoc"])(targetAllRef, dataNew, {
+                    merge: true
+                });
+            }
+        }
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", "all", "cards", card.id), {
+            binder: binderNameToId
+        });
+        setShowBinders(false);
+    };
+    const changeFoil = async (card, newFoil)=>{
+        setFoil(newFoil);
+        if (!user || !user.uid || !currentBinder) {
+            console.log("Error");
+            return;
+        }
+        if (currentBinder != "all") {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                foil: newFoil
+            });
+        } else {
+            const binderId = card.binder;
+            if (binderId != "all" && binderId) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", binderId, "cards", card.id), {
+                    foil: newFoil
+                });
+            }
+        }
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", "all", "cards", card.id), {
+            foil: newFoil
+        });
+    };
+    const changeFavourite = async (card, newFavourite)=>{
+        setFavourite(newFavourite);
+        if (!user || !user.uid || !currentBinder) {
+            console.log("Error");
+            return;
+        }
+        if (currentBinder != "all") {
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                favourite: newFavourite
+            });
+        } else {
+            const binderId = card.binder;
+            if (binderId != "all" && binderId) {
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", binderId, "cards", card.id), {
+                    favourite: newFavourite
+                });
+            }
+        }
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user?.uid, "binders", "all", "cards", card.id), {
+            favourite: newFavourite
+        });
+    };
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "CardProperties.useEffect": ()=>{
+            const fetchBinderName = {
+                "CardProperties.useEffect.fetchBinderName": async ()=>{
+                    if (!user || !card.binder) return;
+                    try {
+                        const binderRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", card.binder);
+                        const binderSnap = await (await __turbopack_context__.r("[project]/node_modules/firebase/firestore/dist/esm/index.esm.js [app-client] (ecmascript, async loader)")(__turbopack_context__.i)).getDoc(binderRef);
+                        if (binderSnap.exists()) {
+                            setBinderName(binderSnap.data().name || card.binder);
+                        } else {
+                            setBinderName(card.binder);
+                        }
+                    } catch (e) {
+                        setBinderName(card.binder);
+                    }
+                }
+            }["CardProperties.useEffect.fetchBinderName"];
+            fetchBinderName();
+        }
+    }["CardProperties.useEffect"], [
+        user,
+        card.binder
+    ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "CardProperties.useEffect": ()=>{
+            const fetchAllBinders = {
+                "CardProperties.useEffect.fetchAllBinders": async ()=>{
+                    if (!user) return;
+                    try {
+                        let binderNames = [];
+                        const binderSnapshot = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders"));
+                        binderSnapshot.forEach({
+                            "CardProperties.useEffect.fetchAllBinders": (doc)=>{
+                                binderNames.push({
+                                    name: doc.data().name,
+                                    index: doc.data().index
+                                });
+                                binderMap.current.set(doc.data().name, doc.id);
+                            }
+                        }["CardProperties.useEffect.fetchAllBinders"]);
+                        binderNames.sort({
+                            "CardProperties.useEffect.fetchAllBinders": (a, b)=>a.index - b.index
+                        }["CardProperties.useEffect.fetchAllBinders"]);
+                        setBinderList(binderNames.map({
+                            "CardProperties.useEffect.fetchAllBinders": (b)=>b.name
+                        }["CardProperties.useEffect.fetchAllBinders"]));
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
+            }["CardProperties.useEffect.fetchAllBinders"];
+            fetchAllBinders();
+        }
+    }["CardProperties.useEffect"], [
+        user,
+        currentBinder
+    ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col w-200 h-140 bg-[#192131]/70 rounded-lg text-white",
         children: [
@@ -660,19 +1001,19 @@ const CardProperties = ({ card })=>{
                     children: "Card Properties"
                 }, void 0, false, {
                     fileName: "[project]/components/CardProperties.tsx",
-                    lineNumber: 29,
+                    lineNumber: 330,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 28,
+                lineNumber: 329,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                 className: "m-2 text-white/25"
             }, void 0, false, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 31,
+                lineNumber: 332,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -681,13 +1022,20 @@ const CardProperties = ({ card })=>{
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "w-100",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                            card.image_uris ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                 src: card.image_uris?.png,
                                 className: "w-65 ml-10 mt-7"
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 34,
-                                columnNumber: 21
+                                lineNumber: 336,
+                                columnNumber: 25
+                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                src: card.card_faces[0].image_uris?.png,
+                                className: "w-65 ml-10 mt-7"
+                            }, void 0, false, {
+                                fileName: "[project]/components/CardProperties.tsx",
+                                lineNumber: 337,
+                                columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex ml-5 w-full h-8 justify-center",
@@ -699,46 +1047,59 @@ const CardProperties = ({ card })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/CardProperties.tsx",
-                                    lineNumber: 36,
+                                    lineNumber: 339,
                                     columnNumber: 26
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 35,
+                                lineNumber: 338,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                 href: card.scryfallUri,
                                 target: "_blank",
-                                className: "ml-28",
+                                className: "ml-28 text-gray-400",
                                 children: "View on Scryfall"
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 38,
+                                lineNumber: 341,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CardProperties.tsx",
-                        lineNumber: 33,
+                        lineNumber: 334,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "w-full",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex w-full justify-center mt-5",
+                                className: "flex w-100 justify-center mt-5 ml-15 break-words",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                     className: "text-2xl",
-                                    children: card.flavor_name || card.card_name
+                                    children: (card.flavor_name || card.card_name || "").split("//").map((part, idx, arr)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            children: [
+                                                part,
+                                                idx < arr.length - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                                    fileName: "[project]/components/CardProperties.tsx",
+                                                    lineNumber: 349,
+                                                    columnNumber: 62
+                                                }, this)
+                                            ]
+                                        }, idx, true, {
+                                            fileName: "[project]/components/CardProperties.tsx",
+                                            lineNumber: 347,
+                                            columnNumber: 33
+                                        }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/CardProperties.tsx",
-                                    lineNumber: 42,
+                                    lineNumber: 345,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 41,
+                                lineNumber: 344,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -750,11 +1111,11 @@ const CardProperties = ({ card })=>{
                                                 children: "Printing"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 46,
+                                                lineNumber: 356,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                className: "bg-gray-700 h-10 w-70 rounded-md",
+                                                className: "bg-gray-700/40 border border-gray-600 h-10 w-85 rounded-md flex justify-between items-center overflow-hidden",
                                                 onClick: ()=>{
                                                     if (!printOpen) {
                                                         viewPrints(card);
@@ -763,148 +1124,511 @@ const CardProperties = ({ card })=>{
                                                 },
                                                 onBlur: ()=>setPrintOpen(false),
                                                 children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                        src: `/set_icons/${card.set}.svg`,
-                                                        className: "inline max-h-7 max-w-7 mr-2"
-                                                    }, void 0, false, {
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "flex ml-4",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                className: `h-6 w-6 mr-2`,
+                                                                style: {
+                                                                    WebkitMaskImage: `url(/set_icons/${card.set}.svg)`,
+                                                                    maskImage: `url(/set_icons/${card.set}.svg)`,
+                                                                    WebkitMaskRepeat: "no-repeat",
+                                                                    maskRepeat: "no-repeat",
+                                                                    WebkitMaskPosition: "center",
+                                                                    maskPosition: "center",
+                                                                    WebkitMaskSize: "contain",
+                                                                    maskSize: "contain",
+                                                                    background: `${rarityFilter[card.rarity]}`
+                                                                }
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/CardProperties.tsx",
+                                                                lineNumber: 367,
+                                                                columnNumber: 37
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                className: "whitespace-nowrap overflow-hidden max-w-65",
+                                                                children: card.set_name + " " + card.collector_number
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/CardProperties.tsx",
+                                                                lineNumber: 380,
+                                                                columnNumber: 33
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 56,
+                                                        lineNumber: 366,
                                                         columnNumber: 33
                                                     }, this),
-                                                    card.set_name + " " + card.collector_number
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "h-full flex justify-center items-center",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                            src: "/dropdown.svg",
+                                                            className: "w-7 filter invert"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/CardProperties.tsx",
+                                                            lineNumber: 383,
+                                                            columnNumber: 37
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/CardProperties.tsx",
+                                                        lineNumber: 382,
+                                                        columnNumber: 33
+                                                    }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 47,
+                                                lineNumber: 357,
                                                 columnNumber: 29
                                             }, this),
                                             printOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "absolute border border-gray-500 bg-gray-600 max-h-70 w-100 overflow-y-auto rounded-sm",
+                                                className: "absolute border border-gray-500 bg-gray-600 max-h-70 w-90 overflow-y-auto rounded-sm z-50",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                                                     children: prints.map((print)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                            className: "hover:bg-gray-500",
+                                                            className: `hover:bg-gray-500 px-3 py-1 ${print.set_name == card.set_name && print.collector_number == card.collector_number ? " bg-gray-500" : ""}`,
+                                                            onMouseEnter: ()=>{
+                                                                if (print.image_uris) {
+                                                                    setShowPreview(print);
+                                                                } else {
+                                                                    setShowPreview(print.card_faces[0]);
+                                                                }
+                                                            },
+                                                            onMouseLeave: ()=>setShowPreview(null),
+                                                            onMouseDown: ()=>changePrint(card, print),
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "flex",
                                                                     children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                                            src: `/set_icons/${print.set}.svg`,
-                                                                            className: "inline max-h-7 max-w-6 mr-2"
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                            className: `h-5.5 w-5.5 mr-2`,
+                                                                            style: {
+                                                                                WebkitMaskImage: `url(/set_icons/${print.set}.svg)`,
+                                                                                maskImage: `url(/set_icons/${print.set}.svg)`,
+                                                                                WebkitMaskRepeat: "no-repeat",
+                                                                                maskRepeat: "no-repeat",
+                                                                                WebkitMaskPosition: "center",
+                                                                                maskPosition: "center",
+                                                                                WebkitMaskSize: "contain",
+                                                                                maskSize: "contain",
+                                                                                background: `${rarityFilter[print.rarity]}`
+                                                                            }
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                                            lineNumber: 67,
+                                                                            lineNumber: 403,
                                                                             columnNumber: 53
                                                                         }, this),
                                                                         `${print.set_name} ${print.collector_number}`
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                                    lineNumber: 66,
+                                                                    lineNumber: 402,
                                                                     columnNumber: 49
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "flex justify-between text-gray-400",
+                                                                    className: "flex justify-between text-gray-400 ml-8",
                                                                     children: [
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                             children: print.flavor_name || print.card_name
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                                            lineNumber: 71,
+                                                                            lineNumber: 419,
                                                                             columnNumber: 53
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                             children: `${print.prices.usd ? `$${print.prices.usd}` : "N/A"}`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                                            lineNumber: 72,
+                                                                            lineNumber: 420,
                                                                             columnNumber: 53
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                                    lineNumber: 70,
+                                                                    lineNumber: 418,
                                                                     columnNumber: 49
                                                                 }, this)
                                                             ]
                                                         }, print.set_name + print.collector_number, true, {
                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                            lineNumber: 63,
+                                                            lineNumber: 390,
                                                             columnNumber: 45
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 61,
+                                                    lineNumber: 388,
                                                     columnNumber: 37
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 60,
+                                                lineNumber: 387,
                                                 columnNumber: 33
+                                            }, this),
+                                            showPreview && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "fixed -right-22 ml-10",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                    src: showPreview.image_uris?.normal,
+                                                    className: "w-50 rounded-lg"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/CardProperties.tsx",
+                                                    lineNumber: 429,
+                                                    columnNumber: 45
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 428,
+                                                columnNumber: 41
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 45,
+                                        lineNumber: 355,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "ml-10",
+                                        className: "ml-7",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 children: "Quantity"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 81,
+                                                lineNumber: 434,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                                                onSubmit: (e)=>changeQuantity(card, Number(cardQuantity), e),
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                    type: "text",
-                                                    className: "bg-gray-700 w-17 h-10 rounded-md pl-4",
+                                                    type: "number",
+                                                    className: "bg-gray-700/40 border border-gray-600 w-17 h-10 rounded-md pl-4",
                                                     placeholder: String(card.quantity),
                                                     value: cardQuantity,
-                                                    onChange: ()=>console.log("Change Quantity")
+                                                    onChange: (e)=>setCardQuantity(e.target.value),
+                                                    onBlur: (e)=>changeQuantity(card, Number(cardQuantity), e)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 83,
+                                                    lineNumber: 437,
                                                     columnNumber: 33
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 82,
+                                                lineNumber: 435,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 80,
+                                        lineNumber: 433,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 44,
+                                lineNumber: 354,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex w-full h-15 ml-15 mt-5",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                children: "Binder"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 450,
+                                                columnNumber: 29
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                className: "bg-gray-700/40 border border-gray-600 h-10 w-60 rounded-md flex justify-between items-center pl-4",
+                                                onClick: ()=>setShowBinders(!showBinders),
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        children: binderName
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/CardProperties.tsx",
+                                                        lineNumber: 454,
+                                                        columnNumber: 33
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "h-full flex justify-center items-center",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                            src: "/dropdown.svg",
+                                                            className: "w-7 filter invert"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/CardProperties.tsx",
+                                                            lineNumber: 456,
+                                                            columnNumber: 37
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/CardProperties.tsx",
+                                                        lineNumber: 455,
+                                                        columnNumber: 33
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 451,
+                                                columnNumber: 29
+                                            }, this),
+                                            showBinders && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                                className: "bg-gray-700 absolute w-60 border border-gray-500 rounded-md",
+                                                children: binderList.map((binder)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                        className: `z-50 flex items-center pl-4 h-8 hover:bg-gray-400 ${binderName == binder ? " bg-gray-400" : " bg-gray-700"}`,
+                                                        onClick: ()=>changeBinder(card, binder),
+                                                        children: binder
+                                                    }, binder, false, {
+                                                        fileName: "[project]/components/CardProperties.tsx",
+                                                        lineNumber: 462,
+                                                        columnNumber: 41
+                                                    }, this))
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 460,
+                                                columnNumber: 33
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/CardProperties.tsx",
+                                        lineNumber: 449,
+                                        columnNumber: 25
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "ml-4",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                children: "Condition"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 473,
+                                                columnNumber: 29
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                className: "bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-between items-center pl-4",
+                                                onClick: ()=>setShowConditions(!showConditions),
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        children: card.condition
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/CardProperties.tsx",
+                                                        lineNumber: 477,
+                                                        columnNumber: 33
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "h-full flex justify-center items-center",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                            src: "/dropdown.svg",
+                                                            className: "w-7 filter invert"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/CardProperties.tsx",
+                                                            lineNumber: 479,
+                                                            columnNumber: 37
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/CardProperties.tsx",
+                                                        lineNumber: 478,
+                                                        columnNumber: 33
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 474,
+                                                columnNumber: 29
+                                            }, this),
+                                            showConditions && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                                className: "bg-gray-700 absolute w-18 border border-gray-500 rounded-md",
+                                                children: conditions.map((condition)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                        className: `z-50 flex justify-center items-center h-8 hover:bg-gray-400 ${card.condition == condition ? " bg-gray-400" : " bg-gray-700"}`,
+                                                        onClick: ()=>changeCondition(card, condition),
+                                                        children: condition
+                                                    }, condition, false, {
+                                                        fileName: "[project]/components/CardProperties.tsx",
+                                                        lineNumber: 485,
+                                                        columnNumber: 41
+                                                    }, this))
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 483,
+                                                columnNumber: 33
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/CardProperties.tsx",
+                                        lineNumber: 472,
+                                        columnNumber: 25
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "ml-4",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                children: "Buy Price"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 496,
+                                                columnNumber: 29
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                                                className: "flex bg-gray-700/40 border border-gray-600 w-23 h-10 rounded-md pl-3 items-center",
+                                                onSubmit: (e)=>{
+                                                    e.preventDefault();
+                                                    const formatted = Number(buyPrice).toFixed(2);
+                                                    setBuyPrice(formatted);
+                                                    changeBuyPrice(card, Number(formatted), e);
+                                                },
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "mr-1",
+                                                        children: "$"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/CardProperties.tsx",
+                                                        lineNumber: 504,
+                                                        columnNumber: 33
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                        className: "w-16",
+                                                        type: "number",
+                                                        step: "0.01",
+                                                        placeholder: card.buy_price,
+                                                        value: buyPrice,
+                                                        onChange: (e)=>setBuyPrice(e.target.value),
+                                                        onBlur: (e)=>{
+                                                            const formatted = Number(buyPrice).toFixed(2);
+                                                            setBuyPrice(formatted);
+                                                            changeBuyPrice(card, Number(formatted), e);
+                                                        }
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/CardProperties.tsx",
+                                                        lineNumber: 505,
+                                                        columnNumber: 33
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 497,
+                                                columnNumber: 29
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/CardProperties.tsx",
+                                        lineNumber: 495,
+                                        columnNumber: 25
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/CardProperties.tsx",
+                                lineNumber: 448,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex w-full h-50 ml-15 mt-5",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                children: "Notes"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 523,
+                                                columnNumber: 29
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                                                className: "flex w-83 h-45 rounded-xl items-center",
+                                                onSubmit: (e)=>{
+                                                    e.preventDefault();
+                                                    changeNotes(card, notes, e);
+                                                },
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                                    className: "w-full h-full bg-gray-700/40 border border-gray-600 rounded-xl p-2 resize-none text-white",
+                                                    value: notes,
+                                                    placeholder: "Type notes here...",
+                                                    onChange: (e)=>setNotes(e.target.value),
+                                                    onBlur: (e)=>changeNotes(card, e.target.value, e)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/CardProperties.tsx",
+                                                    lineNumber: 530,
+                                                    columnNumber: 33
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 524,
+                                                columnNumber: 29
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/CardProperties.tsx",
+                                        lineNumber: 522,
+                                        columnNumber: 25
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "ml-8",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                className: "mt-5",
+                                                children: "Foil"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 540,
+                                                columnNumber: 29
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                className: `bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${foil ? 'ring-2 ring-purple-400' : ''}`,
+                                                onClick: ()=>changeFoil(card, !foil),
+                                                children: foil ? '★' : '☆'
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 541,
+                                                columnNumber: 29
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                className: "mt-6",
+                                                children: "Favourite"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 546,
+                                                columnNumber: 29
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                className: `bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${favourite ? 'ring-2 ring-purple-400' : ''}`,
+                                                onClick: ()=>changeFavourite(card, !favourite),
+                                                children: favourite ? '★' : '☆'
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/CardProperties.tsx",
+                                                lineNumber: 547,
+                                                columnNumber: 29
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/CardProperties.tsx",
+                                        lineNumber: 539,
+                                        columnNumber: 25
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/CardProperties.tsx",
+                                lineNumber: 521,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CardProperties.tsx",
-                        lineNumber: 40,
+                        lineNumber: 343,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 32,
+                lineNumber: 333,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/CardProperties.tsx",
-        lineNumber: 27,
+        lineNumber: 328,
         columnNumber: 9
     }, this);
 };
-_s(CardProperties, "I6QdEYxeTUGlzVonl1/uPt61hig=");
+_s(CardProperties, "zPIkQG9bdon4mnVLDgldtzORcEY=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useFirebaseUser"]
+    ];
+});
 _c = CardProperties;
 const __TURBOPACK__default__export__ = CardProperties;
 var _c;
@@ -942,75 +1666,145 @@ const Card = ({ card })=>{
         setFade(false);
         setTimeout(()=>setPropsOpen(false), 400);
     };
-    return card.image_uris && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex-1 min-w-55 max-w-60 relative group",
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$QuickMenu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                card: card
-            }, void 0, false, {
-                fileName: "[project]/components/Card.tsx",
-                lineNumber: 22,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                src: card.image_uris.large,
-                alt: card.card_name,
-                className: "rounded-xl w-full cursor-pointer",
-                onClick: ()=>fadeIn()
-            }, void 0, false, {
-                fileName: "[project]/components/Card.tsx",
-                lineNumber: 23,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "bg-orange-500 w-full h-full flex justify-center cursor-default",
-                children: [
-                    card.prices.usd && "$" + card.prices.usd,
-                    !card.prices.usd && "N/A"
-                ]
-            }, void 0, true, {
-                fileName: "[project]/components/Card.tsx",
-                lineNumber: 24,
-                columnNumber: 13
-            }, this),
-            propsOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "fixed inset-0 z-50 flex items-start justify-center pt-50",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: `fixed inset-0 bg-black z-40 transition-opacity duration-500 ${fade ? ' opacity-50' : ' opacity-0'}`,
-                        onClick: ()=>fadeOut()
-                    }, void 0, false, {
-                        fileName: "[project]/components/Card.tsx",
-                        lineNumber: 30,
-                        columnNumber: 21
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: `relative z-50 backdrop-blur-md transition-opacity duration-500 ${fade ? ' opacity-100' : ' opacity-0'}`,
-                        onClick: (e)=>e.stopPropagation(),
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardProperties$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                            card: card
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+        children: card.image_uris ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex-1 min-w-55 max-w-60 relative group",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$QuickMenu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    card: card
+                }, void 0, false, {
+                    fileName: "[project]/components/Card.tsx",
+                    lineNumber: 24,
+                    columnNumber: 21
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                    src: card.image_uris.large,
+                    alt: card.card_name,
+                    className: "rounded-xl w-full cursor-pointer",
+                    onClick: ()=>fadeIn()
+                }, void 0, false, {
+                    fileName: "[project]/components/Card.tsx",
+                    lineNumber: 25,
+                    columnNumber: 21
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "bg-orange-500 w-full h-full flex justify-center cursor-default",
+                    children: [
+                        card.prices.usd && "$" + card.prices.usd,
+                        !card.prices.usd && "N/A"
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/Card.tsx",
+                    lineNumber: 26,
+                    columnNumber: 21
+                }, this),
+                propsOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "fixed inset-0 z-50 flex items-start justify-center pt-50",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: `fixed inset-0 bg-black z-40 transition-opacity duration-500 ${fade ? ' opacity-50' : ' opacity-0'}`,
+                            onClick: ()=>fadeOut()
                         }, void 0, false, {
                             fileName: "[project]/components/Card.tsx",
                             lineNumber: 32,
-                            columnNumber: 25
+                            columnNumber: 29
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: `relative z-50 backdrop-blur-md transition-opacity duration-500 ${fade ? ' opacity-100' : ' opacity-0'}`,
+                            onClick: (e)=>e.stopPropagation(),
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardProperties$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                card: card
+                            }, void 0, false, {
+                                fileName: "[project]/components/Card.tsx",
+                                lineNumber: 34,
+                                columnNumber: 33
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/components/Card.tsx",
+                            lineNumber: 33,
+                            columnNumber: 29
                         }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/components/Card.tsx",
-                        lineNumber: 31,
-                        columnNumber: 21
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/components/Card.tsx",
-                lineNumber: 29,
-                columnNumber: 17
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "[project]/components/Card.tsx",
-        lineNumber: 21,
-        columnNumber: 9
-    }, this);
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/Card.tsx",
+                    lineNumber: 31,
+                    columnNumber: 25
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/components/Card.tsx",
+            lineNumber: 23,
+            columnNumber: 17
+        }, this) : card.card_faces ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex-1 min-w-55 max-w-60 relative group",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$QuickMenu$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    card: card
+                }, void 0, false, {
+                    fileName: "[project]/components/Card.tsx",
+                    lineNumber: 41,
+                    columnNumber: 21
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                    src: card.card_faces?.[0]?.image_uris?.large,
+                    alt: card.card_name,
+                    className: "rounded-xl w-full cursor-pointer",
+                    onClick: ()=>fadeIn()
+                }, void 0, false, {
+                    fileName: "[project]/components/Card.tsx",
+                    lineNumber: 42,
+                    columnNumber: 21
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "bg-orange-500 w-full h-full flex justify-center cursor-default",
+                    children: [
+                        card.prices.usd && "$" + card.prices.usd,
+                        !card.prices.usd && "N/A"
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/Card.tsx",
+                    lineNumber: 43,
+                    columnNumber: 21
+                }, this),
+                propsOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "fixed inset-0 z-50 flex items-start justify-center pt-50",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: `fixed inset-0 bg-black z-40 transition-opacity duration-500 ${fade ? ' opacity-50' : ' opacity-0'}`,
+                            onClick: ()=>fadeOut()
+                        }, void 0, false, {
+                            fileName: "[project]/components/Card.tsx",
+                            lineNumber: 49,
+                            columnNumber: 29
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: `relative z-50 backdrop-blur-md transition-opacity duration-500 ${fade ? ' opacity-100' : ' opacity-0'}`,
+                            onClick: (e)=>e.stopPropagation(),
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardProperties$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                card: card
+                            }, void 0, false, {
+                                fileName: "[project]/components/Card.tsx",
+                                lineNumber: 51,
+                                columnNumber: 33
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/components/Card.tsx",
+                            lineNumber: 50,
+                            columnNumber: 29
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/Card.tsx",
+                    lineNumber: 48,
+                    columnNumber: 25
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/components/Card.tsx",
+            lineNumber: 40,
+            columnNumber: 17
+        }, this) : null
+    }, void 0, false);
 };
 _s(Card, "gv6m1Ec+YMru/cHX79cJLmKlRtg=");
 _c = Card;
@@ -1056,12 +1850,16 @@ const CardDisplay = ()=>{
         const now = Date.now();
         let lastUpdate;
         const updatePeriod = 24 * 60 * 60 * 1000;
-        if (typeof card.last_price_update.toDate() === "function") {
-            lastUpdate = card.last_price_update.toDate().getTime();
-        } else if (card.last_price_update instanceof Date) {
-            lastUpdate = card.last_price_update.getTime();
+        if (card.last_price_update) {
+            if (typeof card.last_price_update === "object" && card.last_price_update !== null && "toDate" in card.last_price_update && typeof card.last_price_update.toDate === "function") {
+                lastUpdate = card.last_price_update.toDate().getTime();
+            } else if (card.last_price_update instanceof Date) {
+                lastUpdate = card.last_price_update.getTime();
+            } else if (typeof card.last_price_update === "string" || typeof card.last_price_update === "number") {
+                lastUpdate = new Date(card.last_price_update).getTime();
+            }
         }
-        if (now - lastUpdate > updatePeriod) {
+        if (lastUpdate === undefined || now - lastUpdate > updatePeriod) {
             const res = await fetch(`https://api.scryfall.com/cards/${card.scryfallId}`);
             if (!res.ok) return;
             const data = await res.json();
@@ -1075,7 +1873,6 @@ const CardDisplay = ()=>{
                         last_price_update: new Date()
                     } : c));
         }
-        ;
     };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "CardDisplay.useEffect": ()=>{
@@ -1118,12 +1915,12 @@ const CardDisplay = ()=>{
                 card: card
             }, card.id, false, {
                 fileName: "[project]/components/CardDisplay.tsx",
-                lineNumber: 77,
+                lineNumber: 89,
                 columnNumber: 21
             }, this))
     }, void 0, false, {
         fileName: "[project]/components/CardDisplay.tsx",
-        lineNumber: 75,
+        lineNumber: 87,
         columnNumber: 9
     }, this);
 };
