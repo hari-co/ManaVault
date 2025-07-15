@@ -42,7 +42,7 @@ export default function register() {
       try {
         await setDoc(doc(db, "users", uid), { username, email, createdAt: new Date() });
         await setDoc(doc(db, "users", uid, "profile", "description"), {});
-        await setDoc(doc(db, "users", uid, "binders", "all"), {name: "All Cards", index: 0, color: "adadad"});
+        await setDoc(doc(db, "users", uid, "binders", "all"), {name: "All cards", index: 0, color: "adadad"});
       } catch (error: any) {
         setError("Error creating user data. Please try again.");
         await userCredentials.user.delete();

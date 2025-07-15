@@ -395,7 +395,7 @@ const Binders = ()=>{
             let q = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["query"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders"), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["where"])("name", "==", nameCheck));
             let querySnapshot = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])(q);
             if (!nameCheck) {
-                nameCheck = "New Binder";
+                nameCheck = "New binder";
             }
             if (!querySnapshot.empty) {
                 // If a binder with the same name exists, itemize the name
@@ -425,41 +425,76 @@ const Binders = ()=>{
         getBinders();
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex flex-col bg-[#1f1f21] h-full w-64 text-[#a9a9ab] font-semibold",
+        className: "flex flex-col bg-[#1f1f21] h-full w-64 text-[#a9a9ab] font-sans font-medium p-1",
         children: [
-            "Binders",
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex items-center ml-2",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                            src: "/box.svg",
+                            className: "w-6",
+                            style: {
+                                filter: "invert(62%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%)"
+                            }
+                        }, void 0, false, {
+                            fileName: "[project]/components/Binders.tsx",
+                            lineNumber: 93,
+                            columnNumber: 21
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/components/Binders.tsx",
+                        lineNumber: 92,
+                        columnNumber: 18
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                        className: "m-2 text-[#cbcbcd] text-lg",
+                        children: "Binders"
+                    }, void 0, false, {
+                        fileName: "[project]/components/Binders.tsx",
+                        lineNumber: 95,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/Binders.tsx",
+                lineNumber: 91,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
+                className: "text-[#373739]"
+            }, void 0, false, {
+                fileName: "[project]/components/Binders.tsx",
+                lineNumber: 97,
+                columnNumber: 13
+            }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                 className: "p-3",
                 children: binders.slice().sort((a, b)=>a.index - b.index).map((binder)=>{
                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                        className: "cursor-pointer flex rounded-lg h-9 w-full hover:bg-[#373739] items-center " + (binder.id === currentBinder ? "bg-[#373739]" : "bg-[#1f1f21"),
+                        className: "cursor-pointer flex rounded-md h-9 w-full hover:bg-[#373739] items-center " + (binder.id === currentBinder ? "bg-[#373739] text-white" : "bg-[#1f1f21"),
                         onClick: ()=>selectBinder(binder.id),
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "w-3 h-3 rounded-full border mx-2",
-                                style: {
-                                    backgroundColor: binder.color
-                                }
-                            }, void 0, false, {
-                                fileName: "[project]/components/Binders.tsx",
-                                lineNumber: 102,
-                                columnNumber: 25
-                            }, this),
-                            binder.name
-                        ]
-                    }, binder.name, true, {
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "ml-4",
+                            children: binder.name
+                        }, void 0, false, {
+                            fileName: "[project]/components/Binders.tsx",
+                            lineNumber: 108,
+                            columnNumber: 25
+                        }, this)
+                    }, binder.name, false, {
                         fileName: "[project]/components/Binders.tsx",
-                        lineNumber: 97,
+                        lineNumber: 103,
                         columnNumber: 33
                     }, this);
                 })
             }, void 0, false, {
                 fileName: "[project]/components/Binders.tsx",
-                lineNumber: 92,
+                lineNumber: 98,
                 columnNumber: 13
             }, this),
             addingBinder && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "border h-10 w-full bg-gray-900",
+                className: "border h-10 w-full bg-[#1f1f21]",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                     className: "flex items-center h-10 w-full bg-amber-50",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -472,26 +507,42 @@ const Binders = ()=>{
                         onChange: (e)=>setBinderName(e.target.value)
                     }, void 0, false, {
                         fileName: "[project]/components/Binders.tsx",
-                        lineNumber: 114,
+                        lineNumber: 116,
                         columnNumber: 25
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/Binders.tsx",
-                    lineNumber: 113,
+                    lineNumber: 115,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/Binders.tsx",
-                lineNumber: 112,
+                lineNumber: 114,
                 columnNumber: 17
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                className: "border h-10 w-full bg-emerald-400 hover:bg-emerald-100",
+                className: "rounded-lg group flex items-center pl-12 h-10 w-full bg-[#1f1f21] hover:bg-[#373739] hover:text-white",
                 onClick: ()=>setAddingBinder(true),
-                children: "New Binder"
-            }, void 0, false, {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                        src: "/plus.svg",
+                        className: "w-6 filter group-hover:brightness-200"
+                    }, void 0, false, {
+                        fileName: "[project]/components/Binders.tsx",
+                        lineNumber: 131,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        children: "New binder"
+                    }, void 0, false, {
+                        fileName: "[project]/components/Binders.tsx",
+                        lineNumber: 132,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/Binders.tsx",
-                lineNumber: 126,
+                lineNumber: 128,
                 columnNumber: 13
             }, this)
         ]

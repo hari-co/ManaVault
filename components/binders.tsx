@@ -53,7 +53,7 @@ const Binders: React.FC = () => {
             let querySnapshot = await getDocs(q);
 
              if (!nameCheck) {
-                nameCheck = "New Binder";
+                nameCheck = "New binder";
             }
             
             if (!querySnapshot.empty) {
@@ -87,8 +87,14 @@ const Binders: React.FC = () => {
     }
 
     return (
-        <div className='flex flex-col bg-[#1f1f21] h-full w-64 text-[#a9a9ab] font-semibold'>
-            Binders
+        <div className='flex flex-col bg-[#1f1f21] h-full w-64 text-[#a9a9ab] font-sans font-medium p-1'>
+            <div className="flex items-center ml-2">
+                 <span>
+                    <img src={"/box.svg"} className="w-6" style={{filter: "invert(62%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%)"}}/>
+                </span>     
+            <h1 className="m-2 text-[#cbcbcd] text-lg">Binders</h1>
+            </div>
+            <hr className="text-[#373739]"></hr>
             <ul className="p-3">
                 {binders
                     .slice()
@@ -96,20 +102,16 @@ const Binders: React.FC = () => {
                     .map(binder => {
                         return (<li
                         key= {binder.name}
-                        className={"cursor-pointer flex rounded-lg h-9 w-full hover:bg-[#373739] items-center " 
-                            + (binder.id === currentBinder ? "bg-[#373739]" : "bg-[#1f1f21")}
+                        className={"cursor-pointer flex rounded-md h-9 w-full hover:bg-[#373739] items-center " 
+                            + (binder.id === currentBinder ? "bg-[#373739] text-white" : "bg-[#1f1f21")}
                         onClick={() => selectBinder(binder.id)}>
-                        <span
-                            className="w-3 h-3 rounded-full border mx-2"
-                            style={{ backgroundColor: binder.color }}>
-                        </span>
-                        {binder.name}
+                        <p className="ml-4">{binder.name}</p>
                         </li>
                     )})
                 }
             </ul>
             {addingBinder && (
-                <div className="border h-10 w-full bg-gray-900">
+                <div className="border h-10 w-full bg-[#1f1f21]">
                     <form className="flex items-center h-10 w-full bg-amber-50">
                         <input
                         className="outline-none"
@@ -124,9 +126,12 @@ const Binders: React.FC = () => {
                 </div>
             )}
             <button 
-            className="border h-10 w-full bg-emerald-400 hover:bg-emerald-100"
+            className="rounded-lg group flex items-center pl-12 h-10 w-full bg-[#1f1f21] hover:bg-[#373739] hover:text-white"
             onClick={() => setAddingBinder(true)}>
-                New Binder
+                <img src={"/plus.svg"} className="w-6 filter group-hover:brightness-200"/>
+                <p>
+                    New binder
+                </p>
             </button>
         </div>
     )
