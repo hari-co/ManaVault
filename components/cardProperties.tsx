@@ -61,7 +61,8 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
                 set: print.set,
                 set_name: print.set_name,
                 set_uri: print.set_uri,
-                uri: print.uri
+                uri: print.uri,
+                ...(print.card_faces ? { card_faces: print.card_faces } : {})
             })
             if (print.flavor_name) {
                 await updateDoc(doc(db, "users", user.uid, "binders", currentBinder, "cards", card.id), {flavor_name: print.flavor_name})
@@ -79,7 +80,8 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
                 set: print.set,
                 set_name: print.set_name,
                 set_uri: print.set_uri,
-                uri: print.uri
+                uri: print.uri,
+                ...(print.card_faces ? { card_faces: print.card_faces } : {})
             })
             if (print.flavor_name) {
                 await updateDoc(doc(db, "users", user.uid, "binders", binderId, "cards", card.id), {flavor_name: print.flavor_name})
@@ -96,7 +98,8 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
                 set: print.set,
                 set_name: print.set_name,
                 set_uri: print.set_uri,
-                uri: print.uri
+                uri: print.uri,
+                ...(print.card_faces ? { card_faces: print.card_faces } : {})
             })
         if (print.flavor_name) {
                 await updateDoc(doc(db, "users", user.uid, "binders", "all", "cards", card.id), {flavor_name: print.flavor_name})

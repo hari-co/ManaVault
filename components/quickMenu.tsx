@@ -5,10 +5,11 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/config/firebase-config";
 import { BinderContext } from "@/context/BinderContext";
 
-const QuickMenu: React.FC<{card: CardType}> = ({ card }) => {
-    const [menuOpen, setMenuOpen] = useState(false)
-    const user = useFirebaseUser()
-    const binderContext = useContext(BinderContext)
+const QuickMenu: React.FC<{card: CardType, onFlip: () => void}> = ({ card, onFlip }) => {
+    const [menuOpen, setMenuOpen] = useState(false);
+    const user = useFirebaseUser();
+    const binderContext = useContext(BinderContext);
+    const flippable = !!card.card_faces && card.card_faces.length > 1;
     
     if (!binderContext) throw new Error("BinderContext not found.");
     const { currentBinder, setCurrentBinder } = binderContext;
@@ -46,6 +47,14 @@ const QuickMenu: React.FC<{card: CardType}> = ({ card }) => {
                         Delete
                     </button>
                 </div>}
+            {flippable && 
+            <div className={`absolute top-15 right-4 z-10 transition duration-500 ${menuOpen ? `opacity-100` : `opacity-0 group-hover:opacity-100`}`}>
+                <button 
+                className="flex items-center justify-center p-1 w-10 h-8 rounded-xl bg-gray-200 hover:bg-gray-400"
+                onClick={() => onFlip()}>
+                    <img src={"/flip.svg"}/>
+                </button>
+            </div>}
         </>
     )
 }

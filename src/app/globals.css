@@ -24,3 +24,25 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.flip-container {
+  perspective: 1000px;
+}
+
+.flip-card {
+  transition: transform 0.4s linear;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped {
+  transform: rotateY(-180deg);
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}

@@ -480,10 +480,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$BinderCont
 ;
 ;
 ;
-const QuickMenu = ({ card })=>{
+const QuickMenu = ({ card, onFlip })=>{
     const [menuOpen, setMenuOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const user = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useFirebaseUser"])();
     const binderContext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$BinderContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BinderContext"]);
+    const flippable = !!card.card_faces && card.card_faces.length > 1;
     if (!binderContext) throw new Error("BinderContext not found.");
     const { currentBinder, setCurrentBinder } = binderContext;
     const deleteCard = async (card, currentBinder)=>{
@@ -509,17 +510,17 @@ const QuickMenu = ({ card })=>{
                         children: "⋯"
                     }, void 0, false, {
                         fileName: "[project]/components/QuickMenu.tsx",
-                        lineNumber: 35,
+                        lineNumber: 36,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/QuickMenu.tsx",
-                    lineNumber: 33,
+                    lineNumber: 34,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/QuickMenu.tsx",
-                lineNumber: 32,
+                lineNumber: 33,
                 columnNumber: 13
             }, this),
             menuOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -527,7 +528,7 @@ const QuickMenu = ({ card })=>{
                 onClick: ()=>setMenuOpen(false)
             }, void 0, false, {
                 fileName: "[project]/components/QuickMenu.tsx",
-                lineNumber: 38,
+                lineNumber: 39,
                 columnNumber: 26
             }, this),
             menuOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -538,13 +539,35 @@ const QuickMenu = ({ card })=>{
                     children: "Delete"
                 }, void 0, false, {
                     fileName: "[project]/components/QuickMenu.tsx",
-                    lineNumber: 44,
+                    lineNumber: 45,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/QuickMenu.tsx",
-                lineNumber: 43,
+                lineNumber: 44,
                 columnNumber: 17
+            }, this),
+            flippable && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: `absolute top-15 right-4 z-10 transition duration-500 ${menuOpen ? `opacity-100` : `opacity-0 group-hover:opacity-100`}`,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    className: "flex items-center justify-center p-1 w-10 h-8 rounded-xl bg-gray-200 hover:bg-gray-400",
+                    onClick: ()=>onFlip(),
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                        src: "/flip.svg"
+                    }, void 0, false, {
+                        fileName: "[project]/components/QuickMenu.tsx",
+                        lineNumber: 55,
+                        columnNumber: 21
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/components/QuickMenu.tsx",
+                    lineNumber: 52,
+                    columnNumber: 17
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/QuickMenu.tsx",
+                lineNumber: 51,
+                columnNumber: 13
             }, this)
         ]
     }, void 0, true);
@@ -635,7 +658,10 @@ const CardProperties = ({ card })=>{
                 set: print.set,
                 set_name: print.set_name,
                 set_uri: print.set_uri,
-                uri: print.uri
+                uri: print.uri,
+                ...print.card_faces ? {
+                    card_faces: print.card_faces
+                } : {}
             });
             if (print.flavor_name) {
                 await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$node$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$node$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", currentBinder, "cards", card.id), {
@@ -655,7 +681,10 @@ const CardProperties = ({ card })=>{
                     set: print.set,
                     set_name: print.set_name,
                     set_uri: print.set_uri,
-                    uri: print.uri
+                    uri: print.uri,
+                    ...print.card_faces ? {
+                        card_faces: print.card_faces
+                    } : {}
                 });
                 if (print.flavor_name) {
                     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$node$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$node$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", binderId, "cards", card.id), {
@@ -674,7 +703,10 @@ const CardProperties = ({ card })=>{
             set: print.set,
             set_name: print.set_name,
             set_uri: print.set_uri,
-            uri: print.uri
+            uri: print.uri,
+            ...print.card_faces ? {
+                card_faces: print.card_faces
+            } : {}
         });
         if (print.flavor_name) {
             await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$node$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["updateDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$node$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", "all", "cards", card.id), {
@@ -918,19 +950,19 @@ const CardProperties = ({ card })=>{
                     children: "Card Properties"
                 }, void 0, false, {
                     fileName: "[project]/components/CardProperties.tsx",
-                    lineNumber: 330,
+                    lineNumber: 333,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 329,
+                lineNumber: 332,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                 className: "m-2 text-white/25"
             }, void 0, false, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 332,
+                lineNumber: 335,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -944,14 +976,14 @@ const CardProperties = ({ card })=>{
                                 className: "w-65 ml-10 mt-7"
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 336,
+                                lineNumber: 339,
                                 columnNumber: 25
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                 src: card.card_faces[0].image_uris?.png,
                                 className: "w-65 ml-10 mt-7"
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 337,
+                                lineNumber: 340,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -964,12 +996,12 @@ const CardProperties = ({ card })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/CardProperties.tsx",
-                                    lineNumber: 339,
+                                    lineNumber: 342,
                                     columnNumber: 26
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 338,
+                                lineNumber: 341,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -979,13 +1011,13 @@ const CardProperties = ({ card })=>{
                                 children: "View on Scryfall"
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 341,
+                                lineNumber: 344,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CardProperties.tsx",
-                        lineNumber: 334,
+                        lineNumber: 337,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1000,23 +1032,23 @@ const CardProperties = ({ card })=>{
                                                 part,
                                                 idx < arr.length - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 349,
+                                                    lineNumber: 352,
                                                     columnNumber: 62
                                                 }, this)
                                             ]
                                         }, idx, true, {
                                             fileName: "[project]/components/CardProperties.tsx",
-                                            lineNumber: 347,
+                                            lineNumber: 350,
                                             columnNumber: 33
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/CardProperties.tsx",
-                                    lineNumber: 345,
+                                    lineNumber: 348,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 344,
+                                lineNumber: 347,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1028,7 +1060,7 @@ const CardProperties = ({ card })=>{
                                                 children: "Printing"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 356,
+                                                lineNumber: 359,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1059,7 +1091,7 @@ const CardProperties = ({ card })=>{
                                                                 }
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                                lineNumber: 367,
+                                                                lineNumber: 370,
                                                                 columnNumber: 37
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1067,13 +1099,13 @@ const CardProperties = ({ card })=>{
                                                                 children: card.set_name + " " + card.collector_number
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                                lineNumber: 380,
+                                                                lineNumber: 383,
                                                                 columnNumber: 33
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 366,
+                                                        lineNumber: 369,
                                                         columnNumber: 33
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1083,18 +1115,18 @@ const CardProperties = ({ card })=>{
                                                             className: "w-7 filter invert"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                            lineNumber: 383,
+                                                            lineNumber: 386,
                                                             columnNumber: 37
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 382,
+                                                        lineNumber: 385,
                                                         columnNumber: 33
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 357,
+                                                lineNumber: 360,
                                                 columnNumber: 29
                                             }, this),
                                             printOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1130,14 +1162,14 @@ const CardProperties = ({ card })=>{
                                                                             }
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                                            lineNumber: 403,
+                                                                            lineNumber: 406,
                                                                             columnNumber: 53
                                                                         }, this),
                                                                         `${print.set_name} ${print.collector_number}`
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                                    lineNumber: 402,
+                                                                    lineNumber: 405,
                                                                     columnNumber: 49
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1147,36 +1179,36 @@ const CardProperties = ({ card })=>{
                                                                             children: print.flavor_name || print.card_name
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                                            lineNumber: 419,
+                                                                            lineNumber: 422,
                                                                             columnNumber: 53
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                             children: `${print.prices.usd ? `$${print.prices.usd}` : "N/A"}`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                                            lineNumber: 420,
+                                                                            lineNumber: 423,
                                                                             columnNumber: 53
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                                    lineNumber: 418,
+                                                                    lineNumber: 421,
                                                                     columnNumber: 49
                                                                 }, this)
                                                             ]
                                                         }, print.set_name + print.collector_number, true, {
                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                            lineNumber: 390,
+                                                            lineNumber: 393,
                                                             columnNumber: 45
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 388,
+                                                    lineNumber: 391,
                                                     columnNumber: 37
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 387,
+                                                lineNumber: 390,
                                                 columnNumber: 33
                                             }, this),
                                             showPreview && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1186,18 +1218,18 @@ const CardProperties = ({ card })=>{
                                                     className: "w-50 rounded-lg"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 429,
+                                                    lineNumber: 432,
                                                     columnNumber: 45
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 428,
+                                                lineNumber: 431,
                                                 columnNumber: 41
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 355,
+                                        lineNumber: 358,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1207,7 +1239,7 @@ const CardProperties = ({ card })=>{
                                                 children: "Quantity"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 434,
+                                                lineNumber: 437,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1221,24 +1253,24 @@ const CardProperties = ({ card })=>{
                                                     onBlur: (e)=>changeQuantity(card, Number(cardQuantity), e)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 437,
+                                                    lineNumber: 440,
                                                     columnNumber: 33
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 435,
+                                                lineNumber: 438,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 433,
+                                        lineNumber: 436,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 354,
+                                lineNumber: 357,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1250,7 +1282,7 @@ const CardProperties = ({ card })=>{
                                                 children: "Binder"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 450,
+                                                lineNumber: 453,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1261,7 +1293,7 @@ const CardProperties = ({ card })=>{
                                                         children: binderName
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 454,
+                                                        lineNumber: 457,
                                                         columnNumber: 33
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1271,18 +1303,18 @@ const CardProperties = ({ card })=>{
                                                             className: "w-7 filter invert"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                            lineNumber: 456,
+                                                            lineNumber: 459,
                                                             columnNumber: 37
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 455,
+                                                        lineNumber: 458,
                                                         columnNumber: 33
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 451,
+                                                lineNumber: 454,
                                                 columnNumber: 29
                                             }, this),
                                             showBinders && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -1293,18 +1325,18 @@ const CardProperties = ({ card })=>{
                                                         children: binder
                                                     }, binder, false, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 462,
+                                                        lineNumber: 465,
                                                         columnNumber: 41
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 460,
+                                                lineNumber: 463,
                                                 columnNumber: 33
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 449,
+                                        lineNumber: 452,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1314,7 +1346,7 @@ const CardProperties = ({ card })=>{
                                                 children: "Condition"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 473,
+                                                lineNumber: 476,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1325,7 +1357,7 @@ const CardProperties = ({ card })=>{
                                                         children: card.condition
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 477,
+                                                        lineNumber: 480,
                                                         columnNumber: 33
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1335,18 +1367,18 @@ const CardProperties = ({ card })=>{
                                                             className: "w-7 filter invert"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/CardProperties.tsx",
-                                                            lineNumber: 479,
+                                                            lineNumber: 482,
                                                             columnNumber: 37
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 478,
+                                                        lineNumber: 481,
                                                         columnNumber: 33
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 474,
+                                                lineNumber: 477,
                                                 columnNumber: 29
                                             }, this),
                                             showConditions && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -1357,18 +1389,18 @@ const CardProperties = ({ card })=>{
                                                         children: condition
                                                     }, condition, false, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 485,
+                                                        lineNumber: 488,
                                                         columnNumber: 41
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 483,
+                                                lineNumber: 486,
                                                 columnNumber: 33
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 472,
+                                        lineNumber: 475,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1378,7 +1410,7 @@ const CardProperties = ({ card })=>{
                                                 children: "Buy Price"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 496,
+                                                lineNumber: 499,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1395,7 +1427,7 @@ const CardProperties = ({ card })=>{
                                                         children: "$"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 504,
+                                                        lineNumber: 507,
                                                         columnNumber: 33
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1412,25 +1444,25 @@ const CardProperties = ({ card })=>{
                                                         }
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 505,
+                                                        lineNumber: 508,
                                                         columnNumber: 33
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 497,
+                                                lineNumber: 500,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 495,
+                                        lineNumber: 498,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 448,
+                                lineNumber: 451,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1442,7 +1474,7 @@ const CardProperties = ({ card })=>{
                                                 children: "Notes"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 523,
+                                                lineNumber: 526,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1459,18 +1491,18 @@ const CardProperties = ({ card })=>{
                                                     onBlur: (e)=>changeNotes(card, e.target.value, e)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 530,
+                                                    lineNumber: 533,
                                                     columnNumber: 33
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 524,
+                                                lineNumber: 527,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 522,
+                                        lineNumber: 525,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1481,7 +1513,7 @@ const CardProperties = ({ card })=>{
                                                 children: "Foil"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 540,
+                                                lineNumber: 543,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1490,7 +1522,7 @@ const CardProperties = ({ card })=>{
                                                 children: foil ? '★' : '☆'
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 541,
+                                                lineNumber: 544,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1498,7 +1530,7 @@ const CardProperties = ({ card })=>{
                                                 children: "Favourite"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 546,
+                                                lineNumber: 549,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1507,37 +1539,37 @@ const CardProperties = ({ card })=>{
                                                 children: favourite ? '★' : '☆'
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 547,
+                                                lineNumber: 550,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 539,
+                                        lineNumber: 542,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 521,
+                                lineNumber: 524,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CardProperties.tsx",
-                        lineNumber: 343,
+                        lineNumber: 346,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 333,
+                lineNumber: 336,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/CardProperties.tsx",
-        lineNumber: 328,
+        lineNumber: 331,
         columnNumber: 9
     }, this);
 };
@@ -1562,6 +1594,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardProperties
 const Card = ({ card })=>{
     const [propsOpen, setPropsOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [fade, setFade] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [flipped, setFlipped] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const fadeIn = ()=>{
         setPropsOpen(true);
         setTimeout(()=>setFade(true), 10);
@@ -1570,15 +1603,19 @@ const Card = ({ card })=>{
         setFade(false);
         setTimeout(()=>setPropsOpen(false), 400);
     };
+    const handleFlip = ()=>{
+        setFlipped(!flipped);
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
-        children: card.image_uris ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        children: card.image_uris && card.card_faces.length < 2 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex-1 min-w-55 max-w-60 relative group",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$QuickMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                    card: card
+                    card: card,
+                    onFlip: handleFlip
                 }, void 0, false, {
                     fileName: "[project]/components/Card.tsx",
-                    lineNumber: 24,
+                    lineNumber: 29,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
@@ -1588,7 +1625,7 @@ const Card = ({ card })=>{
                     onClick: ()=>fadeIn()
                 }, void 0, false, {
                     fileName: "[project]/components/Card.tsx",
-                    lineNumber: 25,
+                    lineNumber: 30,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1599,7 +1636,7 @@ const Card = ({ card })=>{
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/Card.tsx",
-                    lineNumber: 26,
+                    lineNumber: 31,
                     columnNumber: 21
                 }, this),
                 propsOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1610,7 +1647,7 @@ const Card = ({ card })=>{
                             onClick: ()=>fadeOut()
                         }, void 0, false, {
                             fileName: "[project]/components/Card.tsx",
-                            lineNumber: 32,
+                            lineNumber: 37,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1620,43 +1657,70 @@ const Card = ({ card })=>{
                                 card: card
                             }, void 0, false, {
                                 fileName: "[project]/components/Card.tsx",
-                                lineNumber: 34,
+                                lineNumber: 39,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/Card.tsx",
-                            lineNumber: 33,
+                            lineNumber: 38,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/Card.tsx",
-                    lineNumber: 31,
+                    lineNumber: 36,
                     columnNumber: 25
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/Card.tsx",
-            lineNumber: 23,
+            lineNumber: 28,
             columnNumber: 17
         }, this) : card.card_faces ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex-1 min-w-55 max-w-60 relative group",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$QuickMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                    card: card
+                    card: card,
+                    onFlip: handleFlip
                 }, void 0, false, {
                     fileName: "[project]/components/Card.tsx",
-                    lineNumber: 41,
+                    lineNumber: 46,
                     columnNumber: 21
                 }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                    src: card.card_faces?.[0]?.image_uris?.large,
-                    alt: card.card_name,
-                    className: "rounded-xl w-full cursor-pointer",
-                    onClick: ()=>fadeIn()
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flip-container",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: `flip-card ${flipped ? "flipped" : ""}`,
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                src: card.card_faces?.[0]?.image_uris?.large,
+                                alt: card.card_name,
+                                className: "rounded-xl w-full cursor-pointer absolute card-front",
+                                onClick: ()=>fadeIn()
+                            }, void 0, false, {
+                                fileName: "[project]/components/Card.tsx",
+                                lineNumber: 49,
+                                columnNumber: 29
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                src: card.card_faces?.[1]?.image_uris?.large,
+                                alt: card.card_name,
+                                className: "rounded-xl w-full cursor-pointer card-back",
+                                onClick: ()=>fadeIn()
+                            }, void 0, false, {
+                                fileName: "[project]/components/Card.tsx",
+                                lineNumber: 50,
+                                columnNumber: 29
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/Card.tsx",
+                        lineNumber: 48,
+                        columnNumber: 25
+                    }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/Card.tsx",
-                    lineNumber: 42,
+                    lineNumber: 47,
                     columnNumber: 21
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1667,7 +1731,7 @@ const Card = ({ card })=>{
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/Card.tsx",
-                    lineNumber: 43,
+                    lineNumber: 53,
                     columnNumber: 21
                 }, this),
                 propsOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1678,7 +1742,7 @@ const Card = ({ card })=>{
                             onClick: ()=>fadeOut()
                         }, void 0, false, {
                             fileName: "[project]/components/Card.tsx",
-                            lineNumber: 49,
+                            lineNumber: 59,
                             columnNumber: 29
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1688,24 +1752,24 @@ const Card = ({ card })=>{
                                 card: card
                             }, void 0, false, {
                                 fileName: "[project]/components/Card.tsx",
-                                lineNumber: 51,
+                                lineNumber: 61,
                                 columnNumber: 33
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/Card.tsx",
-                            lineNumber: 50,
+                            lineNumber: 60,
                             columnNumber: 29
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/Card.tsx",
-                    lineNumber: 48,
+                    lineNumber: 58,
                     columnNumber: 25
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/Card.tsx",
-            lineNumber: 40,
+            lineNumber: 45,
             columnNumber: 17
         }, this) : null
     }, void 0, false);
