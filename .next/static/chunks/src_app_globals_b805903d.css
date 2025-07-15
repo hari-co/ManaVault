@@ -53,21 +53,19 @@
 
 @layer theme {
   :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --color-red-500: oklch(63.7% .237 25.331);
     --color-orange-500: oklch(70.5% .213 47.604);
     --color-amber-50: oklch(98.7% .022 95.277);
-    --color-amber-500: oklch(76.9% .188 70.08);
     --color-amber-700: oklch(55.5% .163 48.998);
     --color-green-600: oklch(62.7% .194 149.214);
     --color-emerald-100: oklch(95% .052 163.051);
     --color-emerald-400: oklch(76.5% .177 163.223);
     --color-blue-200: oklch(88.2% .059 254.128);
-    --color-blue-300: oklch(80.9% .105 251.813);
     --color-blue-400: oklch(70.7% .165 254.624);
     --color-purple-400: oklch(71.4% .203 305.504);
-    --color-purple-600: oklch(55.8% .288 302.321);
-    --color-purple-800: oklch(43.8% .218 303.724);
-    --color-fuchsia-400: oklch(74% .238 322.16);
+    --color-gray-50: oklch(98.5% .002 247.839);
     --color-gray-200: oklch(92.8% .006 264.531);
     --color-gray-300: oklch(87.2% .01 258.338);
     --color-gray-400: oklch(70.7% .022 261.325);
@@ -88,6 +86,7 @@
     --text-5xl--line-height: 1;
     --text-8xl: 6rem;
     --text-8xl--line-height: 1;
+    --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --radius-sm: .25rem;
@@ -97,8 +96,8 @@
     --blur-md: 12px;
     --default-transition-duration: .15s;
     --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-    --default-font-family: var(--font-geist-sans);
-    --default-mono-font-family: var(--font-geist-mono);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
   }
 }
 
@@ -347,6 +346,10 @@
     margin: calc(var(--spacing) * 2);
   }
 
+  .mx-2 {
+    margin-inline: calc(var(--spacing) * 2);
+  }
+
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
   }
@@ -425,6 +428,10 @@
 
   .h-8 {
     height: calc(var(--spacing) * 8);
+  }
+
+  .h-9 {
+    height: calc(var(--spacing) * 9);
   }
 
   .h-10 {
@@ -690,16 +697,20 @@
     border-color: var(--color-gray-600);
   }
 
+  .bg-\[\#1f1f21\] {
+    background-color: #1f1f21;
+  }
+
   .bg-\[\#192131\]\/70 {
     background-color: oklab(24.7997% -.00359908 -.0325889 / .7);
   }
 
-  .bg-amber-50 {
-    background-color: var(--color-amber-50);
+  .bg-\[\#373739\] {
+    background-color: #373739;
   }
 
-  .bg-amber-500 {
-    background-color: var(--color-amber-500);
+  .bg-amber-50 {
+    background-color: var(--color-amber-50);
   }
 
   .bg-amber-700 {
@@ -714,10 +725,6 @@
     background-color: var(--color-blue-200);
   }
 
-  .bg-blue-300 {
-    background-color: var(--color-blue-300);
-  }
-
   .bg-blue-400 {
     background-color: var(--color-blue-400);
   }
@@ -726,8 +733,8 @@
     background-color: var(--color-emerald-400);
   }
 
-  .bg-fuchsia-400 {
-    background-color: var(--color-fuchsia-400);
+  .bg-gray-50 {
+    background-color: var(--color-gray-50);
   }
 
   .bg-gray-200 {
@@ -774,14 +781,6 @@
 
   .bg-orange-500 {
     background-color: var(--color-orange-500);
-  }
-
-  .bg-purple-600 {
-    background-color: var(--color-purple-600);
-  }
-
-  .bg-purple-800 {
-    background-color: var(--color-purple-800);
   }
 
   .bg-white {
@@ -901,6 +900,11 @@
     font-weight: var(--font-weight-bold);
   }
 
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
@@ -912,6 +916,10 @@
 
   .whitespace-nowrap {
     white-space: nowrap;
+  }
+
+  .text-\[\#a9a9ab\] {
+    color: #a9a9ab;
   }
 
   .text-gray-400 {
@@ -1005,6 +1013,12 @@
   }
 
   @media (hover: hover) {
+    .hover\:bg-\[\#373739\]:hover {
+      background-color: #373739;
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:bg-emerald-100:hover {
       background-color: var(--color-emerald-100);
     }
@@ -1031,12 +1045,6 @@
   @media (hover: hover) {
     .hover\:bg-gray-500:hover {
       background-color: var(--color-gray-500);
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:bg-purple-600:hover {
-      background-color: var(--color-purple-600);
     }
   }
 
@@ -1068,7 +1076,28 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, sans-serif;
+}
+
+.inter-regular {
+  font-optical-sizing: auto;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.inter-medium {
+  font-optical-sizing: auto;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.inter-bold {
+  font-optical-sizing: auto;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .flip-container {

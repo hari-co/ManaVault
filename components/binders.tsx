@@ -87,20 +87,20 @@ const Binders: React.FC = () => {
     }
 
     return (
-        <div className='flex flex-col bg-gray-600 h-full w-64'>
+        <div className='flex flex-col bg-[#1f1f21] h-full w-64 text-[#a9a9ab] font-semibold'>
             Binders
-            <ul>
+            <ul className="p-3">
                 {binders
                     .slice()
                     .sort((a, b) => a.index - b.index)
                     .map(binder => {
                         return (<li
                         key= {binder.name}
-                        className={"cursor-pointer flex border h-10 w-full hover:bg-purple-600 items-center " 
-                            + (binder.id === currentBinder ? "bg-purple-600" : "bg-purple-800")}
+                        className={"cursor-pointer flex rounded-lg h-9 w-full hover:bg-[#373739] items-center " 
+                            + (binder.id === currentBinder ? "bg-[#373739]" : "bg-[#1f1f21")}
                         onClick={() => selectBinder(binder.id)}>
                         <span
-                            className="w-3 h-3 rounded-full border"
+                            className="w-3 h-3 rounded-full border mx-2"
                             style={{ backgroundColor: binder.color }}>
                         </span>
                         {binder.name}

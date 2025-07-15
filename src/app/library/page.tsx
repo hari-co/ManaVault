@@ -29,11 +29,11 @@ export default function Library() {
                 <div className='bg-green-600 flex flex-col p-3 h-32'>
                     <h1 className="font-bold text-5xl py-6">Library</h1>
                 </div>
-                <div className='flex bg-fuchsia-400'>
+                <div className='flex bg-gray-800'>
                     Toolbar
                     <CardSearch />
                 </div>
-                <div className='flex flex-grow bg-amber-500'>
+                <div className='flex flex-grow'>
                     <Binders />
                     <CardDisplay/>
                 </div>
