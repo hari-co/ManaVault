@@ -5,11 +5,14 @@ import { onAuthStateChanged, User } from "firebase/auth";
 import { doc, collection, addDoc, setDoc, getDocs, query, where } from "firebase/firestore";
 import { useFirebaseUser } from "@/hooks/useFirebaseUser";
 import { BinderContext } from "@/context/BinderContext";
+import BinderProperties from "./BinderProperties";
 
 const Binders: React.FC = () => {
     const [binders, setBinders] = useState<{ id: string, name: string; index: number; color: string }[]>([]);
     const [addingBinder, setAddingBinder] = useState(false);
     const [binderName, setBinderName] = useState("");
+    const [showBinderMenu, setShowBinderMenu] = useState(false);
+    const [hoveredBinderId, setHoveredBinderId] = useState<string | null>(null);
     const binderContext = useContext(BinderContext);
     const inputRef = useRef<HTMLInputElement>(null);
     const user = useFirebaseUser();
@@ -46,7 +49,8 @@ const Binders: React.FC = () => {
         }
     }
 
-    const createBinder = async (name: string, color: string) => {
+    const createBinder = async (name: string, color: string, e: React.FormEvent) => {
+        e.preventDefault();
         try {
             let nameCheck = name.trim();
             let q = await query(collection(db, "users", user.uid, "binders"), where("name", "==", nameCheck));
@@ -100,26 +104,35 @@ const Binders: React.FC = () => {
                     .slice()
                     .sort((a, b) => a.index - b.index)
                     .map(binder => {
-                        return (<li
-                        key= {binder.name}
-                        className={"cursor-pointer flex rounded-md h-9 w-full hover:bg-[#373739] items-center " 
-                            + (binder.id === currentBinder ? "bg-[#373739] text-white" : "bg-[#1f1f21")}
-                        onClick={() => selectBinder(binder.id)}>
-                        <p className="ml-4">{binder.name}</p>
-                        </li>
-                    )})
+                        return (
+                            <li
+                                key={binder.name}
+                                className={"cursor-pointer flex rounded-md h-9 w-full hover:bg-[#373739] items-center justify-between "
+                                    + (binder.id === currentBinder ? "bg-[#373739] text-white" : "bg-[#1f1f21")}
+                                onClick={() => selectBinder(binder.id)}
+                                onMouseEnter={() => setHoveredBinderId(binder.id)}
+                                onMouseLeave={() => setHoveredBinderId(null)}
+                            >
+                                <p className="ml-4">{binder.name}</p>
+                                <span className="mr-3 text-[#a9a9ab] relative">
+                                    {hoveredBinderId === binder.id && binder.id != "all" ? <BinderProperties binder={binder}/> : null}
+                                </span>
+                            </li>
+                        )
+                    })
                 }
             </ul>
             {addingBinder && (
                 <div className="border h-10 w-full bg-[#1f1f21]">
-                    <form className="flex items-center h-10 w-full bg-amber-50">
+                    <form className="flex items-center h-10 w-full bg-[#1f1f21]"
+                    onSubmit={(e) => createBinder(binderName, "#92acb5", e)}>
                         <input
                         className="outline-none"
                         type="text"
                         value={binderName}
                         ref={inputRef}
                         autoFocus
-                        onBlur={() => createBinder(binderName, "#92acb5")}
+                        onBlur={(e) => createBinder(binderName, "#92acb5", e)}
                         onChange={e => setBinderName(e.target.value)}>
                         </input>
                     </form>
