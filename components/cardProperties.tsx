@@ -35,23 +35,65 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
     const { currentBinder, setCurrentBinder } = binderContext;
 
     const viewPrints = async (card: CardType) => {
-        const url = card.prints_search_uri;
-        const res = await fetch(url);
-        const data = await res.json();
-        let cardProcessList: CardType[] = [];
-        data.data.forEach((scryCard: any) => {
-            cardProcessList.push(createCard(scryCard, currentBinder));
-        });
-        setPrints(cardProcessList);
+        try {
+            const url = card.prints_search_uri;
+            const res = await fetch(url);
+            const data = await res.json();
+            let cardProcessList: CardType[] = [];
+            data.data.forEach((scryCard: any) => {
+                cardProcessList.push(createCard(scryCard, currentBinder));
+            });
+            setPrints(cardProcessList);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     const changePrint = async (card: CardType, print: CardType) => {
-        if (!user || !user.uid || !currentBinder) {
+        try {
+            if (!user || !user.uid || !currentBinder) {
                 console.log("Error");
                 return;
             }
-        if (currentBinder != "all") {
-            await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+            if (currentBinder != "all") {
+                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                    collector_number: print.collector_number,
+                    image_uris: print.image_uris,
+                    prices: print.prices,
+                    rarity: print.rarity,
+                    scryfallId: print.scryfallId,
+                    scryfallUri: print.scryfallUri,
+                    set: print.set,
+                    set_name: print.set_name,
+                    set_uri: print.set_uri,
+                    uri: print.uri,
+                    ...(print.card_faces ? { card_faces: print.card_faces } : {})
+                })
+                if (print.flavor_name) {
+                    await updateDoc(doc(db, "users", user.uid, "binders", currentBinder, "cards", card.id), {flavor_name: print.flavor_name})
+                }
+            } else {
+                const binderId = card.binder;
+                if (binderId != "all" && binderId) {
+                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
+                        collector_number: print.collector_number,
+                        image_uris: print.image_uris,
+                        prices: print.prices,
+                        rarity: print.rarity,
+                        scryfallId: print.scryfallId,
+                        scryfallUri: print.scryfallUri,
+                        set: print.set,
+                        set_name: print.set_name,
+                        set_uri: print.set_uri,
+                        uri: print.uri,
+                        ...(print.card_faces ? { card_faces: print.card_faces } : {})
+                    })
+                    if (print.flavor_name) {
+                        await updateDoc(doc(db, "users", user.uid, "binders", binderId, "cards", card.id), {flavor_name: print.flavor_name})
+                    }
+                }
+            }
+            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
                 collector_number: print.collector_number,
                 image_uris: print.image_uris,
                 prices: print.prices,
@@ -65,186 +107,173 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
                 ...(print.card_faces ? { card_faces: print.card_faces } : {})
             })
             if (print.flavor_name) {
-                await updateDoc(doc(db, "users", user.uid, "binders", currentBinder, "cards", card.id), {flavor_name: print.flavor_name})
-            }
-        } else {
-            const binderId = card.binder;
-            if (binderId != "all" && binderId) {
-                 await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                collector_number: print.collector_number,
-                image_uris: print.image_uris,
-                prices: print.prices,
-                rarity: print.rarity,
-                scryfallId: print.scryfallId,
-                scryfallUri: print.scryfallUri,
-                set: print.set,
-                set_name: print.set_name,
-                set_uri: print.set_uri,
-                uri: print.uri,
-                ...(print.card_faces ? { card_faces: print.card_faces } : {})
-            })
-            if (print.flavor_name) {
-                await updateDoc(doc(db, "users", user.uid, "binders", binderId, "cards", card.id), {flavor_name: print.flavor_name})
-            }
-            }
-        }
-        await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-                collector_number: print.collector_number,
-                image_uris: print.image_uris,
-                prices: print.prices,
-                rarity: print.rarity,
-                scryfallId: print.scryfallId,
-                scryfallUri: print.scryfallUri,
-                set: print.set,
-                set_name: print.set_name,
-                set_uri: print.set_uri,
-                uri: print.uri,
-                ...(print.card_faces ? { card_faces: print.card_faces } : {})
-            })
-        if (print.flavor_name) {
                 await updateDoc(doc(db, "users", user.uid, "binders", "all", "cards", card.id), {flavor_name: print.flavor_name})
             }
-        setShowPreview(null);
+            setShowPreview(null);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     const changeQuantity = async (card: CardType, cardQuantity: number, e: React.FormEvent) => {
-        e.preventDefault()
-        if (!user || !user.uid || !currentBinder) {
+        try {
+            e.preventDefault()
+            if (!user || !user.uid || !currentBinder) {
                 console.log("Error");
                 return;
             }
-        if (currentBinder != "all") {
-            await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                quantity: cardQuantity,
-            })
-        } else {
-            const binderId = card.binder;
-            if (binderId != "all" && binderId) {
-                 await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                quantity: cardQuantity,
-            })
+            if (currentBinder != "all") {
+                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                    quantity: cardQuantity,
+                })
+            } else {
+                const binderId = card.binder;
+                if (binderId != "all" && binderId) {
+                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
+                        quantity: cardQuantity,
+                    })
+                }
             }
-        }
-        await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
+            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
                 quantity: cardQuantity,
             })
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     const changeBuyPrice = async (card: CardType, buyPrice: number, e: React.FormEvent) => {
-        e.preventDefault();
-        if (!user || !user.uid || !currentBinder) {
-            console.log("Error");
-            return;
-        }
-        if (currentBinder != "all") {
-            await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                buy_price: buyPrice,
-            });
-        } else {
-            const binderId = card.binder;
-            if (binderId != "all" && binderId) {
-                await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                    buy_price: buyPrice,
-                });
-            }
-        }
-        await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-            buy_price: buyPrice,
-        });
-    };
-
-    const changeNotes = async (card: CardType, notes: string, e: React.FormEvent | React.FocusEvent<HTMLTextAreaElement>) => {
-        if (e) e.preventDefault?.();
-        if (!user || !user.uid || !currentBinder) {
-            console.log("Error");
-            return;
-        }
-        if (currentBinder != "all") {
-            await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                notes: notes,
-            });
-        } else {
-            const binderId = card.binder;
-            if (binderId != "all" && binderId) {
-                await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                    notes: notes,
-                });
-            }
-        }
-        await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-            notes: notes,
-        });
-    };
-
-    const changeCondition = async (card: CardType, key: string) => {
-        if (!user || !user.uid || !currentBinder) {
+        try {
+            e.preventDefault();
+            if (!user || !user.uid || !currentBinder) {
                 console.log("Error");
                 return;
             }
-        if (currentBinder != "all") {
-            await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                condition: key,
-            })
-        } else {
-            const binderId = card.binder;
-            if (binderId != "all" && binderId) {
-                 await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                condition: key,
-            })
+            if (currentBinder != "all") {
+                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                    buy_price: buyPrice,
+                });
+            } else {
+                const binderId = card.binder;
+                if (binderId != "all" && binderId) {
+                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
+                        buy_price: buyPrice,
+                    });
+                }
             }
+            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
+                buy_price: buyPrice,
+            });
+        } catch (e) {
+            console.error(e);
         }
-        await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
+    };
+
+    const changeNotes = async (card: CardType, notes: string, e: React.FormEvent | React.FocusEvent<HTMLTextAreaElement>) => {
+        try {
+            if (e) e.preventDefault?.();
+            if (!user || !user.uid || !currentBinder) {
+                console.log("Error");
+                return;
+            }
+            if (currentBinder != "all") {
+                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                    notes: notes,
+                });
+            } else {
+                const binderId = card.binder;
+                if (binderId != "all" && binderId) {
+                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
+                        notes: notes,
+                    });
+                }
+            }
+            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
+                notes: notes,
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const changeCondition = async (card: CardType, key: string) => {
+        try {
+            if (!user || !user.uid || !currentBinder) {
+                console.log("Error");
+                return;
+            }
+            if (currentBinder != "all") {
+                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                    condition: key,
+                })
+            } else {
+                const binderId = card.binder;
+                if (binderId != "all" && binderId) {
+                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
+                        condition: key,
+                    })
+                }
+            }
+            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
                 condition: key,
             })
-        setShowConditions(false);
+            setShowConditions(false);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     const changeBinder = async (card: CardType, binder: string) => {
-        if (!user || !user.uid || !currentBinder) {
-            console.log("Error");
-            return;
-        }
-        const binderNameToId = binderMap.current.get(binder);
-        if (!binderNameToId) {
-            console.error("Invalid binder selected:", binder);
-            return;
-        }
-        const sourceAllRef = doc(db, "users", user.uid, "binders", currentBinder, "cards", card.id);
-        const targetAllRef = doc(db, "users", user.uid, "binders", binderNameToId, "cards", card.id);
+        try {
+            if (!user || !user.uid || !currentBinder) {
+                console.log("Error");
+                return;
+            }
+            const binderNameToId = binderMap.current.get(binder);
+            if (!binderNameToId) {
+                console.error("Invalid binder selected:", binder);
+                return;
+            }
+            const sourceAllRef = doc(db, "users", user.uid, "binders", currentBinder, "cards", card.id);
+            const targetAllRef = doc(db, "users", user.uid, "binders", binderNameToId, "cards", card.id);
 
-        if (currentBinder != "all") {
-            await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+            if (currentBinder != "all") {
+                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
+                    binder: binderNameToId,
+                })
+                const dataAll = (await getDoc(sourceAllRef)).data();
+                await setDoc(targetAllRef, dataAll, { merge: true });
+                await deleteDoc(sourceAllRef);
+            } else {
+                const binderId = card.binder;
+                if (binderId != "all" && binderId) {
+                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
+                        binder: binderNameToId,
+                    })
+                    const sourceRef = doc(db, "users", user.uid, "binders", binderId, "cards", card.id);
+                    const data = (await getDoc(sourceRef)).data();
+                    await setDoc(targetAllRef, data, { merge: true });
+                    await deleteDoc(sourceRef);
+                } else {
+                    await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
+                        binder: binderNameToId,
+                    })
+                    const sourceRefNew = doc(db, "users", user.uid, "binders", "all", "cards", card.id);
+                    const dataNew = (await getDoc(sourceRefNew)).data();
+                    await setDoc(targetAllRef, dataNew, { merge: true });
+                }
+            }
+            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
                 binder: binderNameToId,
             })
-            const dataAll = (await getDoc(sourceAllRef)).data();
-            await setDoc(targetAllRef, dataAll, { merge: true });
-            await deleteDoc(sourceAllRef);
-        } else {
-            const binderId = card.binder;
-            if (binderId != "all" && binderId) {
-                await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                    binder: binderNameToId,
-                })
-                const sourceRef = doc(db, "users", user.uid, "binders", binderId, "cards", card.id);
-                const data = (await getDoc(sourceRef)).data();
-                await setDoc(targetAllRef, data, { merge: true });
-                await deleteDoc(sourceRef);
-            } else {
-                await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-                    binder: binderNameToId,
-                })
-                const sourceRefNew = doc(db, "users", user.uid, "binders", "all", "cards", card.id);
-                const dataNew = (await getDoc(sourceRefNew)).data();
-                await setDoc(targetAllRef, dataNew, { merge: true });
-            }
+            setShowBinders(false);
+        } catch (e) {
+            console.error(e);
         }
-        await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-            binder: binderNameToId,
-        })
-        setShowBinders(false);
     }
 
     const changeFoil = async (card: CardType, newFoil: boolean) => {
+        try {
             setFoil(newFoil);
             if (!user || !user.uid || !currentBinder) {
                 console.log("Error");
@@ -265,9 +294,13 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
             await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
                 foil: newFoil,
             });
+        } catch (e) {
+            console.error(e);
+        }
         };
 
         const changeFavourite = async (card: CardType, newFavourite: boolean) => {
+        try {
             setFavourite(newFavourite);
             if (!user || !user.uid || !currentBinder) {
                 console.log("Error");
@@ -288,6 +321,9 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
             await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
                 favourite: newFavourite,
             });
+        } catch (e) {
+            console.error(e);
+        }
         };
 
     useEffect(() => {

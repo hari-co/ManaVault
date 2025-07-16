@@ -16,46 +16,50 @@ const CardDisplay: React.FC = () => {
     const { currentBinder, setCurrentBinder } = binderContext;
 
     const updatePrice = async (card: CardType, user: User, currentBinder: string) => {
-        const now = Date.now();
-        let lastUpdate: number | undefined;
-        const updatePeriod = 24 * 60 * 60 * 1000;
+        try {
+            const now = Date.now();
+            let lastUpdate: number | undefined;
+            const updatePeriod = 24 * 60 * 60 * 1000;
 
-        if (card.last_price_update) {
-            if (
-                typeof card.last_price_update === "object" &&
-                card.last_price_update !== null &&
-                "toDate" in card.last_price_update &&
-                typeof (card.last_price_update as any).toDate === "function"
-            ) {
-                lastUpdate = (card.last_price_update as any).toDate().getTime();
-            } else if (card.last_price_update instanceof Date) {
-                lastUpdate = card.last_price_update.getTime();
-            } else if (
-                typeof card.last_price_update === "string" ||
-                typeof card.last_price_update === "number"
-            ) {
-                lastUpdate = new Date(card.last_price_update).getTime();
-            }
-        }
-
-        if (lastUpdate === undefined || now - lastUpdate > updatePeriod) {
-            const res = await fetch(`https://api.scryfall.com/cards/${card.scryfallId}`);
-            if (!res.ok) return;
-            const data = await res.json();
-            await updateDoc(
-                doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id),
-                {
-                    prices: data.prices,
-                    last_price_update: new Date()
+            if (card.last_price_update) {
+                if (
+                    typeof card.last_price_update === "object" &&
+                    card.last_price_update !== null &&
+                    "toDate" in card.last_price_update &&
+                    typeof (card.last_price_update as any).toDate === "function"
+                ) {
+                    lastUpdate = (card.last_price_update as any).toDate().getTime();
+                } else if (card.last_price_update instanceof Date) {
+                    lastUpdate = card.last_price_update.getTime();
+                } else if (
+                    typeof card.last_price_update === "string" ||
+                    typeof card.last_price_update === "number"
+                ) {
+                    lastUpdate = new Date(card.last_price_update).getTime();
                 }
-            );
-            setCardList(prev =>
-                prev.map(c =>
-                    c.id === card.id
-                        ? { ...c, prices: data.prices, last_price_update: new Date() }
-                        : c
-                )
-            );
+            }
+
+            if (lastUpdate === undefined || now - lastUpdate > updatePeriod) {
+                const res = await fetch(`https://api.scryfall.com/cards/${card.scryfallId}`);
+                if (!res.ok) return;
+                const data = await res.json();
+                await updateDoc(
+                    doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id),
+                    {
+                        prices: data.prices,
+                        last_price_update: new Date()
+                    }
+                );
+                setCardList(prev =>
+                    prev.map(c =>
+                        c.id === card.id
+                            ? { ...c, prices: data.prices, last_price_update: new Date() }
+                            : c
+                    )
+                );
+            }
+        } catch (e) {
+            console.error(e);
         }
     }
 
@@ -84,7 +88,7 @@ const CardDisplay: React.FC = () => {
     }, [cardList, user, currentBinder]);
 
     return (
-        <div className="flex flex-wrap gap-4 w-full p-5 items-start bg-gray-50">
+        <div className="flex flex-wrap gap-4 w-full pt-5 pl-8 items-start bg-[#1e252c]">
             {cardList.map((card) => (
                     <Card key={card.id} card={card}/>
                 )

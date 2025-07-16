@@ -77,9 +77,9 @@ const CardSearch: React.FC = () => {
     };
 
     return (
-        <div className="bg-amber-700 w-3xs h-10 z-50">
+        <div className="bg-[#121519] w-3xs h-10 z-50 relative">
             <input 
-                className="border rounded px-2 py-1 w-full h-full"
+                className="border border-[#5e5e5e] rounded px-2 py-1 w-full h-full"
                 type="text"
                 name="card-search"
                 placeholder="Search for a card..."
@@ -89,9 +89,9 @@ const CardSearch: React.FC = () => {
                 onFocus={() => setShowSuggestions(results.length > 0)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
             />
-            {!showSuggestions && loading && <div className="bg-gray-800 text-white px-4 py-2">Loading...</div>}
+            {!showSuggestions && loading && <div className="absolute left-0 top-full bg-gray-800 text-white px-4 py-2 z-50">Loading...</div>}
             {showSuggestions && results.length > 0 && (
-                <div className="border rounded bg-gray-800 text-white h-64 overflow-y-auto z-50">
+                <div className="absolute left-0 top-full border rounded bg-gray-800 text-white h-64 overflow-y-auto z-50">
                     <ul>
                         {results.map((suggestion) => (
                             <li

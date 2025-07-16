@@ -25,17 +25,25 @@ export default function Library() {
     return (
         user && (
         <BinderProvider>
-            <div className='flex flex-col h-[calc(100vh-3.5rem)] w-full'>
-                <div className='bg-green-600 flex flex-col p-3 h-32'>
+            <div className='flex flex-col h-[calc(100vh-3.5rem)] w-full font-sans font-medium'>
+                <div className='bg-green-600 p-3 h-32'>
                     <h1 className="font-bold text-5xl py-6">Library</h1>
                 </div>
-                <div className='flex bg-gray-800'>
-                    Toolbar
-                    <CardSearch />
-                </div>
-                <div className='flex flex-grow'>
-                    <Binders />
-                    <CardDisplay/>
+                <div className='flex flex-grow bg-[#1e252c]'>
+                    <div>
+                        <Binders />
+                    </div>
+                    <div className='flex w-full h-full flex-col'>
+                        <div className='flex rounded-bl-lg rounded-br-lg ml-12 mr-12 py-3 px-7 h-25 bg-[#141822] text-[#bfc8ce]'>
+                            <div>
+                                <h2>Quick Add</h2>
+                                <CardSearch />
+                            </div>
+                        </div>
+                        <div className='flex h-full justify-center scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-300'>
+                            <CardDisplay/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </BinderProvider>)

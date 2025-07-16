@@ -25,7 +25,7 @@ const Card: React.FC<{ card: CardType }> = ({ card }) => {
     return (
         <>
             {card.image_uris && card.card_faces.length < 2 ? (
-                <div className="flex-1 min-w-55 max-w-60 relative group">
+                <div className="flex-1 min-w-56 max-w-60 relative group">
                     <QuickMenu card={card} onFlip={handleFlip}/>
                     <img src={card.image_uris.large} alt={card.card_name} className="rounded-xl w-full cursor-pointer" onClick={() => fadeIn()}/>
                     <div className="bg-orange-500 w-full h-full flex justify-center cursor-default">
