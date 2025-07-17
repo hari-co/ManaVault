@@ -49,6 +49,40 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
         }
     }
 
+    const updateCard = async (
+        cardId: string,
+        updates: Partial<CardType>,
+        currentBinder: string | null
+    ): Promise<boolean> => {
+        try {
+            if (!user || !user.uid || !currentBinder) {
+                console.error("No user or binder found.");
+                return false;
+            }
+
+            if (currentBinder != "all") {
+                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", cardId), {
+                    ...updates
+                })
+            } else {
+                const binderId = card.binder;
+                if (binderId != "all" && binderId) {
+                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", cardId), {
+                        ...updates
+                    })
+                }
+            }
+            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", cardId), {
+                ...updates
+            })
+
+            return true;
+        } catch (error) {
+            console.error("Failed to update card: ", error);
+            return false
+        }
+    }
+
     const changePrint = async (card: CardType, print: CardType) => {
         try {
             if (!user || !user.uid || !currentBinder) {
@@ -117,26 +151,12 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
 
     const changeQuantity = async (card: CardType, cardQuantity: number, e: React.FormEvent) => {
         try {
-            e.preventDefault()
-            if (!user || !user.uid || !currentBinder) {
-                console.log("Error");
-                return;
+            e.preventDefault();
+
+            const success = await updateCard(card.id, { quantity: cardQuantity }, currentBinder);
+            if (!success) {
+                console.error("Failed to update quantity");
             }
-            if (currentBinder != "all") {
-                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                    quantity: cardQuantity,
-                })
-            } else {
-                const binderId = card.binder;
-                if (binderId != "all" && binderId) {
-                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                        quantity: cardQuantity,
-                    })
-                }
-            }
-            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-                quantity: cardQuantity,
-            })
         } catch (e) {
             console.error(e);
         }
@@ -145,25 +165,11 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
     const changeBuyPrice = async (card: CardType, buyPrice: number, e: React.FormEvent) => {
         try {
             e.preventDefault();
-            if (!user || !user.uid || !currentBinder) {
-                console.log("Error");
-                return;
+
+            const success = await updateCard(card.id, { buy_price: String(buyPrice) }, currentBinder);
+            if (!success) {
+                console.error("Failed to update buy price");
             }
-            if (currentBinder != "all") {
-                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                    buy_price: buyPrice,
-                });
-            } else {
-                const binderId = card.binder;
-                if (binderId != "all" && binderId) {
-                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                        buy_price: buyPrice,
-                    });
-                }
-            }
-            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-                buy_price: buyPrice,
-            });
         } catch (e) {
             console.error(e);
         }
@@ -172,25 +178,11 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
     const changeNotes = async (card: CardType, notes: string, e: React.FormEvent | React.FocusEvent<HTMLTextAreaElement>) => {
         try {
             if (e) e.preventDefault?.();
-            if (!user || !user.uid || !currentBinder) {
-                console.log("Error");
-                return;
+
+            const success = await updateCard(card.id, { notes: notes }, currentBinder);
+            if (!success) {
+                console.error("Failed to update notes");
             }
-            if (currentBinder != "all") {
-                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                    notes: notes,
-                });
-            } else {
-                const binderId = card.binder;
-                if (binderId != "all" && binderId) {
-                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                        notes: notes,
-                    });
-                }
-            }
-            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-                notes: notes,
-            });
         } catch (e) {
             console.error(e);
         }
@@ -198,25 +190,10 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
 
     const changeCondition = async (card: CardType, key: string) => {
         try {
-            if (!user || !user.uid || !currentBinder) {
-                console.log("Error");
-                return;
+            const success = await updateCard(card.id, { condition: key }, currentBinder);
+            if (!success) {
+                console.error("Failed to update condition");
             }
-            if (currentBinder != "all") {
-                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                    condition: key,
-                })
-            } else {
-                const binderId = card.binder;
-                if (binderId != "all" && binderId) {
-                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                        condition: key,
-                    })
-                }
-            }
-            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-                condition: key,
-            })
             setShowConditions(false);
         } catch (e) {
             console.error(e);
@@ -230,10 +207,12 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
                 return;
             }
             const binderNameToId = binderMap.current.get(binder);
+
             if (!binderNameToId) {
                 console.error("Invalid binder selected:", binder);
                 return;
             }
+            
             const sourceAllRef = doc(db, "users", user.uid, "binders", currentBinder, "cards", card.id);
             const targetAllRef = doc(db, "users", user.uid, "binders", binderNameToId, "cards", card.id);
 
@@ -275,25 +254,11 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
     const changeFoil = async (card: CardType, newFoil: boolean) => {
         try {
             setFoil(newFoil);
-            if (!user || !user.uid || !currentBinder) {
-                console.log("Error");
-                return;
+            const success = await updateCard(card.id, { foil: newFoil }, currentBinder);
+
+            if (!success) {
+                console.error("Failed to update foil");
             }
-            if (currentBinder != "all") {
-                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                    foil: newFoil,
-                });
-            } else {
-                const binderId = card.binder;
-                if (binderId != "all" && binderId) {
-                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                        foil: newFoil,
-                    });
-                }
-            }
-            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-                foil: newFoil,
-            });
         } catch (e) {
             console.error(e);
         }
@@ -302,25 +267,11 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
         const changeFavourite = async (card: CardType, newFavourite: boolean) => {
         try {
             setFavourite(newFavourite);
-            if (!user || !user.uid || !currentBinder) {
-                console.log("Error");
-                return;
+            const success = await updateCard(card.id, { favourite: newFavourite }, currentBinder);
+
+            if (!success) {
+                console.error("Failed to update favourite");
             }
-            if (currentBinder != "all") {
-                await updateDoc(doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id), {
-                    favourite: newFavourite,
-                });
-            } else {
-                const binderId = card.binder;
-                if (binderId != "all" && binderId) {
-                    await updateDoc(doc(db, "users", user?.uid, "binders", binderId, "cards", card.id), {
-                        favourite: newFavourite,
-                    });
-                }
-            }
-            await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
-                favourite: newFavourite,
-            });
         } catch (e) {
             console.error(e);
         }
@@ -558,7 +509,7 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
                             </form>
                         </div>
                     </div>
-                    <div className="flex w-full h-50 ml-15 mt-5">
+                    <div className="flex w-auto h-50 ml-15 mt-5">
                         <div>
                             <h2>Notes</h2>
                             <form

@@ -714,6 +714,10 @@
     width: calc(var(--spacing) * 200);
   }
 
+  .w-auto {
+    width: auto;
+  }
+
   .w-full {
     width: 100%;
   }
