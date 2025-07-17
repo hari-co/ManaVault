@@ -2540,6 +2540,7 @@ const BinderStats = ()=>{
         commons: 0
     });
     const [cardCount, setCardCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [priceCount, setPriceCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const binderContext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$BinderContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BinderContext"]);
     const user = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useFirebaseUser"])();
     if (!binderContext) throw new Error("BinderContext not found.");
@@ -2567,6 +2568,7 @@ const BinderStats = ()=>{
                 commons: 0
             };
             let cardNum = 0;
+            let priceTotal = 0;
             const binderSnapshot = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", user.uid, "binders", currentBinder, "cards"));
             binderSnapshot.forEach((doc)=>{
                 const card = doc.data();
@@ -2587,7 +2589,9 @@ const BinderStats = ()=>{
                         console.warn(`Unknown rarity: ${card.card_name}`);
                 }
                 cardNum++;
+                priceTotal += Number(card.prices.usd);
             });
+            setPriceCount(priceTotal);
             setCardCount(cardNum);
             setRarityCount(counts);
         } catch (e) {
@@ -2595,23 +2599,45 @@ const BinderStats = ()=>{
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "absolute bottom-8 right-14 z-10 font-normal",
+        className: "absolute bottom-7 right-14 z-10 font-normal",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute right-3 -top-5",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    children: [
-                        cardCount,
-                        " cards"
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/components/BinderStats.tsx",
-                    lineNumber: 69,
-                    columnNumber: 17
-                }, this)
-            }, void 0, false, {
+                className: "absolute right-3 -top-5 flex",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                        src: "/tbgplayermono.svg",
+                        className: "relative -top-0.4 w-7"
+                    }, void 0, false, {
+                        fileName: "[project]/components/BinderStats.tsx",
+                        lineNumber: 73,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "ml-0",
+                        children: [
+                            "$",
+                            priceCount
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/BinderStats.tsx",
+                        lineNumber: 74,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "ml-6",
+                        children: [
+                            cardCount,
+                            " cards"
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/BinderStats.tsx",
+                        lineNumber: 75,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/BinderStats.tsx",
-                lineNumber: 68,
+                lineNumber: 72,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2625,7 +2651,7 @@ const BinderStats = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/BinderStats.tsx",
-                        lineNumber: 72,
+                        lineNumber: 78,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2636,7 +2662,7 @@ const BinderStats = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/BinderStats.tsx",
-                        lineNumber: 73,
+                        lineNumber: 79,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2647,7 +2673,7 @@ const BinderStats = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/BinderStats.tsx",
-                        lineNumber: 74,
+                        lineNumber: 80,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2658,23 +2684,23 @@ const BinderStats = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/BinderStats.tsx",
-                        lineNumber: 75,
+                        lineNumber: 81,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/BinderStats.tsx",
-                lineNumber: 71,
+                lineNumber: 77,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/BinderStats.tsx",
-        lineNumber: 67,
+        lineNumber: 71,
         columnNumber: 9
     }, this);
 };
-_s(BinderStats, "k37+PrpbOAxTSEns5mkbnYoSZZ0=", false, function() {
+_s(BinderStats, "di5/4U7jE/yw8Y+dL/rI1YZ6i3k=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useFirebaseUser"]
     ];

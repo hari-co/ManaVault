@@ -12,6 +12,7 @@ const BinderStats: React.FC = () => {
         commons:0
         });
     const [cardCount, setCardCount] = useState<number>(0);
+    const [priceCount, setPriceCount] = useState<number>(0);
     const binderContext = useContext(BinderContext);
     const user = useFirebaseUser();
 
@@ -32,6 +33,7 @@ const BinderStats: React.FC = () => {
 
             let counts = { mythics: 0, rares: 0, uncommons: 0, commons: 0 };
             let cardNum = 0;
+            let priceTotal = 0;
 
             const binderSnapshot = await getDocs(collection(db, "users", user.uid, "binders", currentBinder, "cards"));
             binderSnapshot.forEach((doc) => {
@@ -54,8 +56,10 @@ const BinderStats: React.FC = () => {
                         console.warn(`Unknown rarity: ${card.card_name}`);
                 }
                 cardNum++;
+                priceTotal += Number(card.prices.usd);
             });
 
+            setPriceCount(priceTotal)
             setCardCount(cardNum);
             setRarityCount(counts);
         } catch (e) {
@@ -64,9 +68,11 @@ const BinderStats: React.FC = () => {
     }
 
     return (
-        <div className="absolute bottom-8 right-14 z-10 font-normal">
-            <div className="absolute right-3 -top-5">
-                <p>{cardCount} cards</p>
+        <div className="absolute bottom-7 right-14 z-10 font-normal">
+            <div className="absolute right-3 -top-5 flex">
+                <img src={"/tbgplayermono.svg"} className="relative -top-0.4 w-7"/>
+                <p className="ml-0">${priceCount}</p>
+                <p className="ml-6">{cardCount} cards</p>
             </div>
             <div className="flex text-gray-400">
                 <p className="m-2">{rarityCount.mythics} mythics</p>
