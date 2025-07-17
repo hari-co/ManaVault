@@ -6,6 +6,15 @@ import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "
 import { useFirebaseUser } from "@/hooks/useFirebaseUser";
 import { db } from "@/config/firebase-config";
 
+import CardImage from "./CardPropComponents/CardImage";
+import CardToggles from "./CardPropComponents/CardToggles";
+import QuantityInput from "./CardPropComponents/QuantityInput";
+import PriceInput from "./CardPropComponents/PriceInput";
+import NotesSection from "./CardPropComponents/NotesSection";
+import ConditionSelector from "./CardPropComponents/ConditionSelector";
+import BinderSelector from "./CardPropComponents/BinderSelector";
+import PrintSelector from "./CardPropComponents/PrintSelector";
+
 const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
     const [printOpen, setPrintOpen] = useState(false);
     const [prints, setPrints] = useState<CardType[]>([card]);
@@ -321,16 +330,7 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
             </div>
             <hr className="m-2 text-white/25"></hr>
             <div className="flex w-full h-full">
-                <div className="w-100">
-                    {card.image_uris ? (
-                        <img src={card.image_uris?.png} className="w-65 ml-10 mt-7"/>) :
-                        <img src={card.card_faces[0].image_uris?.png} className="w-65 ml-10 mt-7"/>}
-                    <div className="flex ml-7 w-full h-8 justify-center items-center">
-                        <img src={"/tcgplayer.svg"} className="w-7"/>
-                         <p className="">${card.prices.usd}</p>
-                    </div>
-                    <a href={card.scryfallUri} target="_blank" className="ml-28 text-gray-400">View on Scryfall</a>
-                </div>
+                <CardImage card={card} />
                 <div className="w-full">
                     <div className="flex w-100 justify-center mt-5 ml-15 break-words">
                         <h2 className="text-2xl">
@@ -343,204 +343,62 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
                         </h2>
                     </div>
                     <div className="flex w-full h-15 ml-15">
-                        <div>
-                            <p>Printing</p>
-                            <button
-                                className="bg-gray-700/40 border border-gray-600 h-10 w-85 rounded-md flex justify-between items-center overflow-hidden"
-                                onClick={() => {
-                                    if (!printOpen) {
-                                        viewPrints(card);
-                                    }
-                                    setPrintOpen(!printOpen);
-                                }}
-                                onBlur={() => setPrintOpen(false)}>
-                                <span className="flex ml-4">
-                                    <div 
-                                    className={`h-6 w-6 mr-2`}
-                                    style={{
-                                        WebkitMaskImage: `url(/set_icons/${card.set}.svg)`,
-                                        maskImage: `url(/set_icons/${card.set}.svg)`,
-                                        WebkitMaskRepeat: "no-repeat",
-                                        maskRepeat: "no-repeat",
-                                        WebkitMaskPosition: "center",
-                                        maskPosition: "center",
-                                        WebkitMaskSize: "contain",
-                                        maskSize: "contain",
-                                        background: `${rarityFilter[card.rarity]}`
-                                }}></div>
-                                <span className="whitespace-nowrap overflow-hidden max-w-65">{card.set_name + " " + card.collector_number}</span>
-                                </span>
-                                <span className="h-full flex justify-center items-center">
-                                    <img src={"/dropdown.svg"} className="w-7 filter invert"/>
-                                </span>
-                            </button>
-                            {printOpen && (
-                                <div className="absolute border border-gray-500 bg-gray-600 max-h-70 w-90 overflow-y-auto rounded-sm z-50">
-                                    <ul>
-                                        {prints.map(print => (
-                                            <li
-                                            key={print.set_name + print.collector_number}
-                                            className={`hover:bg-gray-500 px-3 py-1 ${print.set_name == card.set_name && print.collector_number == card.collector_number ? " bg-gray-500" : ""}`}
-                                            onMouseEnter={() => {
-                                                if (print.image_uris) {
-                                                    setShowPreview(print)
-                                                } else {
-                                                    setShowPreview(print.card_faces[0])
-                                                }
-                                            }}
-                                            onMouseLeave={() => setShowPreview(null)}
-                                            onMouseDown={() => changePrint(card, print)}>
-                                                <div className="flex">
-                                                    <div 
-                                                    className={`h-5.5 w-5.5 mr-2`}
-                                                    style={{
-                                                        WebkitMaskImage: `url(/set_icons/${print.set}.svg)`,
-                                                        maskImage: `url(/set_icons/${print.set}.svg)`,
-                                                        WebkitMaskRepeat: "no-repeat",
-                                                        maskRepeat: "no-repeat",
-                                                        WebkitMaskPosition: "center",
-                                                        maskPosition: "center",
-                                                        WebkitMaskSize: "contain",
-                                                        maskSize: "contain",
-                                                        background: `${rarityFilter[print.rarity]}`
-                                                    }}></div>
-                                                    {`${print.set_name} ${print.collector_number}`}
-                                                </div>
-                                                <div className="flex justify-between text-gray-400 ml-8">
-                                                    <p>{print.flavor_name || print.card_name}</p>
-                                                    <p>{`${print.prices.usd ? `$${print.prices.usd}` : "N/A"}`}</p>
-                                                </div>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                            {showPreview && (
-                                        <div className="fixed -right-22 ml-10">
-                                            <img src={showPreview.image_uris?.normal} className="w-50 rounded-lg"/>
-                                        </div>
-                                    )}
-                        </div>
-                        <div className="ml-7">
-                            <p>Quantity</p>
-                            <form
-                            onSubmit={e => changeQuantity(card, Number(cardQuantity), e)}>
-                                <input
-                                 type="number"
-                                 className="bg-gray-700/40 border border-gray-600 w-17 h-10 rounded-md pl-4"
-                                 placeholder={String(card.quantity)}
-                                 value={cardQuantity}
-                                 onChange={(e) => setCardQuantity(e.target.value)}
-                                 onBlur={e => changeQuantity(card, Number(cardQuantity), e)}
-                                 />
-                            </form>
-                        </div>
+                        <PrintSelector
+                            card={card}
+                            printOpen={printOpen}
+                            prints={prints}
+                            showPreview={showPreview}
+                            rarityFilter={rarityFilter}
+                            onTogglePrintOpen={() => setPrintOpen(!printOpen)}
+                            onViewPrints={viewPrints}
+                            onPrintHover={setShowPreview}
+                            onPrintLeave={() => setShowPreview(null)}
+                            onPrintSelect={changePrint}
+                        />
+                        <QuantityInput
+                            card={card}
+                            cardQuantity={cardQuantity}
+                            onQuantityChange={setCardQuantity}
+                            onQuantitySubmit={changeQuantity}
+                        />
                     </div>
                     <div className="flex w-full h-15 ml-15 mt-5">
-                        <div>
-                            <h2>Binder</h2>
-                            <button
-                                className="bg-gray-700/40 border border-gray-600 h-10 w-60 rounded-md flex justify-between items-center pl-4"
-                                onClick={() => setShowBinders(!showBinders)}>
-                                <span>{binderName}</span>
-                                <span className="h-full flex justify-center items-center">
-                                    <img src={"/dropdown.svg"} className="w-7 filter invert"/>
-                                </span>
-                            </button>
-                             {showBinders &&
-                                <ul className="bg-gray-700 absolute w-60 border border-gray-500 rounded-md">
-                                    {binderList.map(binder => (
-                                        <li
-                                        className={`z-50 flex items-center pl-4 h-8 hover:bg-gray-400 ${binderName == binder ? " bg-gray-400" : " bg-gray-700"}`}
-                                        key={binder}
-                                        onClick={() => changeBinder(card, binder)}>
-                                            {binder}
-                                        </li>
-                                    ))}
-                                </ul>
-                            }
-                        </div>
-                        <div className="ml-4">
-                            <h2>Condition</h2>
-                            <button
-                                className="bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-between items-center pl-4"
-                                onClick={() => setShowConditions(!showConditions)}>
-                                <span>{card.condition}</span>
-                                <span className="h-full flex justify-center items-center">
-                                    <img src={"/dropdown.svg"} className="w-7 filter invert"/>
-                                </span>
-                            </button>
-                            {showConditions &&
-                                <ul className="bg-gray-700 absolute w-18 border border-gray-500 rounded-md">
-                                    {conditions.map(condition => (
-                                        <li
-                                        className={`z-50 flex justify-center items-center h-8 hover:bg-gray-400 ${card.condition == condition ? " bg-gray-400" : " bg-gray-700"}`}
-                                        key={condition}
-                                        onClick={() => changeCondition(card, condition)}>
-                                            {condition}
-                                        </li>
-                                    ))}
-                                </ul>
-                            }
-                        </div>
-                        <div className="ml-4">
-                            <h2>Buy Price</h2>
-                            <form className="flex bg-gray-700/40 border border-gray-600 w-23 h-10 rounded-md pl-3 items-center"
-                                onSubmit={e => {
-                                    e.preventDefault();
-                                    const formatted = Number(buyPrice).toFixed(2);
-                                    setBuyPrice(formatted);
-                                    changeBuyPrice(card, Number(formatted), e);
-                                }}>
-                                <span className="mr-1">$</span>
-                                <input
-                                    className="w-16"
-                                    type="number"
-                                    step="0.01"
-                                    placeholder={card.buy_price}
-                                    value={buyPrice}
-                                    onChange={e => setBuyPrice(e.target.value)}
-                                    onBlur={e => {
-                                        const formatted = Number(buyPrice).toFixed(2);
-                                        setBuyPrice(formatted);
-                                        changeBuyPrice(card, Number(formatted), e);
-                                    }}
-                                />
-                            </form>
-                        </div>
+                        <BinderSelector
+                            card={card}
+                            binderName={binderName}
+                            showBinders={showBinders}
+                            binderList={binderList}
+                            onToggleShow={() => setShowBinders(!showBinders)}
+                            onBinderSelect={changeBinder}
+                        />
+                        <ConditionSelector
+                            card={card}
+                            showConditions={showConditions}
+                            conditions={conditions}
+                            onToggleShow={() => setShowConditions(!showConditions)}
+                            onConditionSelect={changeCondition}
+                        />
+                        <PriceInput
+                            card={card}
+                            buyPrice={buyPrice}
+                            onPriceChange={setBuyPrice}
+                            onPriceSubmit={changeBuyPrice}
+                        />
                     </div>
                     <div className="flex w-auto h-50 ml-15 mt-5">
-                        <div>
-                            <h2>Notes</h2>
-                            <form
-                                className="flex w-83 h-45 rounded-xl items-center"
-                                onSubmit={e => {
-                                    e.preventDefault();
-                                    changeNotes(card, notes, e);
-                                }}>
-                                <textarea
-                                    className="w-full h-full bg-gray-700/40 border border-gray-600 rounded-xl p-2 resize-none text-white"
-                                    value={notes}
-                                    placeholder="Type notes here..."
-                                    onChange={e => setNotes(e.target.value)}
-                                    onBlur={e => changeNotes(card, e.target.value, e)}
-                                />
-                            </form>
-                        </div>
-                        <div className="ml-8">
-                            <h2 className="mt-5">Foil</h2>
-                            <button
-                                className={`bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${foil ? 'ring-2 ring-[#7d80ef]' : ''}`}
-                                onClick={() => changeFoil(card, !foil)}>
-                                {foil ? '★' : '☆'}
-                            </button>
-                            <h2 className="mt-6">Favourite</h2>
-                            <button
-                                className={`bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${favourite ? 'ring-2 ring-[#7d80ef]' : ''}`}
-                                onClick={() => changeFavourite(card, !favourite)}>
-                                {favourite ? '★' : '☆'}
-                            </button>
-                        </div>
+                        <NotesSection
+                            card={card}
+                            notes={notes}
+                            onNotesChange={setNotes}
+                            onNotesSubmit={changeNotes}
+                        />
+                        <CardToggles
+                            card={card}
+                            foil={foil}
+                            favourite={favourite}
+                            onFoilChange={changeFoil}
+                            onFavouriteChange={changeFavourite}
+                        />
                     </div>
                 </div>
             </div>

@@ -3,7 +3,6 @@ const Footer: React.FC = () => {
         <footer className="h-70 w-full bg-[#141823] text-gray-300 px-6 py-8">
             <div className="max-w-6xl mx-auto">
                 <div className="border-b border-gray-600 pb-4 mb-6 text-center">
-                    <h2 className="text-xl font-bold text-white">ManaVault</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
                     <div className="mt-5">

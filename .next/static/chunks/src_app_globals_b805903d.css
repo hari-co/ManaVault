@@ -710,6 +710,10 @@
     width: calc(var(--spacing) * 100);
   }
 
+  .w-150 {
+    width: calc(var(--spacing) * 150);
+  }
+
   .w-200 {
     width: calc(var(--spacing) * 200);
   }

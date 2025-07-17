@@ -851,6 +851,715 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
 }
 }}),
+"[project]/components/CardPropComponents/CardImage.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+;
+const CardImage = ({ card })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "w-100",
+        children: [
+            card.image_uris ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                src: card.image_uris?.png,
+                className: "w-65 ml-10 mt-7",
+                alt: card.card_name
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/CardImage.tsx",
+                lineNumber: 11,
+                columnNumber: 17
+            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                src: card.card_faces[0].image_uris?.png,
+                className: "w-65 ml-10 mt-7",
+                alt: card.card_name
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/CardImage.tsx",
+                lineNumber: 13,
+                columnNumber: 17
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex ml-7 w-full h-8 justify-center items-center",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                        src: "/tcgplayer.svg",
+                        className: "w-7",
+                        alt: "TCGPlayer"
+                    }, void 0, false, {
+                        fileName: "[project]/components/CardPropComponents/CardImage.tsx",
+                        lineNumber: 16,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "",
+                        children: [
+                            "$",
+                            card.prices.usd
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/CardPropComponents/CardImage.tsx",
+                        lineNumber: 17,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/CardPropComponents/CardImage.tsx",
+                lineNumber: 15,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                href: card.scryfallUri,
+                target: "_blank",
+                className: "ml-28 text-gray-400",
+                children: "View on Scryfall"
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/CardImage.tsx",
+                lineNumber: 19,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/CardPropComponents/CardImage.tsx",
+        lineNumber: 9,
+        columnNumber: 9
+    }, this);
+};
+_c = CardImage;
+const __TURBOPACK__default__export__ = CardImage;
+var _c;
+__turbopack_context__.k.register(_c, "CardImage");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/components/CardPropComponents/CardToggles.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+;
+const CardToggles = ({ card, foil, favourite, onFoilChange, onFavouriteChange })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "ml-8",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                className: "mt-5",
+                children: "Foil"
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/CardToggles.tsx",
+                lineNumber: 20,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                className: `bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${foil ? 'ring-2 ring-[#7d80ef]' : ''}`,
+                onClick: ()=>onFoilChange(card, !foil),
+                children: foil ? '★' : '☆'
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/CardToggles.tsx",
+                lineNumber: 21,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                className: "mt-6",
+                children: "Favourite"
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/CardToggles.tsx",
+                lineNumber: 26,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                className: `bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${favourite ? 'ring-2 ring-[#7d80ef]' : ''}`,
+                onClick: ()=>onFavouriteChange(card, !favourite),
+                children: favourite ? '★' : '☆'
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/CardToggles.tsx",
+                lineNumber: 27,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/CardPropComponents/CardToggles.tsx",
+        lineNumber: 19,
+        columnNumber: 9
+    }, this);
+};
+_c = CardToggles;
+const __TURBOPACK__default__export__ = CardToggles;
+var _c;
+__turbopack_context__.k.register(_c, "CardToggles");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/components/CardPropComponents/QuantityInput.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+;
+const QuantityInput = ({ card, cardQuantity, onQuantityChange, onQuantitySubmit })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "ml-7",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                children: "Quantity"
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/QuantityInput.tsx",
+                lineNumber: 18,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                onSubmit: (e)=>onQuantitySubmit(card, Number(cardQuantity), e),
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                    type: "number",
+                    className: "bg-gray-700/40 border border-gray-600 w-17 h-10 rounded-md pl-4",
+                    placeholder: String(card.quantity),
+                    value: cardQuantity,
+                    onChange: (e)=>onQuantityChange(e.target.value),
+                    onBlur: (e)=>onQuantitySubmit(card, Number(cardQuantity), e)
+                }, void 0, false, {
+                    fileName: "[project]/components/CardPropComponents/QuantityInput.tsx",
+                    lineNumber: 20,
+                    columnNumber: 17
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/QuantityInput.tsx",
+                lineNumber: 19,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/CardPropComponents/QuantityInput.tsx",
+        lineNumber: 17,
+        columnNumber: 9
+    }, this);
+};
+_c = QuantityInput;
+const __TURBOPACK__default__export__ = QuantityInput;
+var _c;
+__turbopack_context__.k.register(_c, "QuantityInput");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/components/CardPropComponents/PriceInput.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+;
+const PriceInput = ({ card, buyPrice, onPriceChange, onPriceSubmit })=>{
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        const formatted = Number(buyPrice).toFixed(2);
+        onPriceChange(formatted);
+        onPriceSubmit(card, Number(formatted), e);
+    };
+    const handleBlur = (e)=>{
+        const formatted = Number(buyPrice).toFixed(2);
+        onPriceChange(formatted);
+        onPriceSubmit(card, Number(formatted), e);
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "ml-4",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                children: "Buy Price"
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/PriceInput.tsx",
+                lineNumber: 31,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                className: "flex bg-gray-700/40 border border-gray-600 w-23 h-10 rounded-md pl-3 items-center",
+                onSubmit: handleSubmit,
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "mr-1",
+                        children: "$"
+                    }, void 0, false, {
+                        fileName: "[project]/components/CardPropComponents/PriceInput.tsx",
+                        lineNumber: 35,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                        className: "w-16",
+                        type: "number",
+                        step: "0.01",
+                        placeholder: card.buy_price,
+                        value: buyPrice,
+                        onChange: (e)=>onPriceChange(e.target.value),
+                        onBlur: handleBlur
+                    }, void 0, false, {
+                        fileName: "[project]/components/CardPropComponents/PriceInput.tsx",
+                        lineNumber: 36,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/CardPropComponents/PriceInput.tsx",
+                lineNumber: 32,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/CardPropComponents/PriceInput.tsx",
+        lineNumber: 30,
+        columnNumber: 9
+    }, this);
+};
+_c = PriceInput;
+const __TURBOPACK__default__export__ = PriceInput;
+var _c;
+__turbopack_context__.k.register(_c, "PriceInput");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/components/CardPropComponents/NotesSection.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+;
+const NotesSection = ({ card, notes, onNotesChange, onNotesSubmit })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                children: "Notes"
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/NotesSection.tsx",
+                lineNumber: 18,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                className: "flex w-83 h-45 rounded-xl items-center",
+                onSubmit: (e)=>{
+                    e.preventDefault();
+                    onNotesSubmit(card, notes, e);
+                },
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                    className: "w-full h-full bg-gray-700/40 border border-gray-600 rounded-xl p-2 resize-none text-white",
+                    value: notes,
+                    placeholder: "Type notes here...",
+                    onChange: (e)=>onNotesChange(e.target.value),
+                    onBlur: (e)=>onNotesSubmit(card, e.target.value, e)
+                }, void 0, false, {
+                    fileName: "[project]/components/CardPropComponents/NotesSection.tsx",
+                    lineNumber: 25,
+                    columnNumber: 17
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/NotesSection.tsx",
+                lineNumber: 19,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/CardPropComponents/NotesSection.tsx",
+        lineNumber: 17,
+        columnNumber: 9
+    }, this);
+};
+_c = NotesSection;
+const __TURBOPACK__default__export__ = NotesSection;
+var _c;
+__turbopack_context__.k.register(_c, "NotesSection");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/components/CardPropComponents/ConditionSelector.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+;
+const ConditionSelector = ({ card, showConditions, conditions, onToggleShow, onConditionSelect })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "ml-4",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                children: "Condition"
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/ConditionSelector.tsx",
+                lineNumber: 20,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                className: "bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-between items-center pl-4",
+                onClick: onToggleShow,
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        children: card.condition
+                    }, void 0, false, {
+                        fileName: "[project]/components/CardPropComponents/ConditionSelector.tsx",
+                        lineNumber: 24,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "h-full flex justify-center items-center",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                            src: "/dropdown.svg",
+                            className: "w-7 filter invert",
+                            alt: "dropdown"
+                        }, void 0, false, {
+                            fileName: "[project]/components/CardPropComponents/ConditionSelector.tsx",
+                            lineNumber: 26,
+                            columnNumber: 21
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/components/CardPropComponents/ConditionSelector.tsx",
+                        lineNumber: 25,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/CardPropComponents/ConditionSelector.tsx",
+                lineNumber: 21,
+                columnNumber: 13
+            }, this),
+            showConditions && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                className: "bg-gray-700 absolute w-18 border border-gray-500 rounded-md",
+                children: conditions.map((condition)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                        className: `z-50 flex justify-center items-center h-8 hover:bg-gray-400 ${card.condition == condition ? " bg-gray-400" : " bg-gray-700"}`,
+                        onClick: ()=>onConditionSelect(card, condition),
+                        children: condition
+                    }, condition, false, {
+                        fileName: "[project]/components/CardPropComponents/ConditionSelector.tsx",
+                        lineNumber: 32,
+                        columnNumber: 25
+                    }, this))
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/ConditionSelector.tsx",
+                lineNumber: 30,
+                columnNumber: 17
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/CardPropComponents/ConditionSelector.tsx",
+        lineNumber: 19,
+        columnNumber: 9
+    }, this);
+};
+_c = ConditionSelector;
+const __TURBOPACK__default__export__ = ConditionSelector;
+var _c;
+__turbopack_context__.k.register(_c, "ConditionSelector");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/components/CardPropComponents/BinderSelector.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+;
+const BinderSelector = ({ card, binderName, showBinders, binderList, onToggleShow, onBinderSelect })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                children: "Binder"
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
+                lineNumber: 22,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                className: "bg-gray-700/40 border border-gray-600 h-10 w-60 rounded-md flex justify-between items-center pl-4",
+                onClick: onToggleShow,
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        children: binderName
+                    }, void 0, false, {
+                        fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
+                        lineNumber: 26,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "h-full flex justify-center items-center",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                            src: "/dropdown.svg",
+                            className: "w-7 filter invert",
+                            alt: "dropdown"
+                        }, void 0, false, {
+                            fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
+                            lineNumber: 28,
+                            columnNumber: 21
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
+                        lineNumber: 27,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
+                lineNumber: 23,
+                columnNumber: 13
+            }, this),
+            showBinders && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                className: "bg-gray-700 absolute w-60 border border-gray-500 rounded-md",
+                children: binderList.map((binder)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                        className: `z-50 flex items-center pl-4 h-8 hover:bg-gray-400 ${binderName == binder ? " bg-gray-400" : " bg-gray-700"}`,
+                        onClick: ()=>onBinderSelect(card, binder),
+                        children: binder
+                    }, binder, false, {
+                        fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
+                        lineNumber: 34,
+                        columnNumber: 25
+                    }, this))
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
+                lineNumber: 32,
+                columnNumber: 17
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
+        lineNumber: 21,
+        columnNumber: 9
+    }, this);
+};
+_c = BinderSelector;
+const __TURBOPACK__default__export__ = BinderSelector;
+var _c;
+__turbopack_context__.k.register(_c, "BinderSelector");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/components/CardPropComponents/PrintSelector.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>__TURBOPACK__default__export__)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+;
+const PrintSelector = ({ card, printOpen, prints, showPreview, rarityFilter, onTogglePrintOpen, onViewPrints, onPrintHover, onPrintLeave, onPrintSelect })=>{
+    const handlePrintHover = (print)=>{
+        if (print.image_uris) {
+            onPrintHover(print);
+        } else {
+            onPrintHover(print.card_faces[0]);
+        }
+    };
+    const handleToggleOpen = ()=>{
+        if (!printOpen) {
+            onViewPrints(card);
+        }
+        onTogglePrintOpen();
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                children: "Printing"
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                lineNumber: 45,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                className: "bg-gray-700/40 border border-gray-600 h-10 w-85 rounded-md flex justify-between items-center overflow-hidden",
+                onClick: handleToggleOpen,
+                onBlur: ()=>onTogglePrintOpen(),
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "flex ml-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: `h-6 w-6 mr-2`,
+                                style: {
+                                    WebkitMaskImage: `url(/set_icons/${card.set}.svg)`,
+                                    maskImage: `url(/set_icons/${card.set}.svg)`,
+                                    WebkitMaskRepeat: "no-repeat",
+                                    maskRepeat: "no-repeat",
+                                    WebkitMaskPosition: "center",
+                                    maskPosition: "center",
+                                    WebkitMaskSize: "contain",
+                                    maskSize: "contain",
+                                    background: `${rarityFilter[card.rarity]}`
+                                }
+                            }, void 0, false, {
+                                fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                                lineNumber: 51,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "whitespace-nowrap overflow-hidden max-w-65",
+                                children: card.set_name + " " + card.collector_number
+                            }, void 0, false, {
+                                fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                                lineNumber: 65,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                        lineNumber: 50,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "h-full flex justify-center items-center",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                            src: "/dropdown.svg",
+                            className: "w-7 filter invert",
+                            alt: "dropdown"
+                        }, void 0, false, {
+                            fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                            lineNumber: 70,
+                            columnNumber: 21
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                        lineNumber: 69,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                lineNumber: 46,
+                columnNumber: 13
+            }, this),
+            printOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "absolute border border-gray-500 bg-gray-600 max-h-70 w-90 overflow-y-auto rounded-sm z-50",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                    children: prints.map((print)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                            className: `hover:bg-gray-500 px-3 py-1 ${print.set_name == card.set_name && print.collector_number == card.collector_number ? " bg-gray-500" : ""}`,
+                            onMouseEnter: ()=>handlePrintHover(print),
+                            onMouseLeave: onPrintLeave,
+                            onMouseDown: ()=>onPrintSelect(card, print),
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: `h-5.5 w-5.5 mr-2`,
+                                            style: {
+                                                WebkitMaskImage: `url(/set_icons/${print.set}.svg)`,
+                                                maskImage: `url(/set_icons/${print.set}.svg)`,
+                                                WebkitMaskRepeat: "no-repeat",
+                                                maskRepeat: "no-repeat",
+                                                WebkitMaskPosition: "center",
+                                                maskPosition: "center",
+                                                WebkitMaskSize: "contain",
+                                                maskSize: "contain",
+                                                background: `${rarityFilter[print.rarity]}`
+                                            }
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                                            lineNumber: 84,
+                                            columnNumber: 37
+                                        }, this),
+                                        `${print.set_name} ${print.collector_number}`
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                                    lineNumber: 83,
+                                    columnNumber: 33
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex justify-between text-gray-400 ml-8",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            children: print.flavor_name || print.card_name
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                                            lineNumber: 101,
+                                            columnNumber: 37
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            children: `${print.prices.usd ? `$${print.prices.usd}` : "N/A"}`
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                                            lineNumber: 102,
+                                            columnNumber: 37
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                                    lineNumber: 100,
+                                    columnNumber: 33
+                                }, this)
+                            ]
+                        }, print.set_name + print.collector_number, true, {
+                            fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                            lineNumber: 77,
+                            columnNumber: 29
+                        }, this))
+                }, void 0, false, {
+                    fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                    lineNumber: 75,
+                    columnNumber: 21
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                lineNumber: 74,
+                columnNumber: 17
+            }, this),
+            showPreview && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "fixed -right-22 ml-10",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                    src: showPreview.image_uris?.normal,
+                    className: "w-50 rounded-lg",
+                    alt: "card preview"
+                }, void 0, false, {
+                    fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                    lineNumber: 111,
+                    columnNumber: 21
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+                lineNumber: 110,
+                columnNumber: 17
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
+        lineNumber: 44,
+        columnNumber: 9
+    }, this);
+};
+_c = PrintSelector;
+const __TURBOPACK__default__export__ = PrintSelector;
+var _c;
+__turbopack_context__.k.register(_c, "PrintSelector");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
 "[project]/components/CardProperties.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -867,8 +1576,24 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$firebase$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@firebase/firestore/dist/index.esm2017.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useFirebaseUser$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/hooks/useFirebaseUser.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/firebase-config.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$CardImage$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/CardPropComponents/CardImage.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$CardToggles$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/CardPropComponents/CardToggles.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$QuantityInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/CardPropComponents/QuantityInput.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$PriceInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/CardPropComponents/PriceInput.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$NotesSection$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/CardPropComponents/NotesSection.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$ConditionSelector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/CardPropComponents/ConditionSelector.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$BinderSelector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/CardPropComponents/BinderSelector.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$PrintSelector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/CardPropComponents/PrintSelector.tsx [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
+;
+;
+;
+;
+;
+;
+;
+;
 ;
 ;
 ;
@@ -1228,84 +1953,29 @@ const CardProperties = ({ card })=>{
                     children: "Card Properties"
                 }, void 0, false, {
                     fileName: "[project]/components/CardProperties.tsx",
-                    lineNumber: 330,
+                    lineNumber: 329,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 329,
+                lineNumber: 328,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                 className: "m-2 text-white/25"
             }, void 0, false, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 332,
+                lineNumber: 331,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex w-full h-full",
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "w-100",
-                        children: [
-                            card.image_uris ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                src: card.image_uris?.png,
-                                className: "w-65 ml-10 mt-7"
-                            }, void 0, false, {
-                                fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 336,
-                                columnNumber: 25
-                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                src: card.card_faces[0].image_uris?.png,
-                                className: "w-65 ml-10 mt-7"
-                            }, void 0, false, {
-                                fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 337,
-                                columnNumber: 25
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex ml-7 w-full h-8 justify-center items-center",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                        src: "/tcgplayer.svg",
-                                        className: "w-7"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 339,
-                                        columnNumber: 25
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "",
-                                        children: [
-                                            "$",
-                                            card.prices.usd
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 340,
-                                        columnNumber: 26
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 338,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                href: card.scryfallUri,
-                                target: "_blank",
-                                className: "ml-28 text-gray-400",
-                                children: "View on Scryfall"
-                            }, void 0, false, {
-                                fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 342,
-                                columnNumber: 21
-                            }, this)
-                        ]
-                    }, void 0, true, {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$CardImage$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                        card: card
+                    }, void 0, false, {
                         fileName: "[project]/components/CardProperties.tsx",
-                        lineNumber: 334,
+                        lineNumber: 333,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1320,544 +1990,148 @@ const CardProperties = ({ card })=>{
                                                 part,
                                                 idx < arr.length - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 350,
+                                                    lineNumber: 340,
                                                     columnNumber: 62
                                                 }, this)
                                             ]
                                         }, idx, true, {
                                             fileName: "[project]/components/CardProperties.tsx",
-                                            lineNumber: 348,
+                                            lineNumber: 338,
                                             columnNumber: 33
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/CardProperties.tsx",
-                                    lineNumber: 346,
+                                    lineNumber: 336,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 345,
+                                lineNumber: 335,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex w-full h-15 ml-15",
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                children: "Printing"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 357,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                className: "bg-gray-700/40 border border-gray-600 h-10 w-85 rounded-md flex justify-between items-center overflow-hidden",
-                                                onClick: ()=>{
-                                                    if (!printOpen) {
-                                                        viewPrints(card);
-                                                    }
-                                                    setPrintOpen(!printOpen);
-                                                },
-                                                onBlur: ()=>setPrintOpen(false),
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "flex ml-4",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                className: `h-6 w-6 mr-2`,
-                                                                style: {
-                                                                    WebkitMaskImage: `url(/set_icons/${card.set}.svg)`,
-                                                                    maskImage: `url(/set_icons/${card.set}.svg)`,
-                                                                    WebkitMaskRepeat: "no-repeat",
-                                                                    maskRepeat: "no-repeat",
-                                                                    WebkitMaskPosition: "center",
-                                                                    maskPosition: "center",
-                                                                    WebkitMaskSize: "contain",
-                                                                    maskSize: "contain",
-                                                                    background: `${rarityFilter[card.rarity]}`
-                                                                }
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/CardProperties.tsx",
-                                                                lineNumber: 368,
-                                                                columnNumber: 37
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "whitespace-nowrap overflow-hidden max-w-65",
-                                                                children: card.set_name + " " + card.collector_number
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/CardProperties.tsx",
-                                                                lineNumber: 381,
-                                                                columnNumber: 33
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 367,
-                                                        columnNumber: 33
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "h-full flex justify-center items-center",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                            src: "/dropdown.svg",
-                                                            className: "w-7 filter invert"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/CardProperties.tsx",
-                                                            lineNumber: 384,
-                                                            columnNumber: 37
-                                                        }, this)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 383,
-                                                        columnNumber: 33
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 358,
-                                                columnNumber: 29
-                                            }, this),
-                                            printOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "absolute border border-gray-500 bg-gray-600 max-h-70 w-90 overflow-y-auto rounded-sm z-50",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                                                    children: prints.map((print)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                            className: `hover:bg-gray-500 px-3 py-1 ${print.set_name == card.set_name && print.collector_number == card.collector_number ? " bg-gray-500" : ""}`,
-                                                            onMouseEnter: ()=>{
-                                                                if (print.image_uris) {
-                                                                    setShowPreview(print);
-                                                                } else {
-                                                                    setShowPreview(print.card_faces[0]);
-                                                                }
-                                                            },
-                                                            onMouseLeave: ()=>setShowPreview(null),
-                                                            onMouseDown: ()=>changePrint(card, print),
-                                                            children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "flex",
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: `h-5.5 w-5.5 mr-2`,
-                                                                            style: {
-                                                                                WebkitMaskImage: `url(/set_icons/${print.set}.svg)`,
-                                                                                maskImage: `url(/set_icons/${print.set}.svg)`,
-                                                                                WebkitMaskRepeat: "no-repeat",
-                                                                                maskRepeat: "no-repeat",
-                                                                                WebkitMaskPosition: "center",
-                                                                                maskPosition: "center",
-                                                                                WebkitMaskSize: "contain",
-                                                                                maskSize: "contain",
-                                                                                background: `${rarityFilter[print.rarity]}`
-                                                                            }
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/components/CardProperties.tsx",
-                                                                            lineNumber: 404,
-                                                                            columnNumber: 53
-                                                                        }, this),
-                                                                        `${print.set_name} ${print.collector_number}`
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/components/CardProperties.tsx",
-                                                                    lineNumber: 403,
-                                                                    columnNumber: 49
-                                                                }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "flex justify-between text-gray-400 ml-8",
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                            children: print.flavor_name || print.card_name
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/components/CardProperties.tsx",
-                                                                            lineNumber: 420,
-                                                                            columnNumber: 53
-                                                                        }, this),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                            children: `${print.prices.usd ? `$${print.prices.usd}` : "N/A"}`
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/components/CardProperties.tsx",
-                                                                            lineNumber: 421,
-                                                                            columnNumber: 53
-                                                                        }, this)
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/components/CardProperties.tsx",
-                                                                    lineNumber: 419,
-                                                                    columnNumber: 49
-                                                                }, this)
-                                                            ]
-                                                        }, print.set_name + print.collector_number, true, {
-                                                            fileName: "[project]/components/CardProperties.tsx",
-                                                            lineNumber: 391,
-                                                            columnNumber: 45
-                                                        }, this))
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 389,
-                                                    columnNumber: 37
-                                                }, this)
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 388,
-                                                columnNumber: 33
-                                            }, this),
-                                            showPreview && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "fixed -right-22 ml-10",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                    src: showPreview.image_uris?.normal,
-                                                    className: "w-50 rounded-lg"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 430,
-                                                    columnNumber: 45
-                                                }, this)
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 429,
-                                                columnNumber: 41
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$PrintSelector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        card: card,
+                                        printOpen: printOpen,
+                                        prints: prints,
+                                        showPreview: showPreview,
+                                        rarityFilter: rarityFilter,
+                                        onTogglePrintOpen: ()=>setPrintOpen(!printOpen),
+                                        onViewPrints: viewPrints,
+                                        onPrintHover: setShowPreview,
+                                        onPrintLeave: ()=>setShowPreview(null),
+                                        onPrintSelect: changePrint
+                                    }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 356,
+                                        lineNumber: 346,
                                         columnNumber: 25
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "ml-7",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                children: "Quantity"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 435,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                                                onSubmit: (e)=>changeQuantity(card, Number(cardQuantity), e),
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                    type: "number",
-                                                    className: "bg-gray-700/40 border border-gray-600 w-17 h-10 rounded-md pl-4",
-                                                    placeholder: String(card.quantity),
-                                                    value: cardQuantity,
-                                                    onChange: (e)=>setCardQuantity(e.target.value),
-                                                    onBlur: (e)=>changeQuantity(card, Number(cardQuantity), e)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 438,
-                                                    columnNumber: 33
-                                                }, this)
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 436,
-                                                columnNumber: 29
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$QuantityInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        card: card,
+                                        cardQuantity: cardQuantity,
+                                        onQuantityChange: setCardQuantity,
+                                        onQuantitySubmit: changeQuantity
+                                    }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 434,
+                                        lineNumber: 358,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 355,
+                                lineNumber: 345,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex w-full h-15 ml-15 mt-5",
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                children: "Binder"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 451,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                className: "bg-gray-700/40 border border-gray-600 h-10 w-60 rounded-md flex justify-between items-center pl-4",
-                                                onClick: ()=>setShowBinders(!showBinders),
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        children: binderName
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 455,
-                                                        columnNumber: 33
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "h-full flex justify-center items-center",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                            src: "/dropdown.svg",
-                                                            className: "w-7 filter invert"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/CardProperties.tsx",
-                                                            lineNumber: 457,
-                                                            columnNumber: 37
-                                                        }, this)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 456,
-                                                        columnNumber: 33
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 452,
-                                                columnNumber: 29
-                                            }, this),
-                                            showBinders && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                                                className: "bg-gray-700 absolute w-60 border border-gray-500 rounded-md",
-                                                children: binderList.map((binder)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                        className: `z-50 flex items-center pl-4 h-8 hover:bg-gray-400 ${binderName == binder ? " bg-gray-400" : " bg-gray-700"}`,
-                                                        onClick: ()=>changeBinder(card, binder),
-                                                        children: binder
-                                                    }, binder, false, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 463,
-                                                        columnNumber: 41
-                                                    }, this))
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 461,
-                                                columnNumber: 33
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$BinderSelector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        card: card,
+                                        binderName: binderName,
+                                        showBinders: showBinders,
+                                        binderList: binderList,
+                                        onToggleShow: ()=>setShowBinders(!showBinders),
+                                        onBinderSelect: changeBinder
+                                    }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 450,
+                                        lineNumber: 366,
                                         columnNumber: 25
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "ml-4",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                children: "Condition"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 474,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                className: "bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-between items-center pl-4",
-                                                onClick: ()=>setShowConditions(!showConditions),
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        children: card.condition
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 478,
-                                                        columnNumber: 33
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "h-full flex justify-center items-center",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                            src: "/dropdown.svg",
-                                                            className: "w-7 filter invert"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/CardProperties.tsx",
-                                                            lineNumber: 480,
-                                                            columnNumber: 37
-                                                        }, this)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 479,
-                                                        columnNumber: 33
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 475,
-                                                columnNumber: 29
-                                            }, this),
-                                            showConditions && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                                                className: "bg-gray-700 absolute w-18 border border-gray-500 rounded-md",
-                                                children: conditions.map((condition)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                        className: `z-50 flex justify-center items-center h-8 hover:bg-gray-400 ${card.condition == condition ? " bg-gray-400" : " bg-gray-700"}`,
-                                                        onClick: ()=>changeCondition(card, condition),
-                                                        children: condition
-                                                    }, condition, false, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 486,
-                                                        columnNumber: 41
-                                                    }, this))
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 484,
-                                                columnNumber: 33
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$ConditionSelector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        card: card,
+                                        showConditions: showConditions,
+                                        conditions: conditions,
+                                        onToggleShow: ()=>setShowConditions(!showConditions),
+                                        onConditionSelect: changeCondition
+                                    }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 473,
+                                        lineNumber: 374,
                                         columnNumber: 25
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "ml-4",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                children: "Buy Price"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 497,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                                                className: "flex bg-gray-700/40 border border-gray-600 w-23 h-10 rounded-md pl-3 items-center",
-                                                onSubmit: (e)=>{
-                                                    e.preventDefault();
-                                                    const formatted = Number(buyPrice).toFixed(2);
-                                                    setBuyPrice(formatted);
-                                                    changeBuyPrice(card, Number(formatted), e);
-                                                },
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "mr-1",
-                                                        children: "$"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 505,
-                                                        columnNumber: 33
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                        className: "w-16",
-                                                        type: "number",
-                                                        step: "0.01",
-                                                        placeholder: card.buy_price,
-                                                        value: buyPrice,
-                                                        onChange: (e)=>setBuyPrice(e.target.value),
-                                                        onBlur: (e)=>{
-                                                            const formatted = Number(buyPrice).toFixed(2);
-                                                            setBuyPrice(formatted);
-                                                            changeBuyPrice(card, Number(formatted), e);
-                                                        }
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CardProperties.tsx",
-                                                        lineNumber: 506,
-                                                        columnNumber: 33
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 498,
-                                                columnNumber: 29
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$PriceInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        card: card,
+                                        buyPrice: buyPrice,
+                                        onPriceChange: setBuyPrice,
+                                        onPriceSubmit: changeBuyPrice
+                                    }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 496,
+                                        lineNumber: 381,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 449,
+                                lineNumber: 365,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex w-auto h-50 ml-15 mt-5",
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                children: "Notes"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 524,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                                                className: "flex w-83 h-45 rounded-xl items-center",
-                                                onSubmit: (e)=>{
-                                                    e.preventDefault();
-                                                    changeNotes(card, notes, e);
-                                                },
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                                    className: "w-full h-full bg-gray-700/40 border border-gray-600 rounded-xl p-2 resize-none text-white",
-                                                    value: notes,
-                                                    placeholder: "Type notes here...",
-                                                    onChange: (e)=>setNotes(e.target.value),
-                                                    onBlur: (e)=>changeNotes(card, e.target.value, e)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 531,
-                                                    columnNumber: 33
-                                                }, this)
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 525,
-                                                columnNumber: 29
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$NotesSection$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        card: card,
+                                        notes: notes,
+                                        onNotesChange: setNotes,
+                                        onNotesSubmit: changeNotes
+                                    }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 523,
+                                        lineNumber: 389,
                                         columnNumber: 25
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "ml-8",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                className: "mt-5",
-                                                children: "Foil"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 541,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                className: `bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${foil ? 'ring-2 ring-[#7d80ef]' : ''}`,
-                                                onClick: ()=>changeFoil(card, !foil),
-                                                children: foil ? '★' : '☆'
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 542,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                className: "mt-6",
-                                                children: "Favourite"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 547,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                className: `bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${favourite ? 'ring-2 ring-[#7d80ef]' : ''}`,
-                                                onClick: ()=>changeFavourite(card, !favourite),
-                                                children: favourite ? '★' : '☆'
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CardProperties.tsx",
-                                                lineNumber: 548,
-                                                columnNumber: 29
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$CardToggles$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        card: card,
+                                        foil: foil,
+                                        favourite: favourite,
+                                        onFoilChange: changeFoil,
+                                        onFavouriteChange: changeFavourite
+                                    }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 540,
+                                        lineNumber: 395,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 522,
+                                lineNumber: 388,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CardProperties.tsx",
-                        lineNumber: 344,
+                        lineNumber: 334,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 333,
+                lineNumber: 332,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/CardProperties.tsx",
-        lineNumber: 328,
+        lineNumber: 327,
         columnNumber: 9
     }, this);
 };
@@ -2426,4 +2700,4 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 }}),
 }]);
 
-//# sourceMappingURL=_8560023c._.js.map
+//# sourceMappingURL=_525442ef._.js.map
