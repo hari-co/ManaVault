@@ -41,7 +41,7 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
     
     
     if (!binderContext) throw new Error("BinderContext not found.");
-    const { currentBinder, setCurrentBinder } = binderContext;
+    const { currentBinder, triggerCardsUpdate } = binderContext;
 
     const viewPrints = async (card: CardType) => {
         try {
@@ -152,6 +152,7 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
             if (print.flavor_name) {
                 await updateDoc(doc(db, "users", user.uid, "binders", "all", "cards", card.id), {flavor_name: print.flavor_name})
             }
+            triggerCardsUpdate();
             setShowPreview(null);
         } catch (e) {
             console.error(e);
@@ -166,6 +167,7 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
             if (!success) {
                 console.error("Failed to update quantity");
             }
+            triggerCardsUpdate();
         } catch (e) {
             console.error(e);
         }
@@ -254,6 +256,7 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
             await updateDoc(doc(db, "users", user?.uid, "binders", "all", "cards", card.id), {
                 binder: binderNameToId,
             })
+            triggerCardsUpdate();
             setShowBinders(false);
         } catch (e) {
             console.error(e);

@@ -1,12 +1,14 @@
 "use client"
-import CardSearch from '../../../components/CardSearch';
-import Binders from '../../../components/Binders';
-import CardDisplay from '../../../components/CardDisplay';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '@/config/firebase-config';
 import { BinderProvider } from '@/context/BinderContext';
 import { useRouter } from 'next/navigation';
+
+import CardSearch from '../../../components/CardSearch';
+import Binders from '../../../components/Binders';
+import CardDisplay from '../../../components/CardDisplay';
+import BinderStats from '../../../components/BinderStats';
 
 export default function Library() {
     const [user, setUser] = useState<User | null>(null);
@@ -35,6 +37,7 @@ export default function Library() {
                     }}/>
                     {/* <img  */}
                     <h1 className="font-bold text-5xl p-9 z-10 relative">Library</h1>
+                    <BinderStats />
                 </div>
                 <div className='flex flex-grow bg-[#181e2c]'>
                     <div>

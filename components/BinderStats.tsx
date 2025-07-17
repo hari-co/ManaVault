@@ -2,20 +2,26 @@ import { db } from "@/config/firebase-config";
 import { BinderContext } from "@/context/BinderContext";
 import { useFirebaseUser } from "@/hooks/useFirebaseUser";
 import { collection, getDocs } from "firebase/firestore";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const BinderStats: React.FC = () => {
-    const [rarityCount, setRarityCount] = useState<{ mythics: Number, rares: Number, uncommons: Number, commons: Number }>({
+    const [rarityCount, setRarityCount] = useState<{ mythics: number, rares: number, uncommons: number, commons: number }>({
         mythics: 0,
         rares: 0,
         uncommons: 0,
         commons:0
         });
-    const binderContext = useContext(BinderContext)
-    const user = useFirebaseUser()
+    const [cardCount, setCardCount] = useState<number>(0);
+    const binderContext = useContext(BinderContext);
+    const user = useFirebaseUser();
 
     if (!binderContext) throw new Error("BinderContext not found.");
-    const { currentBinder, setCurrentBinder } = binderContext;
+    const { currentBinder, cardsUpdated } = binderContext;
+
+    useEffect(() => {
+        if (!user) return;
+        fetchRarities(currentBinder);
+    }, [currentBinder, user, cardsUpdated]);
 
     const fetchRarities = async (currentBinder: string | null) => {
         try {
@@ -25,6 +31,7 @@ const BinderStats: React.FC = () => {
             }
 
             let counts = { mythics: 0, rares: 0, uncommons: 0, commons: 0 };
+            let cardNum = 0;
 
             const binderSnapshot = await getDocs(collection(db, "users", user.uid, "binders", currentBinder, "cards"));
             binderSnapshot.forEach((doc) => {
@@ -35,7 +42,7 @@ const BinderStats: React.FC = () => {
                         counts.mythics++;
                         break;
                     case 'rare':
-                        counts.rares++
+                        counts.rares++;
                         break;
                     case 'uncommon':
                         counts.uncommons++;
@@ -46,17 +53,27 @@ const BinderStats: React.FC = () => {
                     default:
                         console.warn(`Unknown rarity: ${card.card_name}`);
                 }
+                cardNum++;
             });
 
+            setCardCount(cardNum);
             setRarityCount(counts);
         } catch (e) {
-
+            console.error(`Couldn't get rarities: ${e}`);
         }
     }
 
     return (
-        <div className="w-150 h-30">
-
+        <div className="absolute bottom-8 right-14 z-10 font-normal">
+            <div className="absolute right-3 -top-5">
+                <p>{cardCount} cards</p>
+            </div>
+            <div className="flex text-gray-400">
+                <p className="m-2">{rarityCount.mythics} mythics</p>
+                <p className="m-2">{rarityCount.rares} rares</p>
+                <p className="m-2">{rarityCount.uncommons} uncommons</p>
+                <p className="m-2">{rarityCount.commons} commons</p>
+            </div>
         </div>
     );
 }
