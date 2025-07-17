@@ -27,19 +27,19 @@ const NavBar: React.FC = () => {
     };
 
     return (
-        <nav className='flex top-0 z-50 bg-black text-white py-4 px-20 font-semibold h-14 justify-center'>
-            <div className='bg-blue-400 w-full flex items-center justify-between'>
-                <Link href="/" className='hover:text-purple-400'>ManaVault</Link>
+        <nav className='flex top-0 z-50 bg-[#141823] text-white py-4 px-20 font-sans font-semibold h-14 justify-center'>
+            <div className='w-full flex items-center justify-between'>
+                <Link href="/" className='hover:text-[#616dc9]'>ManaVault</Link>
                 <div className='hidden md:flex space-x-6'>
                     {user ? (
                         <div className='flex space-x-6'>
-                        <Link href="/library" className='hover:text-purple-400'>Library</Link>
-                        <button className='hover:text-purple-400' onClick={signOutUser}>Log Out</button>
+                        <Link href="/library" className='hover:text-[#616dc9]'>Library</Link>
+                        <button className='hover:text-[#616dc9]' onClick={signOutUser}>Log Out</button>
                         </div>
                     ) : (
                         <div className='flex space-x-6'>
-                        <Link href="/account/login" className='hover:text-purple-400'>Login</Link>
-                        <Link href="/account/register" className='hover:text-purple-400'>Register</Link>
+                        <Link href="/account/login" className='hover:text-[#616dc9]'>Login</Link>
+                        <Link href="/account/register" className='hover:text-[#616dc9]'>Register</Link>
                         </div>
                     )}
                 </div>

@@ -25,7 +25,7 @@ export default function Library() {
     return (
         user && (
         <BinderProvider>
-            <div className='flex flex-col h-[calc(100vh-3.5rem)] w-full font-sans font-medium'>
+            <div className='flex flex-col min-h-[calc(100vh-3.5rem)] w-full font-sans font-medium'>
                 <div className='text-gray-300 bg-gradient-to-b from-[#3f3cec] to-[#423fe9] p-3 h-60 relative flex-shrink-0'>
                     <div className='absolute top-0 left-0 w-full h-full'
                     style={{
@@ -61,6 +61,7 @@ export default function Library() {
                         </div>
                     </div>
                 </div>
+                <div className='h-15 bg-[#181e2c]'></div>
             </div>
         </BinderProvider>)
     );
