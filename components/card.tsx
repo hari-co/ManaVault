@@ -28,7 +28,8 @@ const Card: React.FC<{ card: CardType }> = ({ card }) => {
                 <div className="flex-1 min-w-56 max-w-60 relative group">
                     <QuickMenu card={card} onFlip={handleFlip}/>
                     <img src={card.image_uris.large} alt={card.card_name} className="rounded-xl w-full cursor-pointer" onClick={() => fadeIn()}/>
-                    <div className="bg-orange-500 w-full h-full flex justify-center cursor-default">
+                    <div className="w-full h-full flex justify-center cursor-default text-[#7d80ef]">
+                        <img src={"/tcgplayer.svg"} className="w-7"/>
                         {card.prices.usd && "$" + card.prices.usd}
                         {!card.prices.usd && "N/A"}
                     </div>
@@ -50,7 +51,8 @@ const Card: React.FC<{ card: CardType }> = ({ card }) => {
                             <img src={card.card_faces?.[1]?.image_uris?.large} alt={card.card_name} className="rounded-xl w-full cursor-pointer card-back" onClick={() => fadeIn()}/>
                         </div>
                     </div>
-                    <div className="bg-orange-500 w-full h-full flex justify-center cursor-default">
+                    <div className="w-full h-full flex justify-center cursor-default text-[#7d80ef]">
+                        <img src={"/tcgplayer.svg"} className="w-7"/>
                         {card.prices.usd && "$" + card.prices.usd}
                         {!card.prices.usd && "N/A"}
                     </div>

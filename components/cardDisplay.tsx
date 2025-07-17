@@ -88,7 +88,7 @@ const CardDisplay: React.FC = () => {
     }, [cardList, user, currentBinder]);
 
     return (
-        <div className="flex flex-wrap gap-4 w-full pt-5 pl-8 items-start bg-[#1e252c]">
+        <div className="flex flex-wrap gap-4 w-full pt-5 pl-13 items-start bg-[#181e2b]">
             {cardList.map((card) => (
                     <Card key={card.id} card={card}/>
                 )

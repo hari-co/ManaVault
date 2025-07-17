@@ -374,8 +374,9 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
                     {card.image_uris ? (
                         <img src={card.image_uris?.png} className="w-65 ml-10 mt-7"/>) :
                         <img src={card.card_faces[0].image_uris?.png} className="w-65 ml-10 mt-7"/>}
-                    <div className="flex ml-5 w-full h-8 justify-center">
-                         <p className="ml-5">${card.prices.usd}</p>
+                    <div className="flex ml-7 w-full h-8 justify-center items-center">
+                        <img src={"/tcgplayer.svg"} className="w-7"/>
+                         <p className="">${card.prices.usd}</p>
                     </div>
                     <a href={card.scryfallUri} target="_blank" className="ml-28 text-gray-400">View on Scryfall</a>
                 </div>
@@ -578,13 +579,13 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
                         <div className="ml-8">
                             <h2 className="mt-5">Foil</h2>
                             <button
-                                className={`bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${foil ? 'ring-2 ring-purple-400' : ''}`}
+                                className={`bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${foil ? 'ring-2 ring-[#7d80ef]' : ''}`}
                                 onClick={() => changeFoil(card, !foil)}>
                                 {foil ? '★' : '☆'}
                             </button>
                             <h2 className="mt-6">Favourite</h2>
                             <button
-                                className={`bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${favourite ? 'ring-2 ring-purple-400' : ''}`}
+                                className={`bg-gray-700/40 border border-gray-600 h-10 w-18 rounded-md flex justify-center items-center text-2xl ${favourite ? 'ring-2 ring-[#7d80ef]' : ''}`}
                                 onClick={() => changeFavourite(card, !favourite)}>
                                 {favourite ? '★' : '☆'}
                             </button>

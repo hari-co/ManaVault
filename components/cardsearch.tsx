@@ -89,9 +89,9 @@ const CardSearch: React.FC = () => {
                 onFocus={() => setShowSuggestions(results.length > 0)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
             />
-            {!showSuggestions && loading && <div className="absolute left-0 top-full bg-gray-800 text-white px-4 py-2 z-50">Loading...</div>}
+            {!showSuggestions && loading && <div className="absolute left-0 top-full bg-gray-800 text-white w-64 px-4 py-2 z-50">Loading...</div>}
             {showSuggestions && results.length > 0 && (
-                <div className="absolute left-0 top-full border rounded bg-gray-800 text-white h-64 overflow-y-auto z-50">
+                <div className="absolute left-0 top-full border rounded bg-gray-800 text-white h-64 w-64 overflow-y-auto z-50">
                     <ul>
                         {results.map((suggestion) => (
                             <li
