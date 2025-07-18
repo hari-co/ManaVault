@@ -36,7 +36,7 @@ export default function Library() {
                         zIndex: 2
                     }}/>
                     {/* <img  */}
-                    <h1 className="font-bold text-5xl p-9 z-10 relative">Library</h1>
+                    <h1 className="font-bold text-5xl pl-12 pt-15 z-10 relative">Library</h1>
                     <BinderStats />
                 </div>
                 <div className='flex flex-grow bg-[#181e2c]'>

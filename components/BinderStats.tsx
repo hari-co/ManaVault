@@ -59,7 +59,7 @@ const BinderStats: React.FC = () => {
                 priceTotal += Number(card.prices.usd);
             });
 
-            setPriceCount(priceTotal)
+            setPriceCount(Number(priceTotal.toFixed(2)));
             setCardCount(cardNum);
             setRarityCount(counts);
         } catch (e) {
