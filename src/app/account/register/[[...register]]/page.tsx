@@ -63,43 +63,43 @@ export default function register() {
   }
 
     return (!user &&
-      <div className="bg-blue-200 flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-screen">
-        <form className="bg-white flex flex-col p-8 rounded shadow-md w-96"
+      <div className="bg-linear-to-br from-[#181e2c] via-[#1b1b4e] to-[#141823] flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-full">
+        <form className="bg-[#141823]/70 flex flex-col p-6 rounded-xl shadow-md w-96 text-gray-50 font-sans space-y-3"
               onSubmit={register}>
-          <div className="flex justify-center">
-            <h2>Register for ManaVault</h2>
+          <div className="flex justify-center mb-4">
+            <h2 className="text-3xl font-bold text-white">Register</h2>
           </div>
           <div>
-            <p>Username</p>
+            <p className="text-gray-300 mb-2 font-semibold tracking-wide">Username</p>
             <input
-              className="border"
+              className="bg-gray-700/40 border border-gray-600 w-full h-10 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4"
               type="text"
               placeholder="Username"
               value={username}
               onChange={e => setUsername(e.target.value)}
               required
               />
-              <p>Email</p>
+              <p className="text-gray-300 mb-2 font-semibold tracking-wide">Email</p>
               <input
-                className="border"
+                className="bg-gray-700/40 border border-gray-600 w-full h-10 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4"
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
               />
-              <p>Password</p>
+              <p className="text-gray-300 mb-2 font-semibold tracking-wide">Password</p>
               <input 
-                className="border"
+                className="bg-gray-700/40 border border-gray-600 w-full h-10 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4"
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required
               />
-              <p>Confirm Password</p>
+              <p className="text-gray-300 mb-2 font-semibold tracking-wide">Confirm Password</p>
               <input
-                className="border"
+                className="bg-gray-700/40 border border-gray-600 w-full h-10 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 type="password"
                 placeholder="Confirm Password"
                 value={confirmPassword}
@@ -108,9 +108,11 @@ export default function register() {
                 />
           </div>
             {error && (
-            <p className="text-red-500">{error}</p>)}
+            <p className="text-red-400 text-center bg-red-900/20 border border-red-500/30 rounded-md p-3 font-medium">
+              {error}
+            </p>)}
           <button
-          className="border rounded mt-8 p-2 hover:bg-gray-300"
+            className="bg-[#5d5fd4] hover:bg-[#3f4088] text-white font-bold rounded-md mt-4 p-2 transition-colors duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#141823] shadow-lg"
             type="submit"
             >
               Register

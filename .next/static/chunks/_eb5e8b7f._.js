@@ -80,15 +80,16 @@ function login() {
         }, this);
     }
     return !user && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "bg-blue-200 flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-screen",
+        className: "bg-linear-to-br from-[#181e2c] via-[#1b1b4e] to-[#141823] flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-full",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-            className: "bg-white flex flex-col p-8 rounded shadow-md w-96",
+            className: "bg-[#141823]/70 flex flex-col p-8 rounded-xl shadow-md w-96 text-gray-50 font-sans space-y-6",
             onSubmit: signIn,
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex justify-center",
+                    className: "flex justify-center mb-8",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                        children: "ManaVault Login"
+                        className: "text-4xl font-bold text-[#9899da]",
+                        children: "ManaVault"
                     }, void 0, false, {
                         fileName: "[project]/src/app/account/login/[[...login]]/page.tsx",
                         lineNumber: 63,
@@ -102,6 +103,7 @@ function login() {
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-gray-300 mb-3 font-semibold tracking-wide",
                             children: "Username"
                         }, void 0, false, {
                             fileName: "[project]/src/app/account/login/[[...login]]/page.tsx",
@@ -109,7 +111,7 @@ function login() {
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                            className: "border",
+                            className: "bg-gray-700/40 border border-gray-600 w-full h-12 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-6",
                             type: "text",
                             placeholder: "Username or Email",
                             value: username,
@@ -121,6 +123,7 @@ function login() {
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-gray-300 mb-3 font-semibold tracking-wide",
                             children: "Password"
                         }, void 0, false, {
                             fileName: "[project]/src/app/account/login/[[...login]]/page.tsx",
@@ -128,7 +131,7 @@ function login() {
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                            className: "border",
+                            className: "bg-gray-700/40 border border-gray-600 w-full h-12 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
                             type: "password",
                             placeholder: "Password",
                             value: password,
@@ -146,7 +149,7 @@ function login() {
                     columnNumber: 11
                 }, this),
                 error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-red-500",
+                    className: "text-red-400 text-center bg-red-900/20 border border-red-500/30 rounded-md p-3 font-medium",
                     children: error
                 }, void 0, false, {
                     fileName: "[project]/src/app/account/login/[[...login]]/page.tsx",
@@ -154,7 +157,7 @@ function login() {
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                    className: "border rounded mt-8 p-2 hover:bg-gray-300",
+                    className: "bg-[#5d5fd4] hover:bg-[#3f4088] text-white font-bold rounded-md mt-8 p-3 transition-colors duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#141823] shadow-lg",
                     type: "submit",
                     children: "Login"
                 }, void 0, false, {

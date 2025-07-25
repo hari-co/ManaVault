@@ -110,15 +110,16 @@ function register() {
         }, this);
     }
     return !user && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "bg-blue-200 flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-screen",
+        className: "bg-linear-to-br from-[#181e2c] via-[#1b1b4e] to-[#141823] flex justify-center items-center min-h-[calc(100vh-3.5rem)] w-full",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-            className: "bg-white flex flex-col p-8 rounded shadow-md w-96",
+            className: "bg-[#141823]/70 flex flex-col p-6 rounded-xl shadow-md w-96 text-gray-50 font-sans space-y-3",
             onSubmit: register,
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex justify-center",
+                    className: "flex justify-center mb-4",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                        children: "Register for ManaVault"
+                        className: "text-3xl font-bold text-white",
+                        children: "Register"
                     }, void 0, false, {
                         fileName: "[project]/src/app/account/register/[[...register]]/page.tsx",
                         lineNumber: 70,
@@ -132,6 +133,7 @@ function register() {
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-gray-300 mb-2 font-semibold tracking-wide",
                             children: "Username"
                         }, void 0, false, {
                             fileName: "[project]/src/app/account/register/[[...register]]/page.tsx",
@@ -139,7 +141,7 @@ function register() {
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                            className: "border",
+                            className: "bg-gray-700/40 border border-gray-600 w-full h-10 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4",
                             type: "text",
                             placeholder: "Username",
                             value: username,
@@ -151,6 +153,7 @@ function register() {
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-gray-300 mb-2 font-semibold tracking-wide",
                             children: "Email"
                         }, void 0, false, {
                             fileName: "[project]/src/app/account/register/[[...register]]/page.tsx",
@@ -158,7 +161,7 @@ function register() {
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                            className: "border",
+                            className: "bg-gray-700/40 border border-gray-600 w-full h-10 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4",
                             type: "email",
                             placeholder: "Email",
                             value: email,
@@ -170,6 +173,7 @@ function register() {
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-gray-300 mb-2 font-semibold tracking-wide",
                             children: "Password"
                         }, void 0, false, {
                             fileName: "[project]/src/app/account/register/[[...register]]/page.tsx",
@@ -177,7 +181,7 @@ function register() {
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                            className: "border",
+                            className: "bg-gray-700/40 border border-gray-600 w-full h-10 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4",
                             type: "password",
                             placeholder: "Password",
                             value: password,
@@ -189,6 +193,7 @@ function register() {
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-gray-300 mb-2 font-semibold tracking-wide",
                             children: "Confirm Password"
                         }, void 0, false, {
                             fileName: "[project]/src/app/account/register/[[...register]]/page.tsx",
@@ -196,7 +201,7 @@ function register() {
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                            className: "border",
+                            className: "bg-gray-700/40 border border-gray-600 w-full h-10 rounded-md px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
                             type: "password",
                             placeholder: "Confirm Password",
                             value: confirmPassword,
@@ -214,7 +219,7 @@ function register() {
                     columnNumber: 11
                 }, this),
                 error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-red-500",
+                    className: "text-red-400 text-center bg-red-900/20 border border-red-500/30 rounded-md p-3 font-medium",
                     children: error
                 }, void 0, false, {
                     fileName: "[project]/src/app/account/register/[[...register]]/page.tsx",
@@ -222,12 +227,12 @@ function register() {
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                    className: "border rounded mt-8 p-2 hover:bg-gray-300",
+                    className: "bg-[#5d5fd4] hover:bg-[#3f4088] text-white font-bold rounded-md mt-4 p-2 transition-colors duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#141823] shadow-lg",
                     type: "submit",
                     children: "Register"
                 }, void 0, false, {
                     fileName: "[project]/src/app/account/register/[[...register]]/page.tsx",
-                    lineNumber: 112,
+                    lineNumber: 114,
                     columnNumber: 11
                 }, this)
             ]

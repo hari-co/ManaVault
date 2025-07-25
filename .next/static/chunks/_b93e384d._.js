@@ -1291,24 +1291,30 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 ;
 const BinderSelector = ({ card, binderName, showBinders, binderList, onToggleShow, onBinderSelect })=>{
+    const handleBlur = ()=>{
+        if (showBinders) {
+            onToggleShow();
+        }
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                 children: "Binder"
             }, void 0, false, {
                 fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
-                lineNumber: 22,
+                lineNumber: 28,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 className: "bg-gray-700/40 border border-gray-600 h-10 w-60 rounded-md flex justify-between items-center pl-4",
                 onClick: onToggleShow,
+                onBlur: handleBlur,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: binderName
                     }, void 0, false, {
                         fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
-                        lineNumber: 26,
+                        lineNumber: 33,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1319,18 +1325,18 @@ const BinderSelector = ({ card, binderName, showBinders, binderList, onToggleSho
                             alt: "dropdown"
                         }, void 0, false, {
                             fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
-                            lineNumber: 28,
+                            lineNumber: 35,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
-                        lineNumber: 27,
+                        lineNumber: 34,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
-                lineNumber: 23,
+                lineNumber: 29,
                 columnNumber: 13
             }, this),
             showBinders && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -1341,18 +1347,18 @@ const BinderSelector = ({ card, binderName, showBinders, binderList, onToggleSho
                         children: binder
                     }, binder, false, {
                         fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
-                        lineNumber: 34,
+                        lineNumber: 41,
                         columnNumber: 25
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
-                lineNumber: 32,
+                lineNumber: 39,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
-        lineNumber: 21,
+        lineNumber: 27,
         columnNumber: 9
     }, this);
 };
@@ -1388,19 +1394,24 @@ const PrintSelector = ({ card, printOpen, prints, showPreview, rarityFilter, onT
         }
         onTogglePrintOpen();
     };
+    const handleBlur = ()=>{
+        if (printOpen) {
+            onTogglePrintOpen();
+        }
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                 children: "Printing"
             }, void 0, false, {
                 fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                lineNumber: 45,
+                lineNumber: 51,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 className: "bg-gray-700/40 border border-gray-600 h-10 w-85 rounded-md flex justify-between items-center overflow-hidden",
                 onClick: handleToggleOpen,
-                onBlur: ()=>onTogglePrintOpen(),
+                onBlur: handleBlur,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         className: "flex ml-4",
@@ -1420,7 +1431,7 @@ const PrintSelector = ({ card, printOpen, prints, showPreview, rarityFilter, onT
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                                lineNumber: 51,
+                                lineNumber: 57,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1428,13 +1439,13 @@ const PrintSelector = ({ card, printOpen, prints, showPreview, rarityFilter, onT
                                 children: card.set_name + " " + card.collector_number
                             }, void 0, false, {
                                 fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                                lineNumber: 65,
+                                lineNumber: 71,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                        lineNumber: 50,
+                        lineNumber: 56,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1445,18 +1456,18 @@ const PrintSelector = ({ card, printOpen, prints, showPreview, rarityFilter, onT
                             alt: "dropdown"
                         }, void 0, false, {
                             fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                            lineNumber: 70,
+                            lineNumber: 76,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                        lineNumber: 69,
+                        lineNumber: 75,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                lineNumber: 46,
+                lineNumber: 52,
                 columnNumber: 13
             }, this),
             printOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1486,14 +1497,14 @@ const PrintSelector = ({ card, printOpen, prints, showPreview, rarityFilter, onT
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                                            lineNumber: 84,
+                                            lineNumber: 90,
                                             columnNumber: 37
                                         }, this),
                                         `${print.set_name} ${print.collector_number}`
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                                    lineNumber: 83,
+                                    lineNumber: 89,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1503,36 +1514,36 @@ const PrintSelector = ({ card, printOpen, prints, showPreview, rarityFilter, onT
                                             children: print.flavor_name || print.card_name
                                         }, void 0, false, {
                                             fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                                            lineNumber: 101,
+                                            lineNumber: 107,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             children: `${print.prices.usd ? `$${print.prices.usd}` : "N/A"}`
                                         }, void 0, false, {
                                             fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                                            lineNumber: 102,
+                                            lineNumber: 108,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                                    lineNumber: 100,
+                                    lineNumber: 106,
                                     columnNumber: 33
                                 }, this)
                             ]
                         }, print.set_name + print.collector_number, true, {
                             fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                            lineNumber: 77,
+                            lineNumber: 83,
                             columnNumber: 29
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                    lineNumber: 75,
+                    lineNumber: 81,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                lineNumber: 74,
+                lineNumber: 80,
                 columnNumber: 17
             }, this),
             showPreview && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1543,18 +1554,18 @@ const PrintSelector = ({ card, printOpen, prints, showPreview, rarityFilter, onT
                     alt: "card preview"
                 }, void 0, false, {
                     fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                    lineNumber: 111,
+                    lineNumber: 117,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-                lineNumber: 110,
+                lineNumber: 116,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/CardPropComponents/PrintSelector.tsx",
-        lineNumber: 44,
+        lineNumber: 50,
         columnNumber: 9
     }, this);
 };

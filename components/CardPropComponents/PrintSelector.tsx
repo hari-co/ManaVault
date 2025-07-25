@@ -40,13 +40,19 @@ const PrintSelector: React.FC<PrintSelectorProps> = ({
         onTogglePrintOpen();
     };
 
+    const handleBlur = () => {
+        if (printOpen) {
+            onTogglePrintOpen();
+        }
+    };
+
     return (
         <div>
             <p>Printing</p>
             <button
                 className="bg-gray-700/40 border border-gray-600 h-10 w-85 rounded-md flex justify-between items-center overflow-hidden"
                 onClick={handleToggleOpen}
-                onBlur={() => onTogglePrintOpen()}>
+                onBlur={handleBlur}>
                 <span className="flex ml-4">
                     <div 
                         className={`h-6 w-6 mr-2`}
