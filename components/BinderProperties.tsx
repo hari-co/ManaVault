@@ -42,8 +42,8 @@ const BinderProperties: React.FC<Binder> = ({ binder }) => {
                 onClick={() => setMenuOpen(false)}
             />}
         {menuOpen && 
-            <div className="w-40 h-30 bg-[#141823] absolute z-50 top-1 left-5 rounded-md pt-2 pb-2">
-                <button className="bg-[#141823] hover:bg-[#3f475a] w-full h-10"
+            <div className="w-40 h-30 bg-[#141823] absolute z-50 top-1 left-5 rounded-md pt-2 pb-2 border border-gray-600">
+                <button className="bg-[#141823] hover:bg-[#3f475a] w-full h-10 text-gray-300"
                         onClick={() => deleteBinder()}>
                     Delete
                 </button>

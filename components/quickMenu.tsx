@@ -5,7 +5,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/config/firebase-config";
 import { BinderContext } from "@/context/BinderContext";
 
-const QuickMenu: React.FC<{card: CardType, onFlip: () => void}> = ({ card, onFlip }) => {
+const QuickMenu: React.FC<{card: CardType, onFlip: () => void, viewOnly?: boolean}> = ({ card, onFlip, viewOnly }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const user = useFirebaseUser();
     const binderContext = useContext(BinderContext);
@@ -30,12 +30,12 @@ const QuickMenu: React.FC<{card: CardType, onFlip: () => void}> = ({ card, onFli
 
     return (
         <>
-            <div className={`absolute top-5 right-4 z-10 transition duration-500 ${menuOpen ? `opacity-100` : `opacity-0 group-hover:opacity-100`}`}>
+            {!viewOnly && <div className={`absolute top-5 right-4 z-10 transition duration-500 ${menuOpen ? `opacity-100` : `opacity-0 group-hover:opacity-100`}`}>
                 <button className="flex items-center justify-center p-1 w-10 h-8 rounded-xl bg-[#1a1b27d2] hover:bg-[#2b2c33c0]"
                         onClick={() => setMenuOpen(true)}>
                     <span className="mb-1 text-3xl font-sans font-semibold text-[#bebebe]">⋯</span>
                 </button>
-            </div>
+            </div>}
             <div className={`absolute top-6 left-6 z-10 text-gray-300 bg-[#1a1b27d2] py-1 px-2 rounded-lg cursor-pointer transition duration-700 ${menuOpen ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                 <p>{card.quantity}</p>
             </div>
@@ -44,7 +44,7 @@ const QuickMenu: React.FC<{card: CardType, onFlip: () => void}> = ({ card, onFli
                 onClick={() => setMenuOpen(false)}
             />}
             {menuOpen && 
-                <div className="w-40 h-30 bg-[#141823] absolute z-50 top-1 left-5 rounded-md pt-2 pb-2">
+                <div className="w-40 h-15 bg-[#141823] absolute z-50 top-1 left-5 rounded-md pt-2 pb-2 border border-gray-600">
                 <button className="bg-[#141823] hover:bg-[#3f475a] w-full h-10 text-gray-300"
                         onClick={() => deleteCard(card, currentBinder)}>
                     Delete

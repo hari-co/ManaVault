@@ -4,7 +4,11 @@ import { useFirebaseUser } from "@/hooks/useFirebaseUser";
 import { collection, getDocs } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 
-const BinderStats: React.FC = () => {
+interface BinderStatsProps {
+    paramID?: string
+}
+
+const BinderStats: React.FC<BinderStatsProps> = ({paramID}) => {
     const [rarityCount, setRarityCount] = useState<{ mythics: number, rares: number, uncommons: number, commons: number }>({
         mythics: 0,
         rares: 0,
@@ -31,11 +35,14 @@ const BinderStats: React.FC = () => {
                 return;
             }
 
+            const targetUserID = paramID || user.uid
+            if (!targetUserID) return;
+
             let counts = { mythics: 0, rares: 0, uncommons: 0, commons: 0 };
             let cardNum = 0;
             let priceTotal = 0;
 
-            const binderSnapshot = await getDocs(collection(db, "users", user.uid, "binders", currentBinder, "cards"));
+            const binderSnapshot = await getDocs(collection(db, "users", targetUserID, "binders", currentBinder, "cards"));
             binderSnapshot.forEach((doc) => {
                 const card = doc.data();
                 

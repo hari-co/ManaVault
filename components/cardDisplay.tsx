@@ -5,18 +5,28 @@ import { CardType } from "@/types/CardType";
 import { collection, getDocs, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/config/firebase-config";
 import Card from "./Card";
-import { User } from "firebase/auth";
 
-const CardDisplay: React.FC = () => {
+interface CardDisplayProps {
+    viewOnly?: boolean;
+    paramID?: string;
+}
+
+const CardDisplay: React.FC<CardDisplayProps> = ({viewOnly, paramID}) => {
     const [cardList, setCardList] = useState<CardType[]>([])
+    const [viewID, setViewID] = useState<string>("")
     const user = useFirebaseUser()
     const binderContext = useContext(BinderContext)
 
     if (!binderContext) throw new Error("BinderContext not found.");
     const { currentBinder, setCurrentBinder } = binderContext;
 
-    const updatePrice = async (card: CardType, user: User, currentBinder: string) => {
+    const updatePrice = async (card: CardType, currentBinder: string) => {
         try {
+            if (!user || !paramID) {
+                console.log("how did this happen");
+                return;
+            }
+
             const now = Date.now();
             let lastUpdate: number | undefined;
             const updatePeriod = 24 * 60 * 60 * 1000;
@@ -44,7 +54,7 @@ const CardDisplay: React.FC = () => {
                 if (!res.ok) return;
                 const data = await res.json();
                 await updateDoc(
-                    doc(db, "users", user?.uid, "binders", currentBinder, "cards", card.id),
+                    doc(db, "users", viewID, "binders", currentBinder, "cards", card.id),
                     {
                         prices: data.prices,
                         last_price_update: new Date()
@@ -66,8 +76,12 @@ const CardDisplay: React.FC = () => {
 
     useEffect(() => {
         if (!user || !currentBinder) return;
+        
+        const targetUserID = paramID || user.uid;
+        setViewID(targetUserID);
+        
         const unsubscribe = onSnapshot(
-        collection(db, "users", user?.uid, "binders", currentBinder, "cards"),
+        collection(db, "users", targetUserID, "binders", currentBinder, "cards"),
             (snapshot) => {
                 setCardList(
                     snapshot.docs.map(doc => ({
@@ -83,14 +97,14 @@ const CardDisplay: React.FC = () => {
     useEffect(() => {
         if (!user || !currentBinder) return;
         cardList.forEach(card => {
-            updatePrice(card, user, currentBinder);
+            updatePrice(card, currentBinder);
         });
     }, [cardList, user, currentBinder]);
 
     return (
         <div className="flex flex-wrap gap-4 w-full pt-5 pl-13 items-start bg-[#181e2b]">
             {cardList.map((card) => (
-                    <Card key={card.id} card={card}/>
+                    <Card key={card.id} card={card} viewOnly={viewOnly}/>
                 )
             )}
         </div>

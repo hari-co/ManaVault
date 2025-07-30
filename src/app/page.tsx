@@ -21,7 +21,7 @@ export default function Home() {
           <h1 className="text-center text-8xl z-10 font-semibold">ManaVault</h1>
           <h2 className="text-3xl font-medium">Track your MTG collection</h2>
           <button 
-          className="mt-10 w-35 h-13 rounded-xl border border-gray-500 bg-[#1a1829b4]"
+          className="mt-10 w-35 h-13 rounded-xl border border-gray-500 bg-[#1a1829b4] hover:bg-[#353152b4]"
           onClick={() => router.push("/account/login")}>
             <h2>Get started</h2>
           </button>

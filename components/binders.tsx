@@ -7,11 +7,15 @@ import { useFirebaseUser } from "@/hooks/useFirebaseUser";
 import { BinderContext } from "@/context/BinderContext";
 import BinderProperties from "./BinderProperties";
 
-const Binders: React.FC = () => {
+interface BindersProps {
+    viewOnly?: boolean,
+    paramID?: string
+}
+
+const Binders: React.FC<BindersProps> = ({viewOnly, paramID}) => {
     const [binders, setBinders] = useState<{ id: string, name: string; index: number; color: string }[]>([]);
     const [addingBinder, setAddingBinder] = useState(false);
     const [binderName, setBinderName] = useState("");
-    const [showBinderMenu, setShowBinderMenu] = useState(false);
     const [hoveredBinderId, setHoveredBinderId] = useState<string | null>(null);
     const binderContext = useContext(BinderContext);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -37,7 +41,10 @@ const Binders: React.FC = () => {
     const getBinders = async () => {
         try {
             if (!user) return;
-            const binderSnapshot = await getDocs(collection(db, "users", user.uid, "binders"));
+            const targetUserID = paramID || user.uid;
+            if (!targetUserID) return;
+            
+            const binderSnapshot = await getDocs(collection(db, "users", targetUserID, "binders"));
             const binderList = binderSnapshot.docs.map(doc => ({
                 id: doc.id,
                 name: doc.data().name,
@@ -63,7 +70,6 @@ const Binders: React.FC = () => {
             }
             
             if (!querySnapshot.empty) {
-                // If a binder with the same name exists, itemize the name
                 let index = 1;
                 const originalName = nameCheck;
                 while (!querySnapshot.empty) {
@@ -127,7 +133,7 @@ const Binders: React.FC = () => {
                             >
                                 <p className="ml-4">{binder.name}</p>
                                 <span className="mr-3 text-[#a9a9ab] relative">
-                                    {hoveredBinderId === binder.id && binder.id != "all" ? <BinderProperties binder={binder}/> : null}
+                                    {hoveredBinderId === binder.id && binder.id != "all" && !viewOnly ? <BinderProperties binder={binder}/> : null}
                                 </span>
                             </li>
                         )
@@ -150,14 +156,14 @@ const Binders: React.FC = () => {
                     </form>
                 </div>
             )}
-            <button 
+            {!viewOnly && <button 
             className="rounded-lg group flex items-center pl-15 h-10 z-10 w-full bg-[#141822b2] hover:bg-[#343a4ab2] hover:text-white"
             onClick={() => setAddingBinder(true)}>
                 <img src={"/plus.svg"} className="w-6 filter group-hover:brightness-200"/>
                 <p>
                     New binder
                 </p>
-            </button>
+            </button>}
         </div>
     )
 }
