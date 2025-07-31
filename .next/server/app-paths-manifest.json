@@ -1,6 +1,5 @@
 {
   "/account/login/[[...login]]/page": "app/account/login/[[...login]]/page.js",
-  "/account/register/[[...register]]/page": "app/account/register/[[...register]]/page.js",
   "/community/page": "app/community/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/library/[userID]/page": "app/library/[userID]/page.js",
