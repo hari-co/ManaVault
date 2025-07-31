@@ -9,9 +9,12 @@ import CardSearch from '../../../components/CardSearch';
 import Binders from '../../../components/Binders';
 import CardDisplay from '../../../components/CardDisplay';
 import BinderStats from '../../../components/BinderStats';
+import ShareModal from '../../../components/ShareModal';
 
 export default function Library() {
     const [user, setUser] = useState<User | null>(null);
+    const [showShareModal, setShowShareModal] = useState(false);
+    const [shareUrl, setShareUrl] = useState('');
     const router = useRouter();
 
     useEffect(() => {
@@ -19,6 +22,10 @@ export default function Library() {
             setUser(user);
             if (!user) {
                 router.push('/account/login');
+            } else {
+                if (typeof window !== 'undefined') {
+                    setShareUrl(`${window.location.origin}/library/${user.uid}`);
+                }
             }
         });
         return () => unsubscribe();
@@ -37,7 +44,10 @@ export default function Library() {
                     }}/>
                     <h1 className="font-bold text-5xl pl-12 pt-15 z-10 relative">Library</h1>
                     <div className='absolute right-15 top-8 z-10'>
-                        <button className='flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2 rounded-lg hover:bg-white/20 transition-all duration-200 shadow-lg'>
+                        <button 
+                            onClick={() => setShowShareModal(true)}
+                            className='flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2 rounded-lg hover:bg-white/20 transition-all duration-200 shadow-lg'
+                        >
                             <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24'>
                                 <path d='M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92S19.61 16.08 18 16.08z'/>
                             </svg>
@@ -73,6 +83,13 @@ export default function Library() {
                 </div>
                 <div className='h-15 bg-[#181e2c]'></div>
             </div>
+            
+            <ShareModal 
+                isOpen={showShareModal}
+                onClose={() => setShowShareModal(false)}
+                shareUrl={shareUrl}
+                title="Share My Library"
+            />
         </BinderProvider>)
     );
 }

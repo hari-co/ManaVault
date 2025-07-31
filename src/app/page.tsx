@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
 
-  return (
+  return (<>
     <div className="flex w-full items-center justify-center min-h-screen relative text-gray-50 font-sans">
       <div className="absolute top-0 left-0 w-full h-full z-2 bg-[#1f275357]"/>
         <video 
@@ -27,5 +27,8 @@ export default function Home() {
           </button>
         </div>
     </div>
-  );
+    <div>
+      
+    </div>
+  </>);
 };

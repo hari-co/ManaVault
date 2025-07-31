@@ -37,7 +37,6 @@ export default function FollowingModal({ isOpen, onClose, userId, followingCount
         const followingData = followingDoc.data();
         const userIds = followingData.userIds || [];
         
-        // Fetch user data for each following user
         const usersData = await Promise.all(
           userIds.map(async (uid: string) => {
             const userDoc = await getDoc(doc(db, "users", uid));

@@ -40,7 +40,6 @@ function Settings() {
                 router.push('/account/login');
                 return;
             }
-            // Fetch user profile data
             try {
                 const userDoc = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$node$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$node$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["db"], "users", user.uid));
                 if (userDoc.exists()) {
@@ -61,17 +60,14 @@ function Settings() {
     ]);
     const handleUsernameChange = async (e)=>{
         e.preventDefault();
-        // Logic for updating username will be implemented later
         console.log('Update username to:', username);
     };
     const handleEmailChange = async (e)=>{
         e.preventDefault();
-        // Logic for updating email will be implemented later
         console.log('Update email to:', email);
     };
     const handlePasswordChange = async (e)=>{
         e.preventDefault();
-        // Logic for updating password will be implemented later
         console.log('Update password');
     };
     if (loading) {
@@ -80,7 +76,7 @@ function Settings() {
             children: "Loading..."
         }, void 0, false, {
             fileName: "[project]/src/app/account/settings/page.tsx",
-            lineNumber: 70,
+            lineNumber: 66,
             columnNumber: 12
         }, this);
     }
@@ -90,7 +86,7 @@ function Settings() {
             children: "Profile not found"
         }, void 0, false, {
             fileName: "[project]/src/app/account/settings/page.tsx",
-            lineNumber: 74,
+            lineNumber: 70,
             columnNumber: 12
         }, this);
     }
@@ -102,7 +98,7 @@ function Settings() {
                 children: "Account Settings"
             }, void 0, false, {
                 fileName: "[project]/src/app/account/settings/page.tsx",
-                lineNumber: 79,
+                lineNumber: 75,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -113,7 +109,7 @@ function Settings() {
                         children: "Username"
                     }, void 0, false, {
                         fileName: "[project]/src/app/account/settings/page.tsx",
-                        lineNumber: 83,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -127,7 +123,7 @@ function Settings() {
                                         children: "Current Username"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 86,
+                                        lineNumber: 81,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -135,7 +131,7 @@ function Settings() {
                                         children: profile.username
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 89,
+                                        lineNumber: 84,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -143,7 +139,7 @@ function Settings() {
                                         children: "New Username"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 90,
+                                        lineNumber: 85,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -154,13 +150,13 @@ function Settings() {
                                         placeholder: "Enter new username"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 93,
+                                        lineNumber: 88,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                lineNumber: 85,
+                                lineNumber: 80,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -169,19 +165,19 @@ function Settings() {
                                 children: "Update Username"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                lineNumber: 101,
+                                lineNumber: 96,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/account/settings/page.tsx",
-                        lineNumber: 84,
+                        lineNumber: 79,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/account/settings/page.tsx",
-                lineNumber: 82,
+                lineNumber: 77,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -192,7 +188,7 @@ function Settings() {
                         children: "Email Address"
                     }, void 0, false, {
                         fileName: "[project]/src/app/account/settings/page.tsx",
-                        lineNumber: 112,
+                        lineNumber: 106,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -206,7 +202,7 @@ function Settings() {
                                         children: "Current Email"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 115,
+                                        lineNumber: 109,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -214,7 +210,7 @@ function Settings() {
                                         children: profile.email
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 118,
+                                        lineNumber: 112,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -222,7 +218,7 @@ function Settings() {
                                         children: "New Email"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 119,
+                                        lineNumber: 113,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -233,13 +229,13 @@ function Settings() {
                                         placeholder: "Enter new email address"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 122,
+                                        lineNumber: 116,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                lineNumber: 114,
+                                lineNumber: 108,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -248,19 +244,19 @@ function Settings() {
                                 children: "Update Email"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                lineNumber: 130,
+                                lineNumber: 124,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/account/settings/page.tsx",
-                        lineNumber: 113,
+                        lineNumber: 107,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/account/settings/page.tsx",
-                lineNumber: 111,
+                lineNumber: 105,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -271,7 +267,7 @@ function Settings() {
                         children: "Password"
                     }, void 0, false, {
                         fileName: "[project]/src/app/account/settings/page.tsx",
-                        lineNumber: 141,
+                        lineNumber: 135,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -287,7 +283,7 @@ function Settings() {
                                                 children: "Current Password"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                                lineNumber: 145,
+                                                lineNumber: 139,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -298,13 +294,13 @@ function Settings() {
                                                 placeholder: "Enter current password"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                                lineNumber: 148,
+                                                lineNumber: 142,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 144,
+                                        lineNumber: 138,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -314,7 +310,7 @@ function Settings() {
                                                 children: "New Password"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                                lineNumber: 157,
+                                                lineNumber: 151,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -325,13 +321,13 @@ function Settings() {
                                                 placeholder: "Enter new password"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                                lineNumber: 160,
+                                                lineNumber: 154,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 156,
+                                        lineNumber: 150,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -341,7 +337,7 @@ function Settings() {
                                                 children: "Confirm New Password"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                                lineNumber: 169,
+                                                lineNumber: 163,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -352,19 +348,19 @@ function Settings() {
                                                 placeholder: "Confirm new password"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                                lineNumber: 172,
+                                                lineNumber: 166,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/account/settings/page.tsx",
-                                        lineNumber: 168,
+                                        lineNumber: 162,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                lineNumber: 143,
+                                lineNumber: 137,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -373,25 +369,25 @@ function Settings() {
                                 children: "Update Password"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/account/settings/page.tsx",
-                                lineNumber: 181,
+                                lineNumber: 175,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/account/settings/page.tsx",
-                        lineNumber: 142,
+                        lineNumber: 136,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/account/settings/page.tsx",
-                lineNumber: 140,
+                lineNumber: 134,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/account/settings/page.tsx",
-        lineNumber: 78,
+        lineNumber: 74,
         columnNumber: 5
     }, this);
 }

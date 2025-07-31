@@ -1,105 +1,182 @@
 "use client"
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '@/config/firebase-config';
+import { auth, db } from '@/config/firebase-config';
 import { useRouter } from 'next/navigation';
+import { collection, query, where, getDocs, orderBy, limit, Query, DocumentData } from 'firebase/firestore';
+
+interface UserSearchResult {
+  id: string;
+  username: string;
+  displayName?: string;
+  email?: string;
+}
 
 export default function Community() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<UserSearchResult[]>([]);
+  const [searching, setSearching] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
       setUser(user);
-      if (!user) {
-        router.push('/account/login');
-        return;
-      }
       setLoading(false);
     });
     return () => unsubscribe();
   }, [router]);
 
+  const searchUsers = async (searchTerm: string) => {
+    if (!searchTerm.trim() || searchTerm.length < 2) {
+      setSearchResults([]);
+      setHasSearched(false);
+      return;
+    }
+
+    setSearching(true);
+    setHasSearched(true);
+    
+    try {
+      const usersRef = collection(db, 'users');
+      const userQuery = query(
+        usersRef,
+        where('username', '>=', searchTerm.toLowerCase()),
+        where('username', '<=', searchTerm.toLowerCase() + '\uf8ff'),
+        orderBy('username'),
+        limit(20)
+      );
+      
+      const querySnapshot = await getDocs(userQuery);
+      const results: UserSearchResult[] = [];
+      
+      querySnapshot.forEach((doc) => {
+        const userData = doc.data() as {
+          username: string;
+          displayName?: string;
+          email?: string;
+        };
+        results.push({
+          id: doc.id,
+          username: userData.username,
+          displayName: userData.displayName,
+          email: userData.email
+        });
+      });
+      
+      setSearchResults(results);
+    } catch (error) {
+      console.error('Error searching users:', error);
+      setSearchResults([]);
+    } finally {
+      setSearching(false);
+    }
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    
+    const timeoutId = setTimeout(() => {
+      searchUsers(value);
+    }, 300);
+    
+    return () => clearTimeout(timeoutId);
+  };
+
+  const visitUserProfile = (userId: string) => {
+    router.push(`/profile/${userId}`);
+  };
+
   if (loading) {
     return <div className="p-4">Loading...</div>;
-  }
-
-  if (!user) {
-    return <div className="p-4">Please log in to access the community.</div>;
   }
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#181e2c' }}>
       <div className="p-8 max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-white">Community</h1>
+        <h1 className="text-4xl font-bold mb-8 text-white">Find Users</h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Featured Collections */}
-          <div className="bg-[#141823] rounded-lg p-6 border border-gray-600">
-            <h2 className="text-xl font-semibold mb-4 text-white">Featured Collections</h2>
-            <p className="text-gray-300 text-sm mb-4">
-              Discover amazing card collections from the community
-            </p>
-            <div className="space-y-3">
-              <div className="bg-[#1f2537] p-3 rounded hover:bg-[#2a2f42] transition-colors">
-                <p className="text-white font-medium">Coming Soon</p>
-                <p className="text-gray-400 text-sm">Featured collections will appear here</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Recent Activity */}
-          <div className="bg-[#141823] rounded-lg p-6 border border-gray-600">
-            <h2 className="text-xl font-semibold mb-4 text-white">Recent Activity</h2>
-            <p className="text-gray-300 text-sm mb-4">
-              See what the community has been up to
-            </p>
-            <div className="space-y-3">
-              <div className="bg-[#1f2537] p-3 rounded hover:bg-[#2a2f42] transition-colors">
-                <p className="text-white font-medium">Coming Soon</p>
-                <p className="text-gray-400 text-sm">Community activity will appear here</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Trending Cards */}
-          <div className="bg-[#141823] rounded-lg p-6 border border-gray-600">
-            <h2 className="text-xl font-semibold mb-4 text-white">Trending Cards</h2>
-            <p className="text-gray-300 text-sm mb-4">
-              Popular cards in the community right now
-            </p>
-            <div className="space-y-3">
-              <div className="bg-[#1f2537] p-3 rounded hover:bg-[#2a2f42] transition-colors">
-                <p className="text-white font-medium">Coming Soon</p>
-                <p className="text-gray-400 text-sm">Trending cards will appear here</p>
-              </div>
+        <div className="mb-8">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search for users by username..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="w-full p-4 bg-[#141823] border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#616dc9] transition-colors"
+            />
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+              {searching ? (
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#616dc9]"></div>
+              ) : (
+                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Community Stats */}
-        <div className="mt-8 bg-[#141823] rounded-lg p-6 border border-gray-600">
-          <h2 className="text-2xl font-semibold mb-6 text-white">Community Stats</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#616dc9] mb-2">--</div>
-              <div className="text-gray-300">Total Users</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#616dc9] mb-2">--</div>
-              <div className="text-gray-300">Cards Collected</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#616dc9] mb-2">--</div>
-              <div className="text-gray-300">Public Libraries</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#616dc9] mb-2">--</div>
-              <div className="text-gray-300">Active This Week</div>
-            </div>
+        {hasSearched && (
+          <div className="space-y-4">
+            {searchResults.length > 0 ? (
+              <>
+                <h2 className="text-xl font-semibold text-white mb-4">
+                  Found {searchResults.length} user{searchResults.length !== 1 ? 's' : ''}
+                </h2>
+                <div className="grid gap-4">
+                  {searchResults.map((userResult) => (
+                    <div
+                      key={userResult.id}
+                      className="bg-[#141823] border border-gray-600 rounded-lg p-4 hover:border-[#616dc9] transition-colors cursor-pointer"
+                      onClick={() => visitUserProfile(userResult.id)}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-lg font-semibold text-white">
+                            @{userResult.username}
+                          </h3>
+                          {userResult.displayName && (
+                            <p className="text-gray-300 text-sm">
+                              {userResult.displayName}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex items-center space-x-2 text-[#616dc9]">
+                          <span className="text-sm">View Profile</span>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-12">
+                <svg className="w-16 h-16 text-gray-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <h3 className="text-lg font-semibold text-gray-300 mb-2">No users found</h3>
+                <p className="text-gray-500">Try searching with a different username</p>
+              </div>
+            )}
           </div>
-        </div>
+        )}
+
+        {!hasSearched && (
+          <div className="text-center py-12">
+            <svg className="w-16 h-16 text-gray-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <h3 className="text-lg font-semibold text-gray-300 mb-2">Discover the ManaVault Community</h3>
+            <p className="text-gray-500">Enter a username to find MTG collectors and explore their profiles and collections</p>
+          </div>
+        )}
       </div>
     </div>
   );

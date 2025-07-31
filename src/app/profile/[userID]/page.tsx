@@ -30,14 +30,12 @@ export default function Profile() {
       setUser(user);
 
       try {
-        // Fetch the profile user's data
         const userDoc = await getDoc(doc(db, "users", params.userID));
         if (userDoc.exists()) {
           const userData = userDoc.data() as UserProfile;
           setProfile(userData);
         }
 
-        // Fetch the user's bio from profile subcollection
         const descriptionRef = doc(db, "users", params.userID, "profile", "description");
         const descriptionDoc = await getDoc(descriptionRef);
         if (descriptionDoc.exists()) {
@@ -49,7 +47,6 @@ export default function Profile() {
           setBioText('');
         }
 
-        // Fetch following count
         const followingRef = doc(db, "users", params.userID, "profile", "following");
         const followingDoc = await getDoc(followingRef);
         if (followingDoc.exists()) {
@@ -60,7 +57,6 @@ export default function Profile() {
           setFollowingCount(0);
         }
 
-        // Fetch followers count
         const followersRef = doc(db, "users", params.userID, "profile", "followers");
         const followersDoc = await getDoc(followersRef);
         if (followersDoc.exists()) {
@@ -84,14 +80,12 @@ export default function Profile() {
   };
 
   const handleSaveBio = async () => {
-    if (!user) return;
+    if (!user) return; // Only allow authenticated users to edit
     
     try {
-      // Update the user's profile description in the subcollection
       const profileRef = doc(db, "users", params.userID, "profile", "description");
       await setDoc(profileRef, { description: bioText });
       
-      // Update local profile state
       setProfile(prev => prev ? { ...prev, description: bioText } : null);
       setIsEditingBio(false);
     } catch (error) {
@@ -104,14 +98,13 @@ export default function Profile() {
     setIsEditingBio(false);
   };
 
-  // Check if viewing own profile
   const isOwnProfile = user?.uid === params.userID;
 
   if (loading) {
     return <div className="p-4">Loading...</div>;
   }
 
-  if (!user || !profile) {
+  if (!profile) {
     return <div className="p-4">Profile not found</div>;
   }
 
@@ -120,11 +113,9 @@ export default function Profile() {
       <h1 className="text-3xl font-bold mb-6">Profile</h1>
       
       <div className="flex gap-6">
-        {/* Left Column - Account and Library Settings */}
         <div className="flex-1 space-y-6">
           <div className="bg-[#141823] shadow rounded-lg p-6 border border-gray-500 h-[720px]">
             <div className="flex items-start space-x-4 mb-4">
-              {/* Profile Picture Placeholder */}
               <div className="w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
                 <div 
                   className="w-8 h-8 bg-gray-400"
@@ -142,22 +133,28 @@ export default function Profile() {
               </div>
               
               <div className="flex flex-1 min-w-0 space-x-4">
-                {/* Username and Member Since */}
                 <div className="flex-shrink-0">
                   <div className="flex items-center space-x-3 mb-1">
                     <h2 className="text-2xl font-bold text-white">{profile.username}</h2>
-                    <FollowButton 
-                      currentUser={user}
-                      targetUserId={params.userID}
-                      isOwnProfile={isOwnProfile}
-                    />
+                    {user && (
+                      <FollowButton 
+                        currentUser={user}
+                        targetUserId={params.userID}
+                        isOwnProfile={isOwnProfile}
+                      />
+                    )}
                   </div>
                   <p className="text-sm text-gray-400">
                     Member since {profile.createdAt?.toDate?.()?.toLocaleDateString() || 'Unknown'}
                   </p>
+                  <button 
+                    onClick={() => router.push(`/library/${params.userID}`)}
+                    className="mt-2 px-4 py-2 text-sm bg-[#616dc9] text-white rounded hover:bg-[#5159b3] transition-colors"
+                  >
+                    View Library
+                  </button>
                 </div>
                 
-                {/* Bio Section */}
                 <div className="flex-1 min-w-0">
                   <div className="text-sm text-gray-300 min-h-[120px]">
                     {isEditingBio ? (
@@ -210,7 +207,6 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Right Column - Following and Followers */}
         <FollowersSection 
           followingCount={followingCount}
           followersCount={followersCount}

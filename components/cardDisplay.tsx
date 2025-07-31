@@ -22,7 +22,7 @@ const CardDisplay: React.FC<CardDisplayProps> = ({viewOnly, paramID}) => {
 
     const updatePrice = async (card: CardType, currentBinder: string) => {
         try {
-            if (!user || !paramID) {
+            if (!user && !paramID) {
                 console.log("how did this happen");
                 return;
             }
@@ -75,9 +75,9 @@ const CardDisplay: React.FC<CardDisplayProps> = ({viewOnly, paramID}) => {
 
 
     useEffect(() => {
-        if (!user || !currentBinder) return;
+        if (!currentBinder || (!user && !paramID)) return;
         
-        const targetUserID = paramID || user.uid;
+        const targetUserID = paramID || (user ? user.uid : "N/A");
         setViewID(targetUserID);
         
         const unsubscribe = onSnapshot(

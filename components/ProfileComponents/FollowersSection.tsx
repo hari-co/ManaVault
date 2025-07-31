@@ -38,7 +38,6 @@ export default function FollowersSection({
   const fetchPreviews = async () => {
     setLoadingPreviews(true);
     try {
-      // Fetch following preview (up to 7)
       const followingRef = doc(db, "users", userId, "profile", "following");
       const followingDoc = await getDoc(followingRef);
       
@@ -60,7 +59,6 @@ export default function FollowersSection({
         setFollowingPreview(followingUsersData.filter(user => user !== null) as UserData[]);
       }
 
-      // Fetch followers preview (up to 7)
       const followersRef = doc(db, "users", userId, "profile", "followers");
       const followersDoc = await getDoc(followersRef);
       
@@ -91,7 +89,6 @@ export default function FollowersSection({
     <div className="w-80">
       <div className="bg-[#141823] shadow rounded-lg p-6 border border-gray-500">
         <div className="space-y-8">
-          {/* Following Section */}
           <div>
             <button 
               onClick={() => setShowFollowingModal(true)}
@@ -100,7 +97,6 @@ export default function FollowersSection({
               Following ({followingCount})
             </button>
             <div className="space-y-2 min-h-[280px]">
-              {/* Following Preview */}
               {loadingPreviews ? (
                 <div className="text-xs text-gray-400">Loading...</div>
               ) : followingCount === 0 ? (
@@ -136,7 +132,6 @@ export default function FollowersSection({
             </div>
           </div>
 
-          {/* Followers Section */}
           <div>
             <button 
               onClick={() => setShowFollowersModal(true)}
@@ -145,7 +140,6 @@ export default function FollowersSection({
               Followers ({followersCount})
             </button>
             <div className="space-y-2 min-h-[280px]">
-              {/* Followers Preview */}
               {loadingPreviews ? (
                 <div className="text-xs text-gray-400">Loading...</div>
               ) : followersCount === 0 ? (
@@ -183,7 +177,6 @@ export default function FollowersSection({
         </div>
       </div>
 
-      {/* Modals */}
       <FollowingModal 
         isOpen={showFollowingModal}
         onClose={() => setShowFollowingModal(false)}

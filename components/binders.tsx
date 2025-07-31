@@ -25,7 +25,7 @@ const Binders: React.FC<BindersProps> = ({viewOnly, paramID}) => {
     const { currentBinder, setCurrentBinder } = binderContext;
 
     useEffect(() => {
-        if (!user) return;
+        if (!user && !paramID) return;
         selectBinder("all")
     }, [user]);
 
@@ -40,8 +40,7 @@ const Binders: React.FC<BindersProps> = ({viewOnly, paramID}) => {
 
     const getBinders = async () => {
         try {
-            if (!user) return;
-            const targetUserID = paramID || user.uid;
+            const targetUserID = paramID || (user ? user.uid : null);
             if (!targetUserID) return;
             
             const binderSnapshot = await getDocs(collection(db, "users", targetUserID, "binders"));

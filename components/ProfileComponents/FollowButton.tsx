@@ -14,7 +14,6 @@ const FollowButton: React.FC<FollowButtonProps> = ({ currentUser, targetUserId, 
   const [isFollowing, setIsFollowing] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Check if current user is following the target user
   useEffect(() => {
     const checkFollowStatus = async () => {
       if (!currentUser || isOwnProfile) return;
@@ -47,11 +46,9 @@ const FollowButton: React.FC<FollowButtonProps> = ({ currentUser, targetUserId, 
       const targetUserFollowersRef = doc(db, "users", targetUserId, "profile", "followers");
 
       if (isFollowing) {
-        // Unfollow: Remove userID from current user's following and current user from target's followers
         await updateDoc(currentUserFollowingRef, {
           userIds: arrayRemove(targetUserId)
         }).catch(async () => {
-          // Document might not exist, create it
           await setDoc(currentUserFollowingRef, {
             userIds: []
           });
@@ -60,17 +57,14 @@ const FollowButton: React.FC<FollowButtonProps> = ({ currentUser, targetUserId, 
         await updateDoc(targetUserFollowersRef, {
           userIds: arrayRemove(currentUser.uid)
         }).catch(async () => {
-          // Document might not exist, create it
           await setDoc(targetUserFollowersRef, {
             userIds: []
           });
         });
       } else {
-        // Follow: Add userID to current user's following and current user to target's followers
         await updateDoc(currentUserFollowingRef, {
           userIds: arrayUnion(targetUserId)
         }).catch(async () => {
-          // Document might not exist, create it
           await setDoc(currentUserFollowingRef, {
             userIds: [targetUserId]
           });
@@ -79,14 +73,12 @@ const FollowButton: React.FC<FollowButtonProps> = ({ currentUser, targetUserId, 
         await updateDoc(targetUserFollowersRef, {
           userIds: arrayUnion(currentUser.uid)
         }).catch(async () => {
-          // Document might not exist, create it
           await setDoc(targetUserFollowersRef, {
             userIds: [currentUser.uid]
           });
         });
       }
 
-      // Toggle the local state
       setIsFollowing(!isFollowing);
     } catch (error) {
       console.error("Error updating follow status:", error);
@@ -95,7 +87,6 @@ const FollowButton: React.FC<FollowButtonProps> = ({ currentUser, targetUserId, 
     }
   };
 
-  // Don't render if it's the user's own profile or user is not logged in
   if (!currentUser || isOwnProfile) {
     return null;
   }

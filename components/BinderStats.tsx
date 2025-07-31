@@ -24,18 +24,18 @@ const BinderStats: React.FC<BinderStatsProps> = ({paramID}) => {
     const { currentBinder, cardsUpdated } = binderContext;
 
     useEffect(() => {
-        if (!user) return;
+        if (!user && !paramID) return;
         fetchRarities(currentBinder);
     }, [currentBinder, user, cardsUpdated]);
 
     const fetchRarities = async (currentBinder: string | null) => {
         try {
-            if (!user || !currentBinder) {
+            if (!currentBinder) {
                 console.error("user or binder not found");
                 return;
             }
 
-            const targetUserID = paramID || user.uid
+            const targetUserID = paramID || (user ? user.uid : null)
             if (!targetUserID) return;
 
             let counts = { mythics: 0, rares: 0, uncommons: 0, commons: 0 };

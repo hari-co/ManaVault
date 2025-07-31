@@ -19,7 +19,6 @@ const NavBar: React.FC = () => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             setUser(user);
             if (user) {
-                // Fetch username from Firestore
                 try {
                     const userDoc = await getDoc(doc(db, "users", user.uid));
                     if (userDoc.exists()) {
@@ -35,7 +34,6 @@ const NavBar: React.FC = () => {
         return () => unsubscribe();
     }, []);
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             const target = event.target as HTMLElement;
@@ -67,9 +65,9 @@ const NavBar: React.FC = () => {
         <div className='w-full flex items-center justify-between'>
             <Link href="/" className='hover:text-[#616dc9]'>ManaVault</Link>
             <div className='hidden md:flex space-x-6'>
+                <Link href="/community" className='hover:text-[#616dc9]'>Community</Link>
                 {user ? (
                     <div className='flex space-x-6 items-center'>
-                    <Link href="/community" className='hover:text-[#616dc9]'>Community</Link>
                     <Link href="/library" className='hover:text-[#616dc9]'>Library</Link>
                     <div className='relative dropdown-container'>
                         <button 
@@ -99,13 +97,6 @@ const NavBar: React.FC = () => {
                                     onClick={() => setDropdownOpen(false)}
                                 >
                                     Profile
-                                </Link>
-                                <Link 
-                                    href="/account/settings" 
-                                    className='block px-4 py-2 text-sm text-gray-300 hover:bg-[#1f2537] hover:text-white'
-                                    onClick={() => setDropdownOpen(false)}
-                                >
-                                    Settings
                                 </Link>
                                 <button 
                                     onClick={() => {

@@ -23,7 +23,6 @@ const FollowButton = ({ currentUser, targetUserId, isOwnProfile })=>{
     _s();
     const [isFollowing, setIsFollowing] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Check if current user is following the target user
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "FollowButton.useEffect": ()=>{
             const checkFollowStatus = {
@@ -58,11 +57,9 @@ const FollowButton = ({ currentUser, targetUserId, isOwnProfile })=>{
             const currentUserFollowingRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", currentUser.uid, "profile", "following");
             const targetUserFollowersRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", targetUserId, "profile", "followers");
             if (isFollowing) {
-                // Unfollow: Remove userID from current user's following and current user from target's followers
                 await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])(currentUserFollowingRef, {
                     userIds: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["arrayRemove"])(targetUserId)
                 }).catch(async ()=>{
-                    // Document might not exist, create it
                     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDoc"])(currentUserFollowingRef, {
                         userIds: []
                     });
@@ -70,17 +67,14 @@ const FollowButton = ({ currentUser, targetUserId, isOwnProfile })=>{
                 await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])(targetUserFollowersRef, {
                     userIds: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["arrayRemove"])(currentUser.uid)
                 }).catch(async ()=>{
-                    // Document might not exist, create it
                     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDoc"])(targetUserFollowersRef, {
                         userIds: []
                     });
                 });
             } else {
-                // Follow: Add userID to current user's following and current user to target's followers
                 await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])(currentUserFollowingRef, {
                     userIds: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["arrayUnion"])(targetUserId)
                 }).catch(async ()=>{
-                    // Document might not exist, create it
                     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDoc"])(currentUserFollowingRef, {
                         userIds: [
                             targetUserId
@@ -90,7 +84,6 @@ const FollowButton = ({ currentUser, targetUserId, isOwnProfile })=>{
                 await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateDoc"])(targetUserFollowersRef, {
                     userIds: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["arrayUnion"])(currentUser.uid)
                 }).catch(async ()=>{
-                    // Document might not exist, create it
                     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDoc"])(targetUserFollowersRef, {
                         userIds: [
                             currentUser.uid
@@ -98,7 +91,6 @@ const FollowButton = ({ currentUser, targetUserId, isOwnProfile })=>{
                     });
                 });
             }
-            // Toggle the local state
             setIsFollowing(!isFollowing);
         } catch (error) {
             console.error("Error updating follow status:", error);
@@ -106,7 +98,6 @@ const FollowButton = ({ currentUser, targetUserId, isOwnProfile })=>{
             setLoading(false);
         }
     };
-    // Don't render if it's the user's own profile or user is not logged in
     if (!currentUser || isOwnProfile) {
         return null;
     }
@@ -117,7 +108,7 @@ const FollowButton = ({ currentUser, targetUserId, isOwnProfile })=>{
         children: loading ? 'Loading...' : isFollowing ? 'Following' : 'Follow'
     }, void 0, false, {
         fileName: "[project]/components/ProfileComponents/FollowButton.tsx",
-        lineNumber: 104,
+        lineNumber: 95,
         columnNumber: 5
     }, this);
 };
@@ -174,7 +165,6 @@ function FollowingModal({ isOpen, onClose, userId, followingCount }) {
             if (followingDoc.exists()) {
                 const followingData = followingDoc.data();
                 const userIds = followingData.userIds || [];
-                // Fetch user data for each following user
                 const usersData = await Promise.all(userIds.map(async (uid)=>{
                     const userDoc = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", uid));
                     if (userDoc.exists()) {
@@ -213,7 +203,7 @@ function FollowingModal({ isOpen, onClose, userId, followingCount }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                            lineNumber: 72,
+                            lineNumber: 71,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -231,23 +221,23 @@ function FollowingModal({ isOpen, onClose, userId, followingCount }) {
                                     d: "M6 18L18 6M6 6l12 12"
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                                    lineNumber: 78,
+                                    lineNumber: 77,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                                lineNumber: 77,
+                                lineNumber: 76,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                            lineNumber: 73,
+                            lineNumber: 72,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                    lineNumber: 71,
+                    lineNumber: 70,
                     columnNumber: 9
                 }, this),
                 loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -257,12 +247,12 @@ function FollowingModal({ isOpen, onClose, userId, followingCount }) {
                         children: "Loading..."
                     }, void 0, false, {
                         fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                        lineNumber: 85,
+                        lineNumber: 84,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                    lineNumber: 84,
+                    lineNumber: 83,
                     columnNumber: 11
                 }, this) : followingUsers.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "text-center py-4",
@@ -271,12 +261,12 @@ function FollowingModal({ isOpen, onClose, userId, followingCount }) {
                         children: "Not following anyone yet."
                     }, void 0, false, {
                         fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                        lineNumber: 89,
+                        lineNumber: 88,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                    lineNumber: 88,
+                    lineNumber: 87,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "space-y-3",
@@ -299,12 +289,12 @@ function FollowingModal({ isOpen, onClose, userId, followingCount }) {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 95,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                                    lineNumber: 95,
+                                    lineNumber: 94,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -314,34 +304,34 @@ function FollowingModal({ isOpen, onClose, userId, followingCount }) {
                                         children: user.username
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                                        lineNumber: 111,
+                                        lineNumber: 110,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                                    lineNumber: 110,
+                                    lineNumber: 109,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, user.uid, true, {
                             fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                            lineNumber: 94,
+                            lineNumber: 93,
                             columnNumber: 15
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-                    lineNumber: 92,
+                    lineNumber: 91,
                     columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-            lineNumber: 67,
+            lineNumber: 66,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/ProfileComponents/FollowingModal.tsx",
-        lineNumber: 63,
+        lineNumber: 62,
         columnNumber: 5
     }, this);
 }
@@ -397,7 +387,6 @@ function FollowersModal({ isOpen, onClose, userId, followersCount }) {
             if (followersDoc.exists()) {
                 const followersData = followersDoc.data();
                 const userIds = followersData.userIds || [];
-                // Fetch user data for each follower
                 const usersData = await Promise.all(userIds.map(async (uid)=>{
                     const userDoc = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", uid));
                     if (userDoc.exists()) {
@@ -436,7 +425,7 @@ function FollowersModal({ isOpen, onClose, userId, followersCount }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                            lineNumber: 72,
+                            lineNumber: 71,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -454,23 +443,23 @@ function FollowersModal({ isOpen, onClose, userId, followersCount }) {
                                     d: "M6 18L18 6M6 6l12 12"
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                                    lineNumber: 78,
+                                    lineNumber: 77,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                                lineNumber: 77,
+                                lineNumber: 76,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                            lineNumber: 73,
+                            lineNumber: 72,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                    lineNumber: 71,
+                    lineNumber: 70,
                     columnNumber: 9
                 }, this),
                 loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -480,12 +469,12 @@ function FollowersModal({ isOpen, onClose, userId, followersCount }) {
                         children: "Loading..."
                     }, void 0, false, {
                         fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                        lineNumber: 85,
+                        lineNumber: 84,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                    lineNumber: 84,
+                    lineNumber: 83,
                     columnNumber: 11
                 }, this) : followersUsers.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "text-center py-4",
@@ -494,12 +483,12 @@ function FollowersModal({ isOpen, onClose, userId, followersCount }) {
                         children: "No followers yet."
                     }, void 0, false, {
                         fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                        lineNumber: 89,
+                        lineNumber: 88,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                    lineNumber: 88,
+                    lineNumber: 87,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "space-y-3",
@@ -522,12 +511,12 @@ function FollowersModal({ isOpen, onClose, userId, followersCount }) {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 95,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                                    lineNumber: 95,
+                                    lineNumber: 94,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -537,34 +526,34 @@ function FollowersModal({ isOpen, onClose, userId, followersCount }) {
                                         children: user.username
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                                        lineNumber: 111,
+                                        lineNumber: 110,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                                    lineNumber: 110,
+                                    lineNumber: 109,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, user.uid, true, {
                             fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                            lineNumber: 94,
+                            lineNumber: 93,
                             columnNumber: 15
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-                    lineNumber: 92,
+                    lineNumber: 91,
                     columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-            lineNumber: 67,
+            lineNumber: 66,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/ProfileComponents/FollowersModal.tsx",
-        lineNumber: 63,
+        lineNumber: 62,
         columnNumber: 5
     }, this);
 }
@@ -620,7 +609,6 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
     const fetchPreviews = async ()=>{
         setLoadingPreviews(true);
         try {
-            // Fetch following preview (up to 7)
             const followingRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", userId, "profile", "following");
             const followingDoc = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])(followingRef);
             if (followingDoc.exists()) {
@@ -639,7 +627,6 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                 }));
                 setFollowingPreview(followingUsersData.filter((user)=>user !== null));
             }
-            // Fetch followers preview (up to 7)
             const followersRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", userId, "profile", "followers");
             const followersDoc = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])(followersRef);
             if (followersDoc.exists()) {
@@ -684,7 +671,7 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                    lineNumber: 96,
+                                    lineNumber: 93,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -694,14 +681,14 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                                         children: "Loading..."
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                        lineNumber: 105,
+                                        lineNumber: 101,
                                         columnNumber: 17
                                     }, this) : followingCount === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "text-sm text-gray-500",
                                         children: isOwnProfile ? "You're not following anyone yet." : "Not following anyone yet."
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                        lineNumber: 107,
+                                        lineNumber: 103,
                                         columnNumber: 17
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "space-y-2",
@@ -724,12 +711,12 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                                            lineNumber: 115,
+                                                            lineNumber: 111,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                                        lineNumber: 114,
+                                                        lineNumber: 110,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -738,29 +725,29 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                                                         children: user.username
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                                        lineNumber: 129,
+                                                        lineNumber: 125,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, user.uid, true, {
                                                 fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                                lineNumber: 113,
+                                                lineNumber: 109,
                                                 columnNumber: 21
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                        lineNumber: 111,
+                                        lineNumber: 107,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                    lineNumber: 102,
+                                    lineNumber: 99,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                            lineNumber: 95,
+                            lineNumber: 92,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -775,7 +762,7 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                    lineNumber: 141,
+                                    lineNumber: 136,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -785,14 +772,14 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                                         children: "Loading..."
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                        lineNumber: 150,
+                                        lineNumber: 144,
                                         columnNumber: 17
                                     }, this) : followersCount === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "text-sm text-gray-500",
                                         children: isOwnProfile ? "No followers yet." : "No followers."
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                        lineNumber: 152,
+                                        lineNumber: 146,
                                         columnNumber: 17
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "space-y-2",
@@ -815,12 +802,12 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                                            lineNumber: 160,
+                                                            lineNumber: 154,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                                        lineNumber: 159,
+                                                        lineNumber: 153,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -829,40 +816,40 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                                                         children: user.username
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                                        lineNumber: 174,
+                                                        lineNumber: 168,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, user.uid, true, {
                                                 fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                                lineNumber: 158,
+                                                lineNumber: 152,
                                                 columnNumber: 21
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                        lineNumber: 156,
+                                        lineNumber: 150,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                                    lineNumber: 147,
+                                    lineNumber: 142,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                            lineNumber: 140,
+                            lineNumber: 135,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                    lineNumber: 93,
+                    lineNumber: 91,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                lineNumber: 92,
+                lineNumber: 90,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ProfileComponents$2f$FollowingModal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -872,7 +859,7 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                 followingCount: followingCount
             }, void 0, false, {
                 fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                lineNumber: 187,
+                lineNumber: 180,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ProfileComponents$2f$FollowersModal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -882,13 +869,13 @@ function FollowersSection({ followingCount, followersCount, isOwnProfile, userId
                 followersCount: followersCount
             }, void 0, false, {
                 fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-                lineNumber: 194,
+                lineNumber: 187,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/ProfileComponents/FollowersSection.tsx",
-        lineNumber: 91,
+        lineNumber: 89,
         columnNumber: 5
     }, this);
 }
@@ -945,13 +932,11 @@ function Profile() {
                 "Profile.useEffect.unsubscribe": async (user)=>{
                     setUser(user);
                     try {
-                        // Fetch the profile user's data
                         const userDoc = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", params.userID));
                         if (userDoc.exists()) {
                             const userData = userDoc.data();
                             setProfile(userData);
                         }
-                        // Fetch the user's bio from profile subcollection
                         const descriptionRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", params.userID, "profile", "description");
                         const descriptionDoc = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])(descriptionRef);
                         if (descriptionDoc.exists()) {
@@ -967,7 +952,6 @@ function Profile() {
                         } else {
                             setBioText('');
                         }
-                        // Fetch following count
                         const followingRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", params.userID, "profile", "following");
                         const followingDoc = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])(followingRef);
                         if (followingDoc.exists()) {
@@ -977,7 +961,6 @@ function Profile() {
                         } else {
                             setFollowingCount(0);
                         }
-                        // Fetch followers count
                         const followersRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", params.userID, "profile", "followers");
                         const followersDoc = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDoc"])(followersRef);
                         if (followersDoc.exists()) {
@@ -1006,14 +989,12 @@ function Profile() {
         setIsEditingBio(true);
     };
     const handleSaveBio = async ()=>{
-        if (!user) return;
+        if (!user) return; // Only allow authenticated users to edit
         try {
-            // Update the user's profile description in the subcollection
             const profileRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["doc"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$firebase$2d$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["db"], "users", params.userID, "profile", "description");
             await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setDoc"])(profileRef, {
                 description: bioText
             });
-            // Update local profile state
             setProfile((prev)=>prev ? {
                     ...prev,
                     description: bioText
@@ -1027,7 +1008,6 @@ function Profile() {
         setBioText(profile?.description || '');
         setIsEditingBio(false);
     };
-    // Check if viewing own profile
     const isOwnProfile = user?.uid === params.userID;
     if (loading) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1035,17 +1015,17 @@ function Profile() {
             children: "Loading..."
         }, void 0, false, {
             fileName: "[project]/src/app/profile/[userID]/page.tsx",
-            lineNumber: 111,
+            lineNumber: 104,
             columnNumber: 12
         }, this);
     }
-    if (!user || !profile) {
+    if (!profile) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "p-4",
             children: "Profile not found"
         }, void 0, false, {
             fileName: "[project]/src/app/profile/[userID]/page.tsx",
-            lineNumber: 115,
+            lineNumber: 108,
             columnNumber: 12
         }, this);
     }
@@ -1057,7 +1037,7 @@ function Profile() {
                 children: "Profile"
             }, void 0, false, {
                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                lineNumber: 120,
+                lineNumber: 113,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1086,12 +1066,12 @@ function Profile() {
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                            lineNumber: 129,
+                                            lineNumber: 120,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                        lineNumber: 128,
+                                        lineNumber: 119,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1108,22 +1088,22 @@ function Profile() {
                                                                 children: profile.username
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                lineNumber: 148,
+                                                                lineNumber: 138,
                                                                 columnNumber: 21
                                                             }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ProfileComponents$2f$FollowButton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                            user && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ProfileComponents$2f$FollowButton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                                                 currentUser: user,
                                                                 targetUserId: params.userID,
                                                                 isOwnProfile: isOwnProfile
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                lineNumber: 149,
-                                                                columnNumber: 21
+                                                                lineNumber: 140,
+                                                                columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                        lineNumber: 147,
+                                                        lineNumber: 137,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1134,13 +1114,22 @@ function Profile() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                        lineNumber: 155,
+                                                        lineNumber: 147,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                        onClick: ()=>router.push(`/library/${params.userID}`),
+                                                        className: "mt-2 px-4 py-2 text-sm bg-[#616dc9] text-white rounded hover:bg-[#5159b3] transition-colors",
+                                                        children: "View Library"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/profile/[userID]/page.tsx",
+                                                        lineNumber: 150,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                lineNumber: 146,
+                                                lineNumber: 136,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1159,7 +1148,7 @@ function Profile() {
                                                                 maxLength: 200
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                lineNumber: 165,
+                                                                lineNumber: 162,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1173,7 +1162,7 @@ function Profile() {
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                        lineNumber: 174,
+                                                                        lineNumber: 171,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1185,7 +1174,7 @@ function Profile() {
                                                                                 children: "Cancel"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                                lineNumber: 176,
+                                                                                lineNumber: 173,
                                                                                 columnNumber: 29
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1194,25 +1183,25 @@ function Profile() {
                                                                                 children: "Save"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                                lineNumber: 182,
+                                                                                lineNumber: 179,
                                                                                 columnNumber: 29
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                        lineNumber: 175,
+                                                                        lineNumber: 172,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                lineNumber: 173,
+                                                                lineNumber: 170,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                        lineNumber: 164,
+                                                        lineNumber: 161,
                                                         columnNumber: 23
                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "flex items-start justify-between",
@@ -1222,7 +1211,7 @@ function Profile() {
                                                                 children: profile?.description || "No bio yet. Tell the community about yourself!"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                lineNumber: 193,
+                                                                lineNumber: 190,
                                                                 columnNumber: 25
                                                             }, this),
                                                             isOwnProfile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1231,45 +1220,45 @@ function Profile() {
                                                                 children: "Edit Bio"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                                lineNumber: 197,
+                                                                lineNumber: 194,
                                                                 columnNumber: 27
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                        lineNumber: 192,
+                                                        lineNumber: 189,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                    lineNumber: 162,
+                                                    lineNumber: 159,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                                lineNumber: 161,
+                                                lineNumber: 158,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                        lineNumber: 144,
+                                        lineNumber: 135,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                                lineNumber: 126,
+                                lineNumber: 118,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                            lineNumber: 125,
+                            lineNumber: 117,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                        lineNumber: 124,
+                        lineNumber: 116,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ProfileComponents$2f$FollowersSection$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1279,19 +1268,19 @@ function Profile() {
                         userId: params.userID
                     }, void 0, false, {
                         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                        lineNumber: 214,
+                        lineNumber: 210,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/profile/[userID]/page.tsx",
-                lineNumber: 122,
+                lineNumber: 115,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/profile/[userID]/page.tsx",
-        lineNumber: 119,
+        lineNumber: 112,
         columnNumber: 5
     }, this);
 }
