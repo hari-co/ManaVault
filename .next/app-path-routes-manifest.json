@@ -1,11 +1,11 @@
 {
   "/_not-found/page": "/_not-found",
   "/favicon.ico/route": "/favicon.ico",
-  "/account/register/[[...register]]/page": "/account/register/[[...register]]",
   "/account/login/[[...login]]/page": "/account/login/[[...login]]",
-  "/community/page": "/community",
+  "/account/register/[[...register]]/page": "/account/register/[[...register]]",
   "/library/[userID]/page": "/library/[userID]",
-  "/page": "/",
   "/library/page": "/library",
+  "/community/page": "/community",
+  "/page": "/",
   "/profile/[userID]/page": "/profile/[userID]"
 }
