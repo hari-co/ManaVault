@@ -61,7 +61,7 @@ export default function Library() {
                         <Binders />
                     </div>
                     <div className='flex w-full h-full flex-col'>
-                        <div className='flex rounded-bl-lg rounded-br-lg ml-12 mr-12 py-3 px-7 h-25 bg-[#141822] text-[#bfc8ce] relative z-10 border border-gray-600'>
+                        <div className='flex rounded-bl-lg rounded-br-lg ml-12 mr-12 py-3 px-7 h-25 bg-[#141822] text-[#bfc8ce] relative z-20 border border-gray-600'>
                             <div className="absolute top-0 left-0 w-full h-full z-1 overflow-x-hidden"
                                     style={{
                                     backgroundImage: `

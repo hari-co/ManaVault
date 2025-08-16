@@ -5,6 +5,8 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/config/firebase-config";
 import { BinderContext } from "@/context/BinderContext";
 
+//yup
+
 const QuickMenu: React.FC<{card: CardType, onFlip: () => void, viewOnly?: boolean}> = ({ card, onFlip, viewOnly }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const user = useFirebaseUser();
@@ -61,5 +63,7 @@ const QuickMenu: React.FC<{card: CardType, onFlip: () => void, viewOnly?: boolea
         </>
     )
 }
+
+//remind me to name my foldesr right next time
 
 export default QuickMenu;

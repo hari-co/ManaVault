@@ -77,7 +77,7 @@ const CardSearch: React.FC = () => {
     };
 
     return (
-        <div className="bg-[#121519] w-3xs h-10 z-50 relative">
+        <div className="bg-[#121519] w-3xs h-10 z-[100] relative">
             <input 
                 className="border border-[#5e5e5e] rounded px-2 py-1 w-full h-full"
                 type="text"
@@ -89,9 +89,9 @@ const CardSearch: React.FC = () => {
                 onFocus={() => setShowSuggestions(results.length > 0)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
             />
-            {!showSuggestions && loading && <div className="absolute left-0 top-full bg-gray-800 text-white w-64 px-4 py-2 z-50">Loading...</div>}
+            {!showSuggestions && loading && <div className="absolute left-0 top-full bg-gray-800 text-white w-64 px-4 py-2 z-[100]">Loading...</div>}
             {showSuggestions && results.length > 0 && (
-                <div className="absolute left-0 top-full border rounded bg-gray-800 text-white h-64 w-64 overflow-y-auto z-50">
+                <div className="absolute left-0 top-full border rounded bg-gray-800 text-white h-64 w-64 overflow-y-auto z-[100]">
                     <ul>
                         {results.map((suggestion) => (
                             <li
@@ -108,5 +108,7 @@ const CardSearch: React.FC = () => {
         </div>
     );
 };
+
+//remind me to name my foldesr right next time
 
 export default CardSearch;

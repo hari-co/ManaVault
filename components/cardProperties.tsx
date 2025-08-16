@@ -219,6 +219,11 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
             }
             const binderNameToId = binderMap.current.get(binder);
 
+            if (binderNameToId === card.binder) {
+                setShowBinders(false);
+                return;
+            }
+
             if (!binderNameToId) {
                 console.error("Invalid binder selected:", binder);
                 return;
@@ -409,4 +414,5 @@ const CardProperties: React.FC<{card: CardType}> = ({ card }) => {
     )
 }
 
+//remind me to name my foldesr right next time
 export default CardProperties;

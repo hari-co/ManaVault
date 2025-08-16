@@ -255,7 +255,7 @@ const CardSearch = ()=>{
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "bg-[#121519] w-3xs h-10 z-50 relative",
+        className: "bg-[#121519] w-3xs h-10 z-[100] relative",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                 className: "border border-[#5e5e5e] rounded px-2 py-1 w-full h-full",
@@ -273,7 +273,7 @@ const CardSearch = ()=>{
                 columnNumber: 13
             }, this),
             !showSuggestions && loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute left-0 top-full bg-gray-800 text-white w-64 px-4 py-2 z-50",
+                className: "absolute left-0 top-full bg-gray-800 text-white w-64 px-4 py-2 z-[100]",
                 children: "Loading..."
             }, void 0, false, {
                 fileName: "[project]/components/CardSearch.tsx",
@@ -281,7 +281,7 @@ const CardSearch = ()=>{
                 columnNumber: 45
             }, this),
             showSuggestions && results.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute left-0 top-full border rounded bg-gray-800 text-white h-64 w-64 overflow-y-auto z-50",
+                className: "absolute left-0 top-full border rounded bg-gray-800 text-white h-64 w-64 overflow-y-auto z-[100]",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                     children: results.map((suggestion)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                             className: "px-4 py-2 hover:bg-gray-200 cursor-pointer",
@@ -800,7 +800,7 @@ const QuickMenu = ({ card, onFlip, viewOnly })=>{
                 columnNumber: 26
             }, this),
             menuOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "w-40 h-15 bg-[#141823] absolute z-50 top-1 left-5 rounded-md pt-2 pb-2 border border-gray-600",
+                className: "w-40 h-15 bg-[#141823] absolute z-40 top-1 left-5 rounded-md pt-2 pb-2 border border-gray-600",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                     className: "bg-[#141823] hover:bg-[#3f475a] w-full h-10 text-gray-300",
                     onClick: ()=>deleteCard(card, currentBinder),
@@ -1342,7 +1342,7 @@ const BinderSelector = ({ card, binderName, showBinders, binderList, onToggleSho
                 className: "bg-gray-700 absolute w-60 border border-gray-500 rounded-md",
                 children: binderList.map((binder)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                         className: `z-50 flex items-center pl-4 h-8 hover:bg-gray-400 ${binderName == binder ? " bg-gray-400" : " bg-gray-700"}`,
-                        onClick: ()=>onBinderSelect(card, binder),
+                        onMouseDown: ()=>onBinderSelect(card, binder),
                         children: binder
                     }, binder, false, {
                         fileName: "[project]/components/CardPropComponents/BinderSelector.tsx",
@@ -1831,6 +1831,10 @@ const CardProperties = ({ card })=>{
                 return;
             }
             const binderNameToId = binderMap.current.get(binder);
+            if (binderNameToId === card.binder) {
+                setShowBinders(false);
+                return;
+            }
             if (!binderNameToId) {
                 console.error("Invalid binder selected:", binder);
                 return;
@@ -1972,19 +1976,19 @@ const CardProperties = ({ card })=>{
                     children: "Card Properties"
                 }, void 0, false, {
                     fileName: "[project]/components/CardProperties.tsx",
-                    lineNumber: 332,
+                    lineNumber: 337,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 331,
+                lineNumber: 336,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                 className: "m-2 text-white/25"
             }, void 0, false, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 334,
+                lineNumber: 339,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1994,7 +1998,7 @@ const CardProperties = ({ card })=>{
                         card: card
                     }, void 0, false, {
                         fileName: "[project]/components/CardProperties.tsx",
-                        lineNumber: 336,
+                        lineNumber: 341,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2009,23 +2013,23 @@ const CardProperties = ({ card })=>{
                                                 part,
                                                 idx < arr.length - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                     fileName: "[project]/components/CardProperties.tsx",
-                                                    lineNumber: 343,
+                                                    lineNumber: 348,
                                                     columnNumber: 62
                                                 }, this)
                                             ]
                                         }, idx, true, {
                                             fileName: "[project]/components/CardProperties.tsx",
-                                            lineNumber: 341,
+                                            lineNumber: 346,
                                             columnNumber: 33
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/CardProperties.tsx",
-                                    lineNumber: 339,
+                                    lineNumber: 344,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 338,
+                                lineNumber: 343,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2044,7 +2048,7 @@ const CardProperties = ({ card })=>{
                                         onPrintSelect: changePrint
                                     }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 349,
+                                        lineNumber: 354,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$QuantityInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2054,13 +2058,13 @@ const CardProperties = ({ card })=>{
                                         onQuantitySubmit: changeQuantity
                                     }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 361,
+                                        lineNumber: 366,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 348,
+                                lineNumber: 353,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2075,7 +2079,7 @@ const CardProperties = ({ card })=>{
                                         onBinderSelect: changeBinder
                                     }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 369,
+                                        lineNumber: 374,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$ConditionSelector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2086,7 +2090,7 @@ const CardProperties = ({ card })=>{
                                         onConditionSelect: changeCondition
                                     }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 377,
+                                        lineNumber: 382,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$PriceInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2096,13 +2100,13 @@ const CardProperties = ({ card })=>{
                                         onPriceSubmit: changeBuyPrice
                                     }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 384,
+                                        lineNumber: 389,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 368,
+                                lineNumber: 373,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2115,7 +2119,7 @@ const CardProperties = ({ card })=>{
                                         onNotesSubmit: changeNotes
                                     }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 392,
+                                        lineNumber: 397,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CardPropComponents$2f$CardToggles$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2126,31 +2130,31 @@ const CardProperties = ({ card })=>{
                                         onFavouriteChange: changeFavourite
                                     }, void 0, false, {
                                         fileName: "[project]/components/CardProperties.tsx",
-                                        lineNumber: 398,
+                                        lineNumber: 403,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CardProperties.tsx",
-                                lineNumber: 391,
+                                lineNumber: 396,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CardProperties.tsx",
-                        lineNumber: 337,
+                        lineNumber: 342,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CardProperties.tsx",
-                lineNumber: 335,
+                lineNumber: 340,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/CardProperties.tsx",
-        lineNumber: 330,
+        lineNumber: 335,
         columnNumber: 9
     }, this);
 };
@@ -3119,7 +3123,7 @@ function Library() {
                                 className: "flex w-full h-full flex-col",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex rounded-bl-lg rounded-br-lg ml-12 mr-12 py-3 px-7 h-25 bg-[#141822] text-[#bfc8ce] relative z-10 border border-gray-600",
+                                        className: "flex rounded-bl-lg rounded-br-lg ml-12 mr-12 py-3 px-7 h-25 bg-[#141822] text-[#bfc8ce] relative z-20 border border-gray-600",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "absolute top-0 left-0 w-full h-full z-1 overflow-x-hidden",

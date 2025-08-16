@@ -41,7 +41,7 @@ const BinderSelector: React.FC<BinderSelectorProps> = ({
                         <li
                             className={`z-50 flex items-center pl-4 h-8 hover:bg-gray-400 ${binderName == binder ? " bg-gray-400" : " bg-gray-700"}`}
                             key={binder}
-                            onClick={() => onBinderSelect(card, binder)}>
+                            onMouseDown={() => onBinderSelect(card, binder)}>
                             {binder}
                         </li>
                     ))}

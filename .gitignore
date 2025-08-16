@@ -403,3 +403,5 @@ FodyWeavers.xsd
 tailwind.config.js
 .env
 public/set_icons/con.svg
+
+.vercel
