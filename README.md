@@ -1,6 +1,6 @@
 # ManaVault
 
-Demo Login:
-Username: demo
+Demo Login:<br>
+Username: demo<br>
 Password: password
 
